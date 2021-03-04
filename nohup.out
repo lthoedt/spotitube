@@ -1,0 +1,27 @@
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2021-03-04 11:56:04,546 [  11030]   WARN - ernallyAddedFilesProcessorImpl - Cannot find project config directory for non-default and non-directory based project spotitube 
+2021-03-04 11:56:05,522 [  12006]   WARN - ernallyAddedFilesProcessorImpl - Cannot find project config directory for non-default and non-directory based project spotitube 
+2021-03-04 11:57:12,556 [  79040]   WARN - ernallyAddedFilesProcessorImpl - Cannot find project config directory for non-default and non-directory based project spotitube 
+2021-03-04 11:58:16,062 [ 142546]   WARN - ernallyAddedFilesProcessorImpl - Cannot find project config directory for non-default and non-directory based project spotitube 
+2021-03-04 11:58:40,341 [ 166825]   WARN - s.ui.configuration.SdkDetector - No version is returned for detected SDK IDEA JDK at /snap/intellij-idea-ultimate/269 
+2021-03-04 11:59:48,321 [ 234805]   WARN - ataSource.DatabaseArtifactList - id/name inconsistency: null/Redshift:Redshift 
+java.io.IOException: id/name inconsistency: null/Redshift:Redshift
+	at com.intellij.database.dataSource.DatabaseArtifactList.checkIndexConsistency(DatabaseArtifactList.java:335)
+	at com.intellij.database.dataSource.DatabaseArtifactList.readArtifact(DatabaseArtifactList.java:304)
+	at com.intellij.database.dataSource.DatabaseArtifactList.loadList(DatabaseArtifactList.java:262)
+	at com.intellij.database.dataSource.DatabaseArtifactList.loadList(DatabaseArtifactList.java:242)
+	at com.intellij.database.dataSource.DatabaseArtifactManager.loadLocalArtifactsList(DatabaseArtifactManager.java:180)
+	at com.intellij.database.dataSource.DatabaseArtifactManager.loadArtifacts(DatabaseArtifactManager.java:89)
+	at com.intellij.database.dataSource.DatabaseArtifactManager.lambda$new$0(DatabaseArtifactManager.java:84)
+	at com.intellij.util.RunnableCallable.call(RunnableCallable.java:20)
+	at com.intellij.util.RunnableCallable.call(RunnableCallable.java:11)
+	at com.intellij.openapi.application.impl.ApplicationImpl$1.call(ApplicationImpl.java:270)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-04 11:59:53,801 [ 240285]   WARN - ntellij.ui.tree.AsyncTreeModel - invalid node: Tomcat 9.0.37 
