@@ -25,3 +25,5 @@ java.io.IOException: id/name inconsistency: null/Redshift:Redshift
 	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 2021-03-04 11:59:53,801 [ 240285]   WARN - ntellij.ui.tree.AsyncTreeModel - invalid node: Tomcat 9.0.37 
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2021-03-08 09:25:29,904 [ 198566]   WARN - ntellij.ui.tree.AsyncTreeModel - invalid node: Tomcat 9.0.37 

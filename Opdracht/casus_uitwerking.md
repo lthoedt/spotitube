@@ -1,0 +1,14 @@
+Endpoints:
+- Login
+    - POST
+- Playlist
+    - GET
+    - POST
+    - DELETE
+    - PUT
+    - tracks
+        - GET
+        - DELETE
+        - POST
+- Tracks
+    - GET
