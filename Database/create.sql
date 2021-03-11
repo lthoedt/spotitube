@@ -114,11 +114,17 @@ ALTER TABLE Songs
 /* ---------- INSERTS ---------------------- */
 /* ========================================= */
 /* ========================================= */
-INSERT INTO Users (username, password, token) VALUES ("henk", "henk", "1425-2565-5487");
+INSERT INTO Users (id, username, password, token) VALUES (1, "henk", "henk", "1425-2565-5487");
 
 INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( 1, "Stevie Ray Vaughan And Double Trouble", "Texas Flood (from Live at the El Mocambo", "https://music.youtube.com/watch?v=KC5H9P4F5Uk&feature=share", 571 );
 INSERT INTO Videos ( track_id, playcount ) VALUES ( 1, 7585665 );
 
+INSERT INTO Playlists ( id, name ) VALUES ( 1, "SRV" );
+INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( 1, 1, true );
+
+INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 1, 1, 1, true );
+
 INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( 2, "Stevie Ray Vaughan And Double Trouble", "Lenny", "https://music.youtube.com/watch?v=dfdJ1rh4zNc&feature=share", 298 );
 INSERT INTO Albums ( id, name ) VALUES (1, "Texas Flood");
 INSERT INTO Songs ( track_id, album_id ) VALUES ( 2, 1 );
+INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 2, 2, 1, false );
