@@ -19,11 +19,18 @@ public class TrackDAO implements ITrackDAO {
     @Override
     public ArrayList<Track> getTracks() {
         // String sql = "SELECT * FROM Tracks LEFT JOIN Videos ON Videos.track_id=Tracks.id LEFT JOIN Songs ON Songs.track_id=Tracks.id";
-        String sqlVideo = "SELECT Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Videos.publication_date, Videos.description, Videos.playcount FROM Videos INNER JOIN Tracks ON Videos.track_id=Tracks.id";
-        String sqlSong  = "SELECT Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Albums.name AS album_name FROM Songs INNER JOIN Tracks ON Songs.track_id=Tracks.id LEFT JOIN Albums ON Songs.album_id=Albums.id";
+        // String sqlVideo = "SELECT Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Videos.publication_date, Videos.description, Videos.playcount FROM Videos INNER JOIN Tracks ON Videos.track_id=Tracks.id";
+        String sqlVideo = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Videos.publication_date, Videos.description, Videos.playcount "
+                            + "FROM Videos "
+                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
+                            + "INNER JOIN TrackMappers ON TrackMappers.track_id=Tracks.id";
+        String sqlSong  = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Albums.name AS album_name "
+                            + "FROM Songs "
+                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
+                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
+                            + "INNER JOIN TrackMappers ON TrackMappers.track_id=Tracks.id";
 
-        try {
-            Connection connection = this.dataSource.getConnection();
+        try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statementVideo = connection.prepareStatement(sqlVideo);
             ResultSet resultSetVideo = statementVideo.executeQuery();
 
@@ -39,6 +46,7 @@ public class TrackDAO implements ITrackDAO {
                 track.setTitle    (resultSetVideo.getString("title"));
                 track.setUrl(resultSetVideo.getString("url"));
                 track.setDuration(resultSetVideo.getInt("duration"));
+                track.setOfflineAvailable(resultSetVideo.getBoolean("offline_available"));
                 
                 track.setPublicationDate(resultSetVideo.getString("publication_date"));
                 track.setDescription(resultSetVideo.getString("description"));
@@ -53,6 +61,7 @@ public class TrackDAO implements ITrackDAO {
                 track.setTitle    (resultSetSong.getString("title"));
                 track.setUrl(resultSetSong.getString("url"));
                 track.setDuration(resultSetSong.getInt("duration"));
+                track.setOfflineAvailable(resultSetSong.getBoolean("offline_available"));
                 
                 Album album = new Album(resultSetSong.getString("album_name"));
                 track.setAlbum(album);

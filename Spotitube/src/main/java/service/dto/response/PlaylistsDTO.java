@@ -1,6 +1,8 @@
 package service.dto.response;
 
+import java.util.ArrayList;
+
 public class PlaylistsDTO {
-    public PlaylistDTO[] playlists;
-    public int length;
+    public ArrayList<PlaylistDTO> playlists;
+    public int length = 0;
 }

@@ -6,10 +6,6 @@ public class User {
     private String token;
     private Playlist[] playlists;
 
-    public User() {
-
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
