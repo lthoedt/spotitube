@@ -16,60 +16,124 @@ public class TrackDAO implements ITrackDAO {
     @Resource(name = "jdbc/spotitube")
     DataSource dataSource;
 
+    private String sqlFields = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration";
+    private String sqlJoins = "LEFT JOIN TrackMappers ON TrackMappers.track_id=Tracks.id "
+                        + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
+                        + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
+
+
     @Override
-    public ArrayList<Track> getTracks() {
-        // String sql = "SELECT * FROM Tracks LEFT JOIN Videos ON Videos.track_id=Tracks.id LEFT JOIN Songs ON Songs.track_id=Tracks.id";
-        // String sqlVideo = "SELECT Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Videos.publication_date, Videos.description, Videos.playcount FROM Videos INNER JOIN Tracks ON Videos.track_id=Tracks.id";
-        String sqlVideo = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Videos.publication_date, Videos.description, Videos.playcount "
+    public ArrayList<Track> getTracks(String token, String forPlaylist ) {
+        String sqlWhere = "WHERE TrackMappers.playlist_id != ? OR TrackMappers.playlist_id IS NULL";
+
+        String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
                             + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
-                            + "INNER JOIN TrackMappers ON TrackMappers.track_id=Tracks.id";
-        String sqlSong  = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration, Albums.name AS album_name "
+                            + sqlJoins
+                            + sqlWhere;
+        String sqlSong  = sqlFields + ", Albums.name AS album_name "
                             + "FROM Songs "
                             + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
                             + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
-                            + "INNER JOIN TrackMappers ON TrackMappers.track_id=Tracks.id";
+                            + sqlJoins
+                            + sqlWhere;
 
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statementVideo = connection.prepareStatement(sqlVideo);
+            statementVideo.setString(1, forPlaylist);
             ResultSet resultSetVideo = statementVideo.executeQuery();
 
             PreparedStatement statementSong = connection.prepareStatement(sqlSong);
+            statementSong.setString(1, forPlaylist);
             ResultSet resultSetSong = statementSong.executeQuery();
 
-            ArrayList<Track> tracks = new ArrayList<>();
+            return this.parseTrackData(resultSetVideo, resultSetSong);
+            
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-            // TODO Change this garbage to not be done twice
+    private ArrayList<Track> parseTrackData(ResultSet resultSetVideo, ResultSet resultSetSong) {
+        ArrayList<Track> tracks = new ArrayList<>();
+
+        try {
             while( resultSetVideo.next() ) {
-                Track track = new Video(resultSetVideo.getInt("id"));
-                track.setPerformer(resultSetVideo.getString("performer"));
-                track.setTitle    (resultSetVideo.getString("title"));
-                track.setUrl(resultSetVideo.getString("url"));
-                track.setDuration(resultSetVideo.getInt("duration"));
-                track.setOfflineAvailable(resultSetVideo.getBoolean("offline_available"));
+                Track track = new Video(resultSetVideo.getString("id"));
+                addTrackData(track, resultSetVideo);
                 
                 track.setPublicationDate(resultSetVideo.getString("publication_date"));
                 track.setDescription(resultSetVideo.getString("description"));
                 track.setPlaycount(resultSetVideo.getInt("playcount"));
-
+    
                 tracks.add(track);
             }
-
+    
             while( resultSetSong.next() ) {
-                Track track = new Song(resultSetSong.getInt("id"));
-                track.setPerformer(resultSetSong.getString("performer"));
-                track.setTitle    (resultSetSong.getString("title"));
-                track.setUrl(resultSetSong.getString("url"));
-                track.setDuration(resultSetSong.getInt("duration"));
-                track.setOfflineAvailable(resultSetSong.getBoolean("offline_available"));
+                Track track = new Song(resultSetSong.getString("id"));
+                addTrackData(track, resultSetSong);
                 
                 Album album = new Album(resultSetSong.getString("album_name"));
                 track.setAlbum(album);
-
+    
                 tracks.add(track);
             }
+    
+        } catch ( SQLException e ) {
+            // TODO
+            e.printStackTrace();
+        }
 
-            return tracks;
+        return tracks;
+    }
+
+    private void addTrackData( Track track, ResultSet set ) {
+        try {
+            track.setPerformer(set.getString("performer"));
+            track.setTitle    (set.getString("title"));
+            track.setUrl(set.getString("url"));
+            track.setDuration(set.getInt("duration"));
+            track.setOfflineAvailable(set.getBoolean("offline_available"));
+        } catch (SQLException e) {
+            // TODO
+            e.printStackTrace();
+        }
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Override
+    public ArrayList<Track> getTracksFromPlaylist(String token, String playlist_id) {
+        String sqlWhere = "WHERE TrackMappers.playlist_id = ? AND Users.token = ?";
+
+        String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
+                            + "FROM Videos "
+                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
+                            + sqlJoins
+                            + sqlWhere;
+        String sqlSong  = sqlFields + ", Albums.name AS album_name "
+                            + "FROM Songs "
+                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
+                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
+                            + sqlJoins
+                            + sqlWhere;
+
+        try (Connection connection = this.dataSource.getConnection()) {
+            PreparedStatement statementVideo = connection.prepareStatement(sqlVideo);
+            statementVideo.setString(1, playlist_id);
+            statementVideo.setString(2, token);
+            ResultSet resultSetVideo = statementVideo.executeQuery();
+
+            PreparedStatement statementSong = connection.prepareStatement(sqlSong);
+            statementSong.setString(1, playlist_id);
+            statementSong.setString(2, token);
+
+            ResultSet resultSetSong = statementSong.executeQuery();
+
+            return this.parseTrackData(resultSetVideo, resultSetSong);
             
         } catch ( SQLException e ) {
             e.printStackTrace();
@@ -78,24 +142,14 @@ public class TrackDAO implements ITrackDAO {
     }
 
     @Override
-    public ArrayList<Track> getTracksFromPlaylist(int playlist_id) {
+    public ArrayList<Track> addTrackFromPlaylist(String token, int playlist_id, int track_id) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ArrayList<Track> addTrackFromPlaylist(int playlist_id, int track_id) {
+    public ArrayList<Track> deleteTrackFromPlaylist(String token, int playlist_id, int track_id) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public ArrayList<Track> deleteTrackFromPlaylist(int playlist_id, int track_id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
     }
 }

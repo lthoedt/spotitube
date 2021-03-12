@@ -3,7 +3,7 @@ package domain;
 public class Song extends Track {
     private Album album;
 
-    public Song(int id) {
+    public Song(String id) {
         super(id);
     }
 

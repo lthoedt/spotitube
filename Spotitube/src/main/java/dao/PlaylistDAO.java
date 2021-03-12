@@ -35,7 +35,7 @@ public class PlaylistDAO implements IPlaylistDAO {
             while ( resultSet.next() ) {
                 Playlist playlist = new Playlist();
 
-                playlist.setId(resultSet.getInt("id"));
+                playlist.setId(resultSet.getString("id"));
                 playlist.setName(resultSet.getString("name"));
                 playlist.setOwner(resultSet.getBoolean("owner"));
 

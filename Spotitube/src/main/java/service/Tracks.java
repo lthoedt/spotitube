@@ -4,8 +4,10 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import dao.ITrackDAO;
 import domain.Track;
@@ -25,8 +27,11 @@ public class Tracks {
      * @return
      */
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTracks() {
-        ArrayList<Track> tracks = this.trackDAO.getTracks();
+    public Response getTracks(@Context UriInfo info) {
+        String token = info.getQueryParameters().getFirst("token");
+        String forPlaylist = info.getQueryParameters().getFirst("forPlaylist");
+
+        ArrayList<Track> tracks = this.trackDAO.getTracks( token, forPlaylist );
 
         // TODO error handling
         if (tracks==null) {
@@ -38,22 +43,7 @@ public class Tracks {
         ArrayList<TrackDTO> trackDTOs = new ArrayList<>();
 
         for ( Track t : tracks ) {
-            TrackDTO trackDTO = new TrackDTO();
-            trackDTO.id = t.getId();
-            trackDTO.title = t.getTitle();
-            trackDTO.performer = t.getPerformer();
-            trackDTO.playcount = t.getPlaycount();
-            trackDTO.publicationDate = t.getPublicationDate();
-            trackDTO.description = t.getDescription();
-            trackDTO.offlineAvailable = t.getOfflineAvailable();
-            
-            try {
-                trackDTO.album = t.getAlbum().getName();
-            } catch ( NullPointerException e) {
-                trackDTO.album = null;
-            }
-
-            trackDTOs.add(trackDTO);
+            trackDTOs.add(t.getDTO());
         }
 
         tracksDTO.tracks = trackDTOs;

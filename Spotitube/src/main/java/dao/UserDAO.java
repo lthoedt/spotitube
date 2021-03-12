@@ -63,27 +63,27 @@ public class UserDAO implements IUserDAO {
         return null;
     }
 
-    public User getUser( String token ) {
-        String sql = "SELECT * FROM Users WHERE token=?";
+    // public User getUser( String token ) {
+    //     String sql = "SELECT * FROM Users WHERE token=?";
 
-        try (Connection connection = this.dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, token);
+    //     try (Connection connection = this.dataSource.getConnection()) {
+    //         PreparedStatement statement = connection.prepareStatement(sql);
+    //         statement.setString(1, token);
 
-            ResultSet resultSet = statement.executeQuery();
+    //         ResultSet resultSet = statement.executeQuery();
 
-            while( resultSet.next() ) {
-                User user = new User();
-                user.setUsername(resultSet.getString("username"));
-                user.setToken(resultSet.getString("token"));
-                return user;
-            }
-        } catch ( SQLException e ) {
-            e.printStackTrace();
-        }
+    //         while( resultSet.next() ) {
+    //             User user = new User();
+    //             user.setUsername(resultSet.getString("username"));
+    //             user.setToken(resultSet.getString("token"));
+    //             return user;
+    //         }
+    //     } catch ( SQLException e ) {
+    //         e.printStackTrace();
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;

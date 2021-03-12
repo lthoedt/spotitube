@@ -5,7 +5,7 @@ public class Video extends Track {
     private String description;
     private int playcount;
 
-    public Video(int id) {
+    public Video(String id) {
         super(id);
     }
 
