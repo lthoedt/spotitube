@@ -2514,3 +2514,167 @@ java.lang.Throwable: Process creation:
 	at java.base/java.security.AccessController.doPrivileged(Native Method)
 	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-12 13:20:23,711 [9403037]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /home/lthoedt/Programs/apache-tomee-plus-8.0.4/bin/catalina.sh run 
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:32)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:91)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:84)
+	at com.intellij.javaee.appServers.run.execution.LocalJavaeeServerProcessHandler.<init>(LocalJavaeeServerProcessHandler.java:40)
+	at com.intellij.javaee.appServers.run.execution.PatchedLocalState$ScriptBasedLocalJavaeeServerProcessHandler.<init>(PatchedLocalState.java:190)
+	at com.intellij.javaee.appServers.run.execution.PatchedLocalState.startJ2EEProcess(PatchedLocalState.java:98)
+	at com.intellij.javaee.appServers.run.execution.J2EEProcessHandlerWrapper.lambda$new$0(J2EEProcessHandlerWrapper.java:97)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.doRun(BoundedTaskExecutor.java:216)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.access$200(BoundedTaskExecutor.java:27)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.execute(BoundedTaskExecutor.java:195)
+	at com.intellij.util.ConcurrencyUtil.runUnderThreadName(ConcurrencyUtil.java:208)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.run(BoundedTaskExecutor.java:184)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-12 13:20:26,199 [9405525]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /usr/java/jdk-12.0.2/bin/java -Dfile.encoding=UTF-8 -classpath /tmp/classpath1910491174.jar com.intellij.javaee.oss.process.JavaeeProcess 41243 org.jetbrains.idea.tomcat.agent.TomEEAgent 
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:32)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:49)
+	at com.intellij.execution.configurations.SimpleJavaParameters.createOSProcessHandler(SimpleJavaParameters.java:194)
+	at com.intellij.javaee.oss.agent.ProcessAgentProxyFactory.createProcess(ProcessAgentProxyFactory.java:103)
+	at com.intellij.javaee.oss.agent.ProcessAgentProxyFactory$ProcessAgentProxy.init(ProcessAgentProxyFactory.java:194)
+	at com.intellij.javaee.oss.admin.JavaeeAgentAdminServerBase.start(JavaeeAgentAdminServerBase.java:67)
+	at org.jetbrains.idea.tomcat.admin.TomcatAdminServerBase.start(TomcatAdminServerBase.java:77)
+	at org.jetbrains.idea.tomcat.admin.TomcatAdminLocalServerImpl.start(TomcatAdminLocalServerImpl.java:57)
+	at jdk.internal.reflect.GeneratedMethodAccessor669.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.intellij.remoteServer.agent.impl.ThreadInvocationHandler.lambda$invoke$0(ThreadInvocationHandler.java:53)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.doRun(BoundedTaskExecutor.java:216)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.access$200(BoundedTaskExecutor.java:27)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.execute(BoundedTaskExecutor.java:195)
+	at com.intellij.util.ConcurrencyUtil.runUnderThreadName(ConcurrencyUtil.java:208)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.run(BoundedTaskExecutor.java:184)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-12 15:51:14,549 [18453875]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (15)!!! 
+2021-03-12 15:51:14,618 [18453944]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (15)!!! 
+2021-03-12 15:51:14,643 [18453969]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (15)!!! 
+2021-03-12 15:51:14,703 [18454029]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (15)!!! 
+2021-03-12 15:51:14,741 [18454067]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (16)!!! 
+2021-03-12 15:51:14,987 [18454313]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (23)!!! 
+2021-03-12 15:51:14,991 [18454317]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (23)!!! 
+2021-03-12 15:51:14,992 [18454318]   WARN - com.intellij.ide.IdeEventQueue - Too many mouse clicks (23)!!! 
+2021-03-12 15:53:49,204 [18608530]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /home/lthoedt/Programs/apache-tomee-plus-8.0.4/bin/catalina.sh run 
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:32)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:91)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:84)
+	at com.intellij.javaee.appServers.run.execution.LocalJavaeeServerProcessHandler.<init>(LocalJavaeeServerProcessHandler.java:40)
+	at com.intellij.javaee.appServers.run.execution.PatchedLocalState$ScriptBasedLocalJavaeeServerProcessHandler.<init>(PatchedLocalState.java:190)
+	at com.intellij.javaee.appServers.run.execution.PatchedLocalState.startJ2EEProcess(PatchedLocalState.java:98)
+	at com.intellij.javaee.appServers.run.execution.J2EEProcessHandlerWrapper.lambda$new$0(J2EEProcessHandlerWrapper.java:97)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.doRun(BoundedTaskExecutor.java:216)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.access$200(BoundedTaskExecutor.java:27)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.execute(BoundedTaskExecutor.java:195)
+	at com.intellij.util.ConcurrencyUtil.runUnderThreadName(ConcurrencyUtil.java:208)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.run(BoundedTaskExecutor.java:184)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-12 15:53:51,354 [18610680]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /usr/java/jdk-12.0.2/bin/java -Dfile.encoding=UTF-8 -classpath /tmp/classpath1070640278.jar com.intellij.javaee.oss.process.JavaeeProcess 40381 org.jetbrains.idea.tomcat.agent.TomEEAgent 
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:32)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:49)
+	at com.intellij.execution.configurations.SimpleJavaParameters.createOSProcessHandler(SimpleJavaParameters.java:194)
+	at com.intellij.javaee.oss.agent.ProcessAgentProxyFactory.createProcess(ProcessAgentProxyFactory.java:103)
+	at com.intellij.javaee.oss.agent.ProcessAgentProxyFactory$ProcessAgentProxy.init(ProcessAgentProxyFactory.java:194)
+	at com.intellij.javaee.oss.admin.JavaeeAgentAdminServerBase.start(JavaeeAgentAdminServerBase.java:67)
+	at org.jetbrains.idea.tomcat.admin.TomcatAdminServerBase.start(TomcatAdminServerBase.java:77)
+	at org.jetbrains.idea.tomcat.admin.TomcatAdminLocalServerImpl.start(TomcatAdminLocalServerImpl.java:57)
+	at jdk.internal.reflect.GeneratedMethodAccessor669.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.intellij.remoteServer.agent.impl.ThreadInvocationHandler.lambda$invoke$0(ThreadInvocationHandler.java:53)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.doRun(BoundedTaskExecutor.java:216)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.access$200(BoundedTaskExecutor.java:27)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.execute(BoundedTaskExecutor.java:195)
+	at com.intellij.util.ConcurrencyUtil.runUnderThreadName(ConcurrencyUtil.java:208)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.run(BoundedTaskExecutor.java:184)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-12 16:00:08,284 [18987610]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /home/lthoedt/Programs/apache-tomee-plus-8.0.4/bin/catalina.sh run 
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:32)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:91)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:84)
+	at com.intellij.javaee.appServers.run.execution.LocalJavaeeServerProcessHandler.<init>(LocalJavaeeServerProcessHandler.java:40)
+	at com.intellij.javaee.appServers.run.execution.PatchedLocalState$ScriptBasedLocalJavaeeServerProcessHandler.<init>(PatchedLocalState.java:190)
+	at com.intellij.javaee.appServers.run.execution.PatchedLocalState.startJ2EEProcess(PatchedLocalState.java:98)
+	at com.intellij.javaee.appServers.run.execution.J2EEProcessHandlerWrapper.lambda$new$0(J2EEProcessHandlerWrapper.java:97)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.doRun(BoundedTaskExecutor.java:216)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.access$200(BoundedTaskExecutor.java:27)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.execute(BoundedTaskExecutor.java:195)
+	at com.intellij.util.ConcurrencyUtil.runUnderThreadName(ConcurrencyUtil.java:208)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.run(BoundedTaskExecutor.java:184)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-03-12 16:00:09,778 [18989104]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /usr/java/jdk-12.0.2/bin/java -Dfile.encoding=UTF-8 -classpath /tmp/classpath1308362371.jar com.intellij.javaee.oss.process.JavaeeProcess 36039 org.jetbrains.idea.tomcat.agent.TomEEAgent 
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:32)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:49)
+	at com.intellij.execution.configurations.SimpleJavaParameters.createOSProcessHandler(SimpleJavaParameters.java:194)
+	at com.intellij.javaee.oss.agent.ProcessAgentProxyFactory.createProcess(ProcessAgentProxyFactory.java:103)
+	at com.intellij.javaee.oss.agent.ProcessAgentProxyFactory$ProcessAgentProxy.init(ProcessAgentProxyFactory.java:194)
+	at com.intellij.javaee.oss.admin.JavaeeAgentAdminServerBase.start(JavaeeAgentAdminServerBase.java:67)
+	at org.jetbrains.idea.tomcat.admin.TomcatAdminServerBase.start(TomcatAdminServerBase.java:77)
+	at org.jetbrains.idea.tomcat.admin.TomcatAdminLocalServerImpl.start(TomcatAdminLocalServerImpl.java:57)
+	at jdk.internal.reflect.GeneratedMethodAccessor669.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.intellij.remoteServer.agent.impl.ThreadInvocationHandler.lambda$invoke$0(ThreadInvocationHandler.java:53)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.doRun(BoundedTaskExecutor.java:216)
+	at com.intellij.util.concurrency.BoundedTaskExecutor.access$200(BoundedTaskExecutor.java:27)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.execute(BoundedTaskExecutor.java:195)
+	at com.intellij.util.ConcurrencyUtil.runUnderThreadName(ConcurrencyUtil.java:208)
+	at com.intellij.util.concurrency.BoundedTaskExecutor$1.run(BoundedTaskExecutor.java:184)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+	at java.base/java.lang.Thread.run(Thread.java:834)

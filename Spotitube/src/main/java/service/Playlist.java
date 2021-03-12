@@ -38,28 +38,7 @@ public class Playlist {
 
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.getPlaylists(token);
 
-        // TODO
-        // Error handling
-        if ( playlists == null )
-            return Response.status(404).build();
-
-        PlaylistsDTO playlistsDTO = new PlaylistsDTO();
-        ArrayList<PlaylistDTO> playlistDTOs = new ArrayList<>();
-
-        for ( domain.Playlist playlist : playlists ) {
-            playlistDTOs.add(playlist.getDTO());
-
-            int length = playlist.getDuration();
-
-            playlistsDTO.length += playlist.getDuration();
-        }
-
-        playlistsDTO.playlists = playlistDTOs;
-
-        // TODO
-        // calc the total length
-        
-        return Response.status(200).entity(playlistsDTO).build();
+        return this.buildPlaylistsDTO(playlists);
     }
 
     @POST
@@ -68,8 +47,9 @@ public class Playlist {
     public Response addPlaylist( @Context UriInfo info, PlaylistReqDTO playlistReqDTO ) {
         String token = info.getQueryParameters().getFirst("token");
         
-
-        return null;
+        ArrayList<domain.Playlist> playlists = this.PlaylistDAO.addPlaylist(token, playlistReqDTO.name);
+        
+        return this.buildPlaylistsDTO(playlists);
     }
 
     @DELETE
@@ -110,6 +90,31 @@ public class Playlist {
         tracksDTO.tracks = trackDTOs;
         
         return Response.status(200).entity(tracksDTO).build();
+    }
+
+    private Response buildPlaylistsDTO( ArrayList<domain.Playlist> playlists ) {
+        // TODO
+        // Error handling
+        if ( playlists == null )
+            return Response.status(404).build();
+
+        PlaylistsDTO playlistsDTO = new PlaylistsDTO();
+        ArrayList<PlaylistDTO> playlistDTOs = new ArrayList<>();
+
+        for ( domain.Playlist playlist : playlists ) {
+            playlistDTOs.add(playlist.getDTO());
+
+            int length = playlist.getDuration();
+
+            playlistsDTO.length += playlist.getDuration();
+        }
+
+        playlistsDTO.playlists = playlistDTOs;
+
+        // TODO
+        // calc the total length
+        
+        return Response.status(200).entity(playlistsDTO).build();
     }
 
     @Inject

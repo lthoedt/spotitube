@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import service.dto.request.PlaylistReqDTO;
 
+import service.utils.DB;
+
 public class PlaylistDAO implements IPlaylistDAO {
 
     @Resource(name = "jdbc/spotitube")
@@ -61,8 +63,33 @@ public class PlaylistDAO implements IPlaylistDAO {
     }
 
     @Override
-    public ArrayList<Playlist> addPlaylist(String token) {
-        // TODO Auto-generated method stub
+    public ArrayList<Playlist> addPlaylist(String token, String name) {
+        String sqlPL = "INSERT INTO Playlists ( id, name ) VALUES ( ?, ? )";
+        String sqlPLM = "INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( ?, ?, 1 )";
+
+        String playlist_id = DB.genId();
+        int user_id = DB.getUser(this.dataSource, token).getId();
+
+        try (Connection connection = this.dataSource.getConnection()) {
+            PreparedStatement statementPL = connection.prepareStatement(sqlPL);
+            statementPL.setString(1, playlist_id);
+            statementPL.setString(2, name);
+            int resultPL = statementPL.executeUpdate();
+
+            PreparedStatement statementPLM = connection.prepareStatement(sqlPLM);
+            statementPLM.setString(1, playlist_id);
+            statementPLM.setInt(2, user_id);
+            int resultPLM = statementPLM.executeUpdate();
+
+            // TODO Error handling
+            if ( resultPL != 1 || resultPLM != 1) return null;
+
+            return this.getPlaylists(token);
+
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

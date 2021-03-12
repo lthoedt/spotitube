@@ -8,6 +8,6 @@ import service.dto.request.PlaylistReqDTO;
 public interface IPlaylistDAO {
     public ArrayList<Playlist> getPlaylists( String token );
     public ArrayList<Playlist> deletePlaylist( String token, int id );
-    public ArrayList<Playlist> addPlaylist( String token );
+    public ArrayList<Playlist> addPlaylist( String token, String name );
     public ArrayList<Playlist> editPlaylist( String token, PlaylistReqDTO playlistReqDTO );
 }
