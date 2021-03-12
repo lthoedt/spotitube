@@ -20,14 +20,14 @@ CREATE TABLE Users (
 /* ---------- Playlists -------------------- */
 /* ========================================= */
 CREATE TABLE PlaylistMappers (
-    id          int     primary key AUTO_INCREMENT ,
-    playlist_id int     not null    ,
-    user_id     int     not null    ,
-    owner       BIT     not null
+    id          int             primary key AUTO_INCREMENT ,
+    playlist_id varchar(34)     not null    ,
+    user_id     int             not null    ,
+    owner       BIT             not null
 );
 
 CREATE TABLE Playlists (
-    id          int             primary key AUTO_INCREMENT,
+    id          varchar(34)     primary key ,
     name        varchar(30)     not null
 );
 
@@ -35,14 +35,14 @@ CREATE TABLE Playlists (
 /* ---------- Tracks ----------------------- */
 /* ========================================= */
 CREATE TABLE TrackMappers (
-    id                  int     primary key AUTO_INCREMENT ,
-    track_id            int     not null    ,
-    playlist_id         int     not null    ,
-    offline_available   BIT     DEFAULT 0
+    id                  int             primary key AUTO_INCREMENT ,
+    track_id            varchar(34)     not null    ,
+    playlist_id         varchar(34)     not null    ,
+    offline_available   BIT             DEFAULT 0
 );
 
 CREATE TABLE Tracks (
-    id                  int             primary key AUTO_INCREMENT ,
+    id                  varchar(34)     primary key ,
     performer           varchar(100)    not null    ,
     title               varchar(100)    not null    ,
     url                 varchar(500)    null        ,
@@ -50,19 +50,19 @@ CREATE TABLE Tracks (
 );
 
 CREATE TABLE Songs (
-    id          int     primary key AUTO_INCREMENT ,
-    track_id    int     not null ,
-    album_id    int     not null
+    id          int             primary key AUTO_INCREMENT ,
+    track_id    varchar(34)     not null ,
+    album_id    varchar(34)     not null
 );
 
 CREATE TABLE Albums (
-    id          int             primary key AUTO_INCREMENT ,
+    id          varchar(34)     primary key ,
     name        varchar(50)     not null
 );
 
 CREATE TABLE Videos (
     id                  int             primary key AUTO_INCREMENT ,
-    track_id            int             not null ,
+    track_id            varchar(34)     not null ,
     publication_date    DATE            DEFAULT (CURRENT_DATE)  ,
     description         text            null                    ,
     playcount           int             DEFAULT 0
@@ -117,25 +117,25 @@ ALTER TABLE Songs
 INSERT INTO Users (id, username, password, token) VALUES (1, "henk", "henk", "1425-2565-5487");
 
 -- Playlist
-INSERT INTO Playlists ( id, name ) VALUES ( 1, "SRV" );
-INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( 1, 1, true );
+INSERT INTO Playlists ( id, name ) VALUES ( "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0", "SRV" );
+INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0", 1, true );
 
 -- Track 1
-INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( 1, "Stevie Ray Vaughan And Double Trouble", "Texas Flood (from Live at the El Mocambo", "https://music.youtube.com/watch?v=KC5H9P4F5Uk&feature=share", 571 );
-INSERT INTO Videos ( track_id, playcount ) VALUES ( 1, 7585665 );
+INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", "Stevie Ray Vaughan And Double Trouble", "Texas Flood (from Live at the El Mocambo", "https://music.youtube.com/watch?v=KC5H9P4F5Uk&feature=share", 571 );
+INSERT INTO Videos ( track_id, playcount ) VALUES ( "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", 7585665 );
 
-INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 1, 1, 1, true );
+INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 1, "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0", true );
 --
 
 -- Track 2
-INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( 2, "Stevie Ray Vaughan And Double Trouble", "Lenny", "https://music.youtube.com/watch?v=dfdJ1rh4zNc&feature=share", 298 );
+INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( "N1wdUywfFlbKWjBB6ayDJfv_nCIaUcOyBK", "Stevie Ray Vaughan And Double Trouble", "Lenny", "https://music.youtube.com/watch?v=dfdJ1rh4zNc&feature=share", 298 );
 INSERT INTO Albums ( id, name ) VALUES (1, "Texas Flood");
-INSERT INTO Songs ( track_id, album_id ) VALUES ( 2, 1 );
+INSERT INTO Songs ( track_id, album_id ) VALUES ( "N1wdUywfFlbKWjBB6ayDJfv_nCIaUcOyBK", 1 );
 
-INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 2, 2, 1, false );
+INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 2, "N1wdUywfFlbKWjBB6ayDJfv_nCIaUcOyBK", "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0", false );
 --
 
 -- Track 3
-INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( 3, "Stevie Ray Vaughan And Double Trouble", "Collins Shuffle (Live at Montreux Casino, Montreux, Switzerland - July 1982)", "https://music.youtube.com/watch?v=4b7Gf6md1GE&feature=share", 291 );
-INSERT INTO Albums ( id, name ) VALUES (2, "Live At Montreux 1982 & 1985 • 2000");
-INSERT INTO Songs ( track_id, album_id ) VALUES ( 3, 2 )
+INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( "PkkDX_9Ri5VmBdvGaqxAJz-u6KaOfiUdje", "Stevie Ray Vaughan And Double Trouble", "Collins Shuffle (Live at Montreux Casino, Montreux, Switzerland - July 1982)", "https://music.youtube.com/watch?v=4b7Gf6md1GE&feature=share", 291 );
+INSERT INTO Albums ( id, name ) VALUES ("1l9veJE1ZBoZBPgzGOuCdqPEI5mNyqpIka", "Live At Montreux 1982 & 1985 • 2000");
+INSERT INTO Songs ( track_id, album_id ) VALUES ( "PkkDX_9Ri5VmBdvGaqxAJz-u6KaOfiUdje", "1l9veJE1ZBoZBPgzGOuCdqPEI5mNyqpIka" )
