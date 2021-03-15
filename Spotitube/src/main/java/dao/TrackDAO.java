@@ -10,6 +10,7 @@ import domain.Album;
 import domain.Song;
 import domain.Track;
 import domain.Video;
+import service.dto.request.TrackReqDTO;
 
 public class TrackDAO implements ITrackDAO {
 
@@ -142,14 +143,61 @@ public class TrackDAO implements ITrackDAO {
     }
 
     @Override
-    public ArrayList<Track> addTrackFromPlaylist(String token, int playlist_id, int track_id) {
+    public ArrayList<Track> addTrackToPlaylist(String token, String playlist_id, TrackReqDTO trackReqDTO) {
+
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        playlistDAO.setDataSource(this.dataSource);
+
+        boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);
+        
+        // TODO
+        if ( !owns ) return null;
+
+        String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) VALUES ( ?, ?, ? )";
+
+        try (Connection connection = this.dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, trackReqDTO.id);
+            statement.setString(2, playlist_id);
+            statement.setBoolean(3, trackReqDTO.offlineAvailable);
+
+            if ( statement.executeUpdate() != 1 ) return null;
+
+            return this.getTracksFromPlaylist( token, playlist_id );
+
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ArrayList<Track> deleteTrackFromPlaylist(String token, int playlist_id, int track_id) {
-        // TODO Auto-generated method stub
+    public ArrayList<Track> deleteTrackFromPlaylist(String token, String playlist_id, String track_id) {
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        playlistDAO.setDataSource(this.dataSource);
+
+        boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);
+        
+        // TODO
+        if ( !owns ) return null;
+
+        String sql = "DELETE FROM TrackMappers WHERE playlist_id = ? AND track_id = ? ";
+
+        try (Connection connection = this.dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, playlist_id);
+            statement.setString(2, track_id);
+
+            if ( statement.executeUpdate() != 1 ) return null;
+
+            return this.getTracksFromPlaylist( token, playlist_id );
+
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

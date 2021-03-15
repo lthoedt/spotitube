@@ -3,11 +3,12 @@ package dao;
 import java.util.ArrayList;
 
 import domain.Playlist;
-import service.dto.request.PlaylistReqDTO;
+import service.dto.response.PlaylistDTO;
 
 public interface IPlaylistDAO {
     public ArrayList<Playlist> getPlaylists( String token );
-    public ArrayList<Playlist> deletePlaylist( String token, int id );
+    public ArrayList<Playlist> deletePlaylist( String token, String playlist_id );
     public ArrayList<Playlist> addPlaylist( String token, String name );
-    public ArrayList<Playlist> editPlaylist( String token, PlaylistReqDTO playlistReqDTO );
+    public ArrayList<Playlist> editPlaylist( String token, PlaylistDTO playlistReqDTO );
+    public boolean ownsPlaylist( String token, String playlist_id );
 }

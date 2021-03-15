@@ -20,6 +20,7 @@ import dao.IPlaylistDAO;
 import dao.ITrackDAO;
 import domain.Track;
 import service.dto.request.PlaylistReqDTO;
+import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
 import service.dto.response.PlaylistsDTO;
 import service.dto.response.TrackDTO;
@@ -53,17 +54,23 @@ public class Playlist {
     }
 
     @DELETE
-    public Response deletePlaylist(@Context UriInfo info) {
+    @Path("/{id}")
+    public Response deletePlaylist(@Context UriInfo info, @PathParam("id") String playlist_id) {
         String token = info.getQueryParameters().getFirst("token");
 
-        return null;
+        ArrayList<domain.Playlist> playlists = this.PlaylistDAO.deletePlaylist(token, playlist_id );
+
+        return this.buildPlaylistsDTO(playlists);
     }
 
     @PUT
-    public Response editPlaylist(@Context UriInfo info) {
+    @Path("/{id}")
+    public Response editPlaylist(@Context UriInfo info, PlaylistDTO playlistReqDTO) {
         String token = info.getQueryParameters().getFirst("token");
 
-        return null;
+        ArrayList<domain.Playlist> playlists = this.PlaylistDAO.editPlaylist(token, playlistReqDTO );
+
+        return this.buildPlaylistsDTO(playlists);
     }
 
     @GET
@@ -74,6 +81,33 @@ public class Playlist {
 
         ArrayList<Track> tracks = this.TrackDAO.getTracksFromPlaylist(token, playlist_id);
 
+        return this.buildTracksDTO(tracks);
+    }
+
+    @POST
+    @Path("/{id}/tracks")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addTrack(@Context UriInfo info, @PathParam("id") String playlist_id, TrackReqDTO trackReqDTO) {
+        String token = info.getQueryParameters().getFirst("token");
+
+        ArrayList<Track> tracks = this.TrackDAO.addTrackToPlaylist(token, playlist_id, trackReqDTO);
+
+        return this.buildTracksDTO(tracks);
+    }
+
+    @DELETE
+    @Path("/{id}/tracks/{track_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addTrack(@Context UriInfo info, @PathParam("id") String playlist_id, @PathParam("track_id") String track_id) {
+        String token = info.getQueryParameters().getFirst("token");
+
+        ArrayList<Track> tracks = this.TrackDAO.deleteTrackFromPlaylist(token, playlist_id, track_id);
+
+        return this.buildTracksDTO(tracks);
+    }
+
+    private Response buildTracksDTO( ArrayList<Track> tracks ) {
         if ( tracks == null ) {
             // TODO
             return Response.status(404).build();
@@ -103,8 +137,6 @@ public class Playlist {
 
         for ( domain.Playlist playlist : playlists ) {
             playlistDTOs.add(playlist.getDTO());
-
-            int length = playlist.getDuration();
 
             playlistsDTO.length += playlist.getDuration();
         }
