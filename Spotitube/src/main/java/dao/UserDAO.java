@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import javax.enterprise.inject.Default;
 import javax.sql.DataSource;
 
-import java.nio.charset.Charset;
 import java.sql.*;
 import java.util.Random;
 
@@ -27,9 +26,12 @@ public class UserDAO implements IUserDAO {
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setString(3, token);
-            ResultSet resultSet = statement.executeQuery();
-        
-            return null;
+            if (statement.executeUpdate() != 1) return null;
+
+            User user = new User();
+            user.setUsername(username);
+            user.setToken(token);
+            return user;
             
         } catch (Exception e) {
             System.out.println(e);
@@ -91,9 +93,16 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public String generateToken() {
-        byte[] array = new byte[15]; // length is bounded by 7
-        new Random().nextBytes(array);
-        return new String(array, Charset.forName("UTF-8"));    
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+        String token = "";
+        for ( int g = 0; g < 3; g++ ) {
+            if ( g != 0 ) token += "-";
+            for ( int c = 0; c < 4; c++ ) {
+                token += chars.charAt(new Random().nextInt(chars.length()));
+            }
+        }
+
+        return token;
     }
 
 }

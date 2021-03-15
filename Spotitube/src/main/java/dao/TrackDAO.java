@@ -19,8 +19,8 @@ public class TrackDAO implements ITrackDAO {
 
     private String sqlFields = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration";
     private String sqlJoins = "LEFT JOIN TrackMappers ON TrackMappers.track_id=Tracks.id "
-                        + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
-                        + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
+                            + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
+                            + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
 
 
     @Override
