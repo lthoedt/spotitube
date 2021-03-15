@@ -63,8 +63,8 @@ CREATE TABLE Albums (
 CREATE TABLE Videos (
     id                  int             primary key AUTO_INCREMENT ,
     track_id            varchar(34)     not null ,
-    publication_date    DATE            DEFAULT (CURRENT_DATE)  ,
-    description         text            null                    ,
+    publication_date    DATETIME        DEFAULT CURRENT_TIMESTAMP  ,
+    description         text            null                       ,
     playcount           int             DEFAULT 0
 );
 
