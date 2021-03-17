@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import dao.IUserDAO;
 import domain.User;
+import exceptions.UserNotFoundException;
 import service.dto.request.LoginReqDTO;
 import service.dto.response.LoginDTO;
 
@@ -21,17 +22,9 @@ public class Login {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response login( LoginReqDTO loginDTORequest ) {
-        // System.out.println(this.userDAO.kaas());
-
+    public Response login( LoginReqDTO loginDTORequest ) throws UserNotFoundException {
         // create user in db
         User user = this.userDAO.loginUser(loginDTORequest.user, loginDTORequest.password);
-        
-        // TODO
-        // error handling
-        if (user == null) {
-            return Response.status(404).build();
-        }
         
         // make dto
         LoginDTO loginDTO = new LoginDTO();

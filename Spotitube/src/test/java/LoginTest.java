@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import dao.IUserDAO;
 import domain.User;
+import exceptions.UserNotFoundException;
 import service.Login;
 import service.dto.request.LoginReqDTO;
 import service.dto.response.LoginDTO;
@@ -28,7 +30,7 @@ public class LoginTest {
     }
 
     @Test
-    public void loginTestRegular() {
+    public void loginTestRegular() throws UserNotFoundException {
         // Arrange
         int statuscodeExpected = 200;
         User user = new User();
@@ -49,19 +51,17 @@ public class LoginTest {
     }
 
     @Test
-    public void loginNotFoundTest() {
+    public void loginNotFoundTest() throws UserNotFoundException {
         // Arrange
         int statuscodeExpected = 404;
 
         IUserDAO loginDAOMock = mock(IUserDAO.class);
-        when(loginDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenReturn(null);
+        when(loginDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenThrow(new UserNotFoundException());
         this.Login.setUserDAO(loginDAOMock);
         
-        // Act
-        Response response = this.Login.login(this.loginReqDTO);
-
-        // Assert
-        assertEquals(statuscodeExpected, response.getStatus()); // status
-
+        assertThrows(UserNotFoundException.class, () -> {
+            Response response = this.Login.login(this.loginReqDTO);
+            assertEquals(statuscodeExpected, response.getStatus()); // status
+        });
     }
 }

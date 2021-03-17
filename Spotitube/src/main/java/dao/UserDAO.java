@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.Random;
 
 import domain.User;
+import exceptions.UserNotFoundException;
 
 @Default
 public class UserDAO implements IUserDAO {
@@ -41,7 +42,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User loginUser(String username, String password) {
+    public User loginUser(String username, String password) throws UserNotFoundException {
         String sql = "SELECT username, token FROM Users WHERE username = ? AND password = ?";
         
         try (Connection connection = this.dataSource.getConnection()) {
@@ -62,7 +63,7 @@ public class UserDAO implements IUserDAO {
             e.printStackTrace();
         }
 
-        return null;
+        throw new UserNotFoundException();
     }
 
     // public User getUser( String token ) {
