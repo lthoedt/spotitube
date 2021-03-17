@@ -7,11 +7,11 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class UserNotFoundException extends Exception implements ExceptionMapper<UserNotFoundException> {
     public UserNotFoundException() {
-        super("User not found!");
+        super("Username/password is wrong");
     }
 
     @Override
     public Response toResponse(UserNotFoundException e) {
-        return Response.status(404).entity(e.getMessage()).build();
+        return Response.status(401).entity(e.getMessage()).build();
     }
 }
