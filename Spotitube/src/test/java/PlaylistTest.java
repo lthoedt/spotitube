@@ -114,12 +114,6 @@ public class PlaylistTest {
         int expectedStatus = 403;
         String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
 
-        // create playlists
-        ArrayList<domain.Playlist> playlists = new ArrayList<>();
-        // add sample playlist
-        domain.Playlist playlist = Utils.getSamplePlaylist();
-        playlists.add(playlist);
-
         // Act
         IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.deletePlaylist(testTokenWrong, playlist_id_to_test)).thenReturn(null);
@@ -165,6 +159,27 @@ public class PlaylistTest {
         // Assert
         assertEquals(expectedStatus, response.getStatus());
         assertEquals(expectedName, playlistsDTO.playlists.get(0).name);
+    }
+
+    @Test
+    public void editPlaylistTestNotOwner() {
+        int expectedStatus = 403;
+        String expectedName = "henk";
+        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
+
+        PlaylistDTO playlistDTOToTest = Utils.getSamplePlaylistDTO(expectedName);
+
+        // Act
+        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
+        when(playlistDAO.editPlaylist(testTokenWrong, playlist_id_to_test, expectedName)).thenReturn(null);
+        this.playlist.setPlaylistDAO(playlistDAO);
+        
+        // Assert
+        assertThrows(NotOwnerException.class, () -> {
+            Response response = this.playlist.editPlaylist(testTokenWrong, playlistDTOToTest);
+            assertEquals(expectedStatus, response.getStatus());
+        });
+
     }
 
 }
