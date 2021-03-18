@@ -117,9 +117,9 @@ public class PlaylistDAO implements IPlaylistDAO {
     }
 
     @Override
-    public ArrayList<Playlist> editPlaylist(String token, PlaylistDTO playlistDTO) {
+    public ArrayList<Playlist> editPlaylist(String token, String playlist_id, String playlist_name) {
 
-        boolean owns = this.ownsPlaylist(token, playlistDTO.id);
+        boolean owns = this.ownsPlaylist(token, playlist_id);
 
         // TODO
         if (!owns) return null;
@@ -130,8 +130,8 @@ public class PlaylistDAO implements IPlaylistDAO {
 
         try ( Connection connection = this.dataSource.getConnection() ) {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, playlistDTO.name);
-            statement.setString(2, playlistDTO.id);
+            statement.setString(1, playlist_name);
+            statement.setString(2, playlist_id);
             int result = statement.executeUpdate();
 
             // TODO

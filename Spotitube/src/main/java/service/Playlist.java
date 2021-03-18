@@ -62,10 +62,9 @@ public class Playlist {
 
     @PUT
     @Path("/{id}")
-    public Response editPlaylist(@Context UriInfo info, PlaylistDTO playlistReqDTO) {
-        String token = info.getQueryParameters().getFirst("token");
+    public Response editPlaylist( @QueryParam("token") String token, PlaylistDTO playlistReqDTO) {
 
-        ArrayList<domain.Playlist> playlists = this.PlaylistDAO.editPlaylist(token, playlistReqDTO );
+        ArrayList<domain.Playlist> playlists = this.PlaylistDAO.editPlaylist(token, playlistReqDTO.id, playlistReqDTO.name);
 
         return this.buildPlaylistsDTO(playlists);
     }
