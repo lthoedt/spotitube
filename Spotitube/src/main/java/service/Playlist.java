@@ -20,6 +20,7 @@ import javax.ws.rs.core.UriInfo;
 import dao.IPlaylistDAO;
 import dao.ITrackDAO;
 import domain.Track;
+import exceptions.NotOwnerException;
 import service.dto.request.PlaylistReqDTO;
 import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
@@ -54,17 +55,23 @@ public class Playlist {
 
     @DELETE
     @Path("/{id}")
-    public Response deletePlaylist( @QueryParam("token") String token, @PathParam("id") String playlist_id ) {
+    public Response deletePlaylist( @QueryParam("token") String token, @PathParam("id") String playlist_id ) throws NotOwnerException {
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.deletePlaylist(token, playlist_id );
+
+        if (playlists == null) 
+            throw new NotOwnerException();
 
         return this.buildPlaylistsDTO(playlists);
     }
 
     @PUT
     @Path("/{id}")
-    public Response editPlaylist( @QueryParam("token") String token, PlaylistDTO playlistReqDTO) {
+    public Response editPlaylist( @QueryParam("token") String token, PlaylistDTO playlistReqDTO) throws NotOwnerException {
 
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.editPlaylist(token, playlistReqDTO.id, playlistReqDTO.name);
+
+        if (playlists == null) 
+            throw new NotOwnerException();
 
         return this.buildPlaylistsDTO(playlists);
     }
