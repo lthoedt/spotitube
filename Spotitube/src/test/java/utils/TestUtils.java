@@ -6,6 +6,7 @@ import domain.Playlist;
 import domain.Track;
 import domain.Video;
 import service.dto.request.PlaylistReqDTO;
+import service.dto.response.PlaylistDTO;
 import service.dto.response.TrackDTO;
 
 public final class TestUtils {
@@ -43,6 +44,15 @@ public final class TestUtils {
         playlistReqDTO.owner = false;
         playlistReqDTO.tracks = new TrackDTO[0];
         return playlistReqDTO;
+    }
+
+    public static PlaylistDTO getSamplePlaylistDTO(String name) {
+        PlaylistDTO playlistDTO = new PlaylistDTO();
+        playlistDTO.id = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
+        playlistDTO.name = name;
+        playlistDTO.owner = false;
+        playlistDTO.tracks = new ArrayList<>();
+        return playlistDTO;
     }
 
     public static Playlist convertPlaylistDTOToPlaylist( PlaylistReqDTO playlistReqDTO ) {
