@@ -54,9 +54,7 @@ public class Playlist {
 
     @DELETE
     @Path("/{id}")
-    public Response deletePlaylist(@Context UriInfo info, @PathParam("id") String playlist_id) {
-        String token = info.getQueryParameters().getFirst("token");
-
+    public Response deletePlaylist( @QueryParam("token") String token, @PathParam("id") String playlist_id ) {
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.deletePlaylist(token, playlist_id );
 
         return this.buildPlaylistsDTO(playlists);

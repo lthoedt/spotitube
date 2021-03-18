@@ -74,4 +74,29 @@ public class PlaylistTest {
         assertEquals(playlistReqDTOToTest.name, playlistsDTO.playlists.get(1).name);
     }
 
+    @Test
+    public void deletePlaylistTestRegular() {
+        int expectedStatus = 200;
+        int expectedLength = 0;
+        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
+
+        // create playlists
+        ArrayList<domain.Playlist> playlists = new ArrayList<>();
+        // add sample playlist
+        domain.Playlist playlist = TestUtils.getSamplePlaylist();
+        playlists.add(playlist);
+
+        // Act
+        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
+        when(playlistDAO.deletePlaylist(testToken, playlist_id_to_test)).thenReturn(new ArrayList<domain.Playlist>());
+        this.playlist.setPlaylistDAO(playlistDAO);
+        
+        Response response = this.playlist.deletePlaylist(testToken, playlist_id_to_test);
+        PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
+
+        // Assert
+        assertEquals(expectedStatus, response.getStatus());
+        assertEquals(expectedLength, playlistsDTO.playlists.size());
+    }
+
 }
