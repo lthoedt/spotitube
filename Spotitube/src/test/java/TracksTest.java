@@ -4,7 +4,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import javax.persistence.EntityManager;
 import javax.ws.rs.core.Response;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,12 +17,10 @@ import service.Tracks;
 public class TracksTest {
 
     private Tracks Tracks;
-    private EntityManager em;
 
     @BeforeEach
     public void setup() {
         this.Tracks = new Tracks();
-        this.em = mock(EntityManager.class);
     }
     
     @Test
