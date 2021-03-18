@@ -45,8 +45,7 @@ public class Playlist {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addPlaylist( @Context UriInfo info, PlaylistReqDTO playlistReqDTO ) {
-        String token = info.getQueryParameters().getFirst("token");
+    public Response addPlaylist( @QueryParam("token") String token, PlaylistReqDTO playlistReqDTO ) {
         
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.addPlaylist(token, playlistReqDTO.name);
         

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import dao.IPlaylistDAO;
 import service.Playlist;
+import service.dto.request.PlaylistReqDTO;
+import service.dto.response.PlaylistsDTO;
 import utils.TestUtils;
 
 public class PlaylistTest {
@@ -26,7 +28,6 @@ public class PlaylistTest {
     @Test
     public void getplayListTestRegular() {
         int expectedStatus = 200;
-        int expectedPlaylistCount = 1;
 
         ArrayList<domain.Playlist> playlists = new ArrayList<>();
 
@@ -42,6 +43,35 @@ public class PlaylistTest {
 
         // Assert
         assertEquals(expectedStatus, response.getStatus());
+    }
+
+    @Test
+    public void addPlaylistTestRegular() {
+        int expectedStatus = 200;
+
+        // create playlists
+        ArrayList<domain.Playlist> playlists = new ArrayList<>();
+        // add sample playlist
+        domain.Playlist playlist = TestUtils.getSamplePlaylist();
+        playlists.add(playlist);
+
+        // get sample playlistDTO
+        PlaylistReqDTO playlistReqDTOToTest = TestUtils.getSamplePlaylistReqDTO();
+
+        // convert to domain and add to playlists
+        playlists.add(TestUtils.convertPlaylistDTOToPlaylist(playlistReqDTOToTest));
+
+        // Act
+        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
+        when(playlistDAO.addPlaylist(testToken, playlistReqDTOToTest.name)).thenReturn(playlists);
+        this.playlist.setPlaylistDAO(playlistDAO);
+        
+        Response response = this.playlist.addPlaylist(testToken, playlistReqDTOToTest);
+        PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
+
+        // Assert
+        assertEquals(expectedStatus, response.getStatus());
+        assertEquals(playlistReqDTOToTest.name, playlistsDTO.playlists.get(1).name);
     }
 
 }
