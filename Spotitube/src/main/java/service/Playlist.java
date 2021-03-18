@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -34,8 +35,7 @@ public class Playlist {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPlaylist(@Context UriInfo info) {
-        String token = info.getQueryParameters().getFirst("token");
+    public Response getPlaylist(@QueryParam("token") String token) {
 
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.getPlaylists(token);
 
@@ -136,15 +136,16 @@ public class Playlist {
         ArrayList<PlaylistDTO> playlistDTOs = new ArrayList<>();
 
         for ( domain.Playlist playlist : playlists ) {
+            playlistsDTO.length += playlist.getDuration();
+
+            // Remove this if tracks should not be empty
+            playlist.setTracks(new ArrayList<Track>());
+
             playlistDTOs.add(playlist.getDTO());
 
-            playlistsDTO.length += playlist.getDuration();
         }
 
         playlistsDTO.playlists = playlistDTOs;
-
-        // TODO
-        // calc the total length
         
         return Response.status(200).entity(playlistsDTO).build();
     }

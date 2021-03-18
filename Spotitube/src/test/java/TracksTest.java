@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import dao.ITrackDAO;
 import domain.Track;
-import domain.Video;
 import service.Tracks;
+import utils.TestUtils;
 
 public class TracksTest {
 
@@ -32,15 +32,7 @@ public class TracksTest {
 
         ArrayList<Track> tracks = new ArrayList<>();
 
-        Track track = new Video("LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u");
-        track.setPerformer("Stevie Ray Vaughan And Double Trouble");
-        track.setTitle("Texas Flood (from Live at the El Mocambo");
-        track.setUrl("");
-        track.setDuration(123);
-        track.setOfflineAvailable(true);
-        track.setPublicationDate("2021-03-15 11:04:11");
-        track.setDescription("");
-        track.setPlaycount(7585665);
+        Track track = TestUtils.getSampleTrack();
         tracks.add(track);
 
 
