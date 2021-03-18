@@ -44,4 +44,17 @@ public final class TestUtils {
         playlistReqDTO.tracks = new TrackDTO[0];
         return playlistReqDTO;
     }
+
+    public static Playlist convertPlaylistDTOToPlaylist( PlaylistReqDTO playlistReqDTO ) {
+        Playlist playlist = new Playlist();
+
+        ArrayList<Track> tracks = new ArrayList<>();
+
+        playlist.setId("RtUtzbPwzN1rds0qEGaSvsmcvtIT3Rpxg0");
+        playlist.setName(playlistReqDTO.name);
+        playlist.setOwner(true);
+        playlist.setTracks(tracks);
+        
+        return playlist;
+    }
 }
