@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import domain.Playlist;
 import domain.Track;
 import domain.Video;
+import service.dto.request.PlaylistReqDTO;
+import service.dto.response.TrackDTO;
 
 public final class TestUtils {
     public static Track getSampleTrack() {
@@ -32,5 +34,14 @@ public final class TestUtils {
         playlist.setTracks(tracks);
         
         return playlist;
+    }
+
+    public static PlaylistReqDTO getSamplePlaylistReqDTO() {
+        PlaylistReqDTO playlistReqDTO = new PlaylistReqDTO();
+        playlistReqDTO.id = -1;
+        playlistReqDTO.name = "Progressive Rock";
+        playlistReqDTO.owner = false;
+        playlistReqDTO.tracks = new TrackDTO[0];
+        return playlistReqDTO;
     }
 }
