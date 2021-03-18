@@ -64,7 +64,6 @@ public class PlaylistDAO implements IPlaylistDAO {
 
         boolean owns = this.ownsPlaylist(token, playlist_id);
 
-        // TODO
         if (!owns) return null;
 
         String sql = "DELETE FROM Playlists WHERE id=?";
@@ -121,7 +120,6 @@ public class PlaylistDAO implements IPlaylistDAO {
 
         boolean owns = this.ownsPlaylist(token, playlist_id);
 
-        // TODO
         if (!owns) return null;
 
         // TODO Validate name
