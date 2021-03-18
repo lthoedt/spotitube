@@ -1,4 +1,4 @@
-package utils;
+package tests;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import service.dto.request.PlaylistReqDTO;
 import service.dto.response.PlaylistDTO;
 import service.dto.response.TrackDTO;
 
-public final class TestUtils {
+public final class Utils {
     public static Track getSampleTrack() {
         Track track = new Video("LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u");
         track.setPerformer("Stevie Ray Vaughan And Double Trouble");
