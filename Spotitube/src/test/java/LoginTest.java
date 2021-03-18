@@ -59,7 +59,7 @@ public class LoginTest {
     @Test
     public void loginNotFoundTest() {
         // Arrange
-        int statuscodeExpected = 404;
+        int statuscodeExpected = 401;
 
         IUserDAO loginDAOMock = mock(IUserDAO.class);
         when(loginDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenReturn(null);
