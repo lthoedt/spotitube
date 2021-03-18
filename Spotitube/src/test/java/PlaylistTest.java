@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import dao.IPlaylistDAO;
 import service.Playlist;
 import service.dto.request.PlaylistReqDTO;
+import service.dto.response.PlaylistDTO;
 import service.dto.response.PlaylistsDTO;
 import utils.TestUtils;
 
@@ -97,6 +98,34 @@ public class PlaylistTest {
         // Assert
         assertEquals(expectedStatus, response.getStatus());
         assertEquals(expectedLength, playlistsDTO.playlists.size());
+    }
+
+    @Test
+    public void editPlaylistTestRegular() {
+        int expectedStatus = 200;
+        String expectedName = "henk";
+        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
+
+        PlaylistDTO playlistDTOToTest = TestUtils.getSamplePlaylistDTO(expectedName);
+
+        // create playlists
+        ArrayList<domain.Playlist> playlists = new ArrayList<>();
+        // add sample playlist
+        domain.Playlist playlist = TestUtils.getSamplePlaylist();
+        playlist.setName(expectedName);
+        playlists.add(playlist);
+
+        // Act
+        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
+        when(playlistDAO.editPlaylist(testToken, playlist_id_to_test, expectedName)).thenReturn(playlists);
+        this.playlist.setPlaylistDAO(playlistDAO);
+        
+        Response response = this.playlist.editPlaylist(testToken, playlistDTOToTest);
+        PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
+
+        // Assert
+        assertEquals(expectedStatus, response.getStatus());
+        assertEquals(expectedName, playlistsDTO.playlists.get(0).name);
     }
 
 }
