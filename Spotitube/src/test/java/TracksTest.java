@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import dao.ITrackDAO;
 import domain.Track;
 import service.Tracks;
-import utils.TestUtils;
+import tests.Utils;
 
 public class TracksTest {
 
@@ -32,7 +32,7 @@ public class TracksTest {
 
         ArrayList<Track> tracks = new ArrayList<>();
 
-        Track track = TestUtils.getSampleTrack();
+        Track track = Utils.getSampleTrack();
         tracks.add(track);
 
 
