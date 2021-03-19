@@ -188,7 +188,7 @@ public class PlaylistTest {
 
         // Act
         ITrackDAO trackDAO = mock(ITrackDAO.class);
-        when(trackDAO.getTracksFromPlaylist(testToken, playlist_id_to_test)).thenReturn(new ArrayList<Track>());
+        when(trackDAO.getTracksFromPlaylist(testToken, playlist_id_to_test)).thenReturn(Utils.getSamplePlaylist().getTracks());
         this.playlist.setTrackDAO(trackDAO);
         
         Response response = this.playlist.getTracks(testToken, playlist_id_to_test);
