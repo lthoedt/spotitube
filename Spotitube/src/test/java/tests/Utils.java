@@ -6,6 +6,7 @@ import domain.Playlist;
 import domain.Track;
 import domain.Video;
 import service.dto.request.PlaylistReqDTO;
+import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
 import service.dto.response.TrackDTO;
 
@@ -53,6 +54,17 @@ public final class Utils {
         playlistDTO.owner = false;
         playlistDTO.tracks = new ArrayList<>();
         return playlistDTO;
+    }
+
+    public static TrackReqDTO getSampleTrackReqDTO() {
+        TrackReqDTO trackReqDTO = new TrackReqDTO();
+        trackReqDTO.id = "1";
+        trackReqDTO.title = "title";
+        trackReqDTO.performer = "performer";
+        trackReqDTO.duration = 123;
+        trackReqDTO.album = "albumName";
+        trackReqDTO.offlineAvailable = true;
+        return trackReqDTO;
     }
 
     public static Playlist convertPlaylistDTOToPlaylist( PlaylistReqDTO playlistReqDTO ) {
