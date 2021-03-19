@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dao.IPlaylistDAO;
+import dao.ITrackDAO;
+import domain.Track;
 import exceptions.NotOwnerException;
 import service.Playlist;
 import service.dto.request.PlaylistReqDTO;
@@ -23,6 +25,7 @@ public class PlaylistTest {
     private Playlist playlist;
     private String testToken = "1425-2565-5487";
     private String testTokenWrong = "1";
+    String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
 
     @BeforeEach
     public void setup() {
@@ -82,7 +85,6 @@ public class PlaylistTest {
     public void deletePlaylistTestRegular() {
         int expectedStatus = 200;
         int expectedLength = 0;
-        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
 
         // create playlists
         ArrayList<domain.Playlist> playlists = new ArrayList<>();
@@ -112,7 +114,6 @@ public class PlaylistTest {
     @Test
     public void deletePlaylistTestNotOwner() {
         int expectedStatus = 403;
-        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
 
         // Act
         IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
@@ -131,7 +132,6 @@ public class PlaylistTest {
     public void editPlaylistTestRegular() {
         int expectedStatus = 200;
         String expectedName = "henk";
-        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
 
         PlaylistDTO playlistDTOToTest = Utils.getSamplePlaylistDTO(expectedName);
 
@@ -165,7 +165,6 @@ public class PlaylistTest {
     public void editPlaylistTestNotOwner() {
         int expectedStatus = 403;
         String expectedName = "henk";
-        String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
 
         PlaylistDTO playlistDTOToTest = Utils.getSamplePlaylistDTO(expectedName);
 
@@ -179,6 +178,22 @@ public class PlaylistTest {
             Response response = this.playlist.editPlaylist(testTokenWrong, playlistDTOToTest);
             assertEquals(expectedStatus, response.getStatus());
         });
+    }
+
+    @Test
+    public void getTracksFromPlaylistTest() {        
+        // Arrange
+        int expectedStatus = 200;
+
+        // Act
+        ITrackDAO trackDAO = mock(ITrackDAO.class);
+        when(trackDAO.getTracksFromPlaylist(testToken, playlist_id_to_test)).thenReturn(new ArrayList<Track>());
+        this.playlist.setTrackDAO(trackDAO);
+        
+        Response response = this.playlist.getTracks(testToken, playlist_id_to_test);
+        
+        // Assert
+        assertEquals(expectedStatus, response.getStatus());
 
     }
 

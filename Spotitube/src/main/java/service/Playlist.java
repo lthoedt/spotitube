@@ -79,8 +79,7 @@ public class Playlist {
     @GET
     @Path("{id}/tracks")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTracks(@Context UriInfo info, @PathParam("id") String playlist_id) {
-        String token = info.getQueryParameters().getFirst("token");
+    public Response getTracks(@QueryParam("token") String token, @PathParam("id") String playlist_id) {
 
         ArrayList<Track> tracks = this.TrackDAO.getTracksFromPlaylist(token, playlist_id);
 
