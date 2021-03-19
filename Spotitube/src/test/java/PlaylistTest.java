@@ -239,7 +239,49 @@ public class PlaylistTest {
             Response response = this.playlist.addTrack("1", playlist_id_to_test, trackReqDTO);
             assertEquals(expectedStatus, response.getStatus());
         });
+    }
+
+    @Test
+    public void deleteTrackFromPlaylistTestRegular() {
+        // Arrange
+        int expectedStatus = 200;
+        String track_id_to_test = "1";
+
+        // Act
+        ITrackDAO trackDAO = mock(ITrackDAO.class);
+        when(trackDAO.deleteTrackFromPlaylist(testToken, playlist_id_to_test, track_id_to_test)).thenReturn(new ArrayList<Track>());
+        this.playlist.setTrackDAO(trackDAO);
+
+        Response response = null;
+        try {
+            response = this.playlist.deleteTrack(testToken, playlist_id_to_test, track_id_to_test);
+        } catch (NotOwnerException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        // Assert
+        assertEquals(expectedStatus, response.getStatus());
+    }
+
+    @Test
+    public void deleteTrackFromPlaylistTestNotOwner() {
+        // Arrange
+        int expectedStatus = 403;
+        String track_id_to_test = "1";
+        String wrong_token = "1";
+
+        // Act
+        ITrackDAO trackDAO = mock(ITrackDAO.class);
+        when(trackDAO.deleteTrackFromPlaylist(wrong_token, playlist_id_to_test, track_id_to_test)).thenReturn(null);
+        this.playlist.setTrackDAO(trackDAO);
         
+        // Assert
+        assertThrows(NotOwnerException.class, () -> {
+            Response response = this.playlist.deleteTrack(wrong_token, playlist_id_to_test, track_id_to_test);
+            assertEquals(expectedStatus, response.getStatus());
+        });
+
     }
 
 }
