@@ -103,10 +103,12 @@ public class Playlist {
     @DELETE
     @Path("/{id}/tracks/{track_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addTrack(@Context UriInfo info, @PathParam("id") String playlist_id, @PathParam("track_id") String track_id) {
-        String token = info.getQueryParameters().getFirst("token");
+    public Response deleteTrack(@QueryParam("token") String token, @PathParam("id") String playlist_id, @PathParam("track_id") String track_id) throws NotOwnerException {
 
         ArrayList<Track> tracks = this.TrackDAO.deleteTrackFromPlaylist(token, playlist_id, track_id);
+
+        if (tracks == null) 
+            throw new NotOwnerException();
 
         return Response.status(200).entity(this.buildTracksDTO(tracks)).build();
     }
