@@ -143,23 +143,21 @@ public class TrackDAO implements ITrackDAO {
     }
 
     @Override
-    public ArrayList<Track> addTrackToPlaylist(String token, String playlist_id, TrackReqDTO trackReqDTO) {
+    public ArrayList<Track> addTrackToPlaylist(String token, String playlist_id, String track_id, boolean track_offlineAvailable) {
 
         PlaylistDAO playlistDAO = new PlaylistDAO();
         playlistDAO.setDataSource(this.dataSource);
 
         boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);
-        
-        // TODO
         if ( !owns ) return null;
 
         String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) VALUES ( ?, ?, ? )";
 
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, trackReqDTO.id);
+            statement.setString(1, track_id);
             statement.setString(2, playlist_id);
-            statement.setBoolean(3, trackReqDTO.offlineAvailable);
+            statement.setBoolean(3, track_offlineAvailable);
 
             if ( statement.executeUpdate() != 1 ) return null;
 
