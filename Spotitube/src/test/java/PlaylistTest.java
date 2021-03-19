@@ -16,8 +16,10 @@ import domain.Track;
 import exceptions.NotOwnerException;
 import service.Playlist;
 import service.dto.request.PlaylistReqDTO;
+import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
 import service.dto.response.PlaylistsDTO;
+import service.dto.response.TracksDTO;
 import tests.Utils;
 
 public class PlaylistTest {
@@ -194,7 +196,50 @@ public class PlaylistTest {
         
         // Assert
         assertEquals(expectedStatus, response.getStatus());
+    }
 
+    @Test
+    public void addTrackToPlaylistTestRegular() {
+        // Arrange
+        int expectedStatus = 201;
+
+        TrackReqDTO trackReqDTO = Utils.getSampleTrackReqDTO();
+
+        // Act
+        ITrackDAO trackDAO = mock(ITrackDAO.class);
+        when(trackDAO.addTrackToPlaylist(testToken, playlist_id_to_test, trackReqDTO.id, trackReqDTO.offlineAvailable)).thenReturn(new ArrayList<Track>());
+        this.playlist.setTrackDAO(trackDAO);
+        
+        Response response = null;
+        try {
+            response = this.playlist.addTrack(testToken, playlist_id_to_test, trackReqDTO);
+        } catch (NotOwnerException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        // Assert
+        assertEquals(expectedStatus, response.getStatus());
+    }
+
+    @Test
+    public void addTrackToPlaylistTestNotOwner() {
+        // Arrange
+        int expectedStatus = 403;
+
+        TrackReqDTO trackReqDTO = Utils.getSampleTrackReqDTO();
+
+        // Act
+        ITrackDAO trackDAO = mock(ITrackDAO.class);
+        when(trackDAO.addTrackToPlaylist("1", playlist_id_to_test, trackReqDTO.id, trackReqDTO.offlineAvailable)).thenReturn(null);
+        this.playlist.setTrackDAO(trackDAO);
+        
+        // Assert
+        assertThrows(NotOwnerException.class, () -> {
+            Response response = this.playlist.addTrack("1", playlist_id_to_test, trackReqDTO);
+            assertEquals(expectedStatus, response.getStatus());
+        });
+        
     }
 
 }
