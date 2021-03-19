@@ -112,11 +112,6 @@ public class Playlist {
     }
 
     private TracksDTO buildTracksDTO( ArrayList<Track> tracks ) {
-        if ( tracks == null ) {
-            // TODO
-            return null;
-        }
-
         TracksDTO tracksDTO = new TracksDTO();
 
         ArrayList<TrackDTO> trackDTOs = new ArrayList<>();
@@ -131,11 +126,6 @@ public class Playlist {
     }
 
     private Response buildPlaylistsDTO( ArrayList<domain.Playlist> playlists ) {
-        // TODO
-        // Error handling
-        if ( playlists == null )
-            return Response.status(404).build();
-
         PlaylistsDTO playlistsDTO = new PlaylistsDTO();
         ArrayList<PlaylistDTO> playlistDTOs = new ArrayList<>();
 
