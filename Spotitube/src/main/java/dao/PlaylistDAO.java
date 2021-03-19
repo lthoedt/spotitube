@@ -18,16 +18,14 @@ public class PlaylistDAO implements IPlaylistDAO {
 
     @Override
     public ArrayList<Playlist> getPlaylists(String token) {
-        String sql = "SELECT Playlists.id, Playlists.name, PlaylistMappers.owner "
-                        + "FROM PlaylistMappers "
-                        + "INNER JOIN Playlists ON PlaylistMappers.playlist_id=Playlists.id "
-                        + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
-                        + "WHERE Users.token=?";
+        String sql = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id "
+                        + "FROM Playlists "
+                        + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
+                        + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id";
 
         try ( Connection connection = this.dataSource.getConnection() ) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, token);
-
             ResultSet resultSet = statement.executeQuery();
 
             ArrayList<Playlist> playlists = new ArrayList<>();
@@ -37,7 +35,10 @@ public class PlaylistDAO implements IPlaylistDAO {
 
                 playlist.setId(resultSet.getString("id"));
                 playlist.setName(resultSet.getString("name"));
-                playlist.setOwner(resultSet.getBoolean("owner"));
+                playlist.setOwner(resultSet.getString("users_id").equals(resultSet.getString("user_id")));
+
+                System.out.println(resultSet.getString("users_id"));
+                System.out.println(resultSet.getString("user_id"));
 
                 // Misschien is dit niet mooi maar duration moet uit tracks gehaald worden
                 TrackDAO trackDAO = new TrackDAO();
