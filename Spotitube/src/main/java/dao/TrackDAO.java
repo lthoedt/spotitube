@@ -173,12 +173,12 @@ public class TrackDAO implements ITrackDAO {
 
     @Override
     public ArrayList<Track> deleteTrackFromPlaylist(String token, String playlist_id, String track_id) {
+
+        // TODO
         PlaylistDAO playlistDAO = new PlaylistDAO();
         playlistDAO.setDataSource(this.dataSource);
 
-        boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);
-        
-        // TODO
+        boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);        
         if ( !owns ) return null;
 
         String sql = "DELETE FROM TrackMappers WHERE playlist_id = ? AND track_id = ? ";
