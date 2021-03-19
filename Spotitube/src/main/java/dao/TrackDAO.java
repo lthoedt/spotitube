@@ -24,7 +24,7 @@ public class TrackDAO implements ITrackDAO {
 
     @Override
     public ArrayList<Track> getTracks(String token, String forPlaylist ) {
-        String sqlWhere = "WHERE TrackMappers.playlist_id != ? OR TrackMappers.playlist_id IS NULL";
+        String sqlWhere = "WHERE TrackMappers.playlist_id NOT IN (SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
 
         String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
