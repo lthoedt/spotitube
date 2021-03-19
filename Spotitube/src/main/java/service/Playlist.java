@@ -83,19 +83,21 @@ public class Playlist {
 
         ArrayList<Track> tracks = this.TrackDAO.getTracksFromPlaylist(token, playlist_id);
 
-        return this.buildTracksDTO(tracks);
+        return Response.status(200).entity(this.buildTracksDTO(tracks)).build();
     }
 
     @POST
     @Path("/{id}/tracks")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addTrack(@Context UriInfo info, @PathParam("id") String playlist_id, TrackReqDTO trackReqDTO) {
-        String token = info.getQueryParameters().getFirst("token");
+    public Response addTrack(@QueryParam("token") String token, @PathParam("id") String playlist_id, TrackReqDTO trackReqDTO) throws NotOwnerException {
 
-        ArrayList<Track> tracks = this.TrackDAO.addTrackToPlaylist(token, playlist_id, trackReqDTO);
+        ArrayList<Track> tracks = this.TrackDAO.addTrackToPlaylist(token, playlist_id, trackReqDTO.id, trackReqDTO.offlineAvailable);
 
-        return this.buildTracksDTO(tracks);
+        if (tracks == null) 
+            throw new NotOwnerException();
+
+        return Response.status(201).entity(this.buildTracksDTO(tracks)).build();
     }
 
     @DELETE
@@ -106,13 +108,13 @@ public class Playlist {
 
         ArrayList<Track> tracks = this.TrackDAO.deleteTrackFromPlaylist(token, playlist_id, track_id);
 
-        return this.buildTracksDTO(tracks);
+        return Response.status(200).entity(this.buildTracksDTO(tracks)).build();
     }
 
-    private Response buildTracksDTO( ArrayList<Track> tracks ) {
+    private TracksDTO buildTracksDTO( ArrayList<Track> tracks ) {
         if ( tracks == null ) {
             // TODO
-            return Response.status(404).build();
+            return null;
         }
 
         TracksDTO tracksDTO = new TracksDTO();
@@ -125,7 +127,7 @@ public class Playlist {
 
         tracksDTO.tracks = trackDTOs;
         
-        return Response.status(200).entity(tracksDTO).build();
+        return tracksDTO;
     }
 
     private Response buildPlaylistsDTO( ArrayList<domain.Playlist> playlists ) {
