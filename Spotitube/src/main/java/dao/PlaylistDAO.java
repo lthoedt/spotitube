@@ -9,7 +9,6 @@ import domain.Track;
 import java.sql.*;
 import java.util.ArrayList;
 
-import service.dto.response.PlaylistDTO;
 import service.utils.DB;
 
 public class PlaylistDAO implements IPlaylistDAO {

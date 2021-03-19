@@ -19,7 +19,6 @@ import service.dto.request.PlaylistReqDTO;
 import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
 import service.dto.response.PlaylistsDTO;
-import service.dto.response.TracksDTO;
 import tests.Utils;
 
 public class PlaylistTest {

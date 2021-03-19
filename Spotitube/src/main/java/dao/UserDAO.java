@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.Random;
 
 import domain.User;
-import exceptions.UserNotFoundException;
 
 @Default
 public class UserDAO implements IUserDAO {
