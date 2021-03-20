@@ -81,7 +81,6 @@ public class TrackDAO implements ITrackDAO {
             }
     
         } catch ( SQLException e ) {
-            // TODO
             e.printStackTrace();
         }
 
@@ -96,7 +95,6 @@ public class TrackDAO implements ITrackDAO {
             track.setDuration(set.getInt("duration"));
             track.setOfflineAvailable(set.getBoolean("offline_available"));
         } catch (SQLException e) {
-            // TODO
             e.printStackTrace();
         }
     }

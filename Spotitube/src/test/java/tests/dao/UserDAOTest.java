@@ -30,6 +30,7 @@ public class UserDAOTest {
             
             String tokenToExpect = "1425-2565-5487";
 
+            // TODO wat doet dit?
             User userToExpect = new User();
             userToExpect.setUsername(usernameToTest);
             userToExpect.setToken(tokenToExpect);

@@ -1,6 +1,8 @@
 package tests.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,19 +15,31 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dao.TrackDAO;
 import domain.Track;
 
 public class TrackDAOTest {
-    @Test
-    public void getTracksTestRegular() {
-        String sqlFields = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration";
-        String sqlJoins = "LEFT JOIN TrackMappers ON TrackMappers.track_id=Tracks.id "
+    private String sqlFields = "SELECT TrackMappers.offline_available, Tracks.id, Tracks.performer, Tracks.title, Tracks.url, Tracks.duration";
+    private String sqlJoins = "LEFT JOIN TrackMappers ON TrackMappers.track_id=Tracks.id "
                             + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
                             + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
-        String sqlWhere = "WHERE TrackMappers.playlist_id != ? OR TrackMappers.playlist_id IS NULL";
+
+    private TrackDAO trackDAO;
+    private DataSource dataSource;
+
+    @BeforeEach
+    public void setup() {
+        this.dataSource = mock(DataSource.class);
+        this.trackDAO = new TrackDAO();
+        this.trackDAO.setDataSource(this.dataSource);
+    }
+
+    @Test
+    public void getTracksTestRegular() {
+        String sqlWhere = "WHERE TrackMappers.playlist_id NOT IN (SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
 
         String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
@@ -42,7 +56,6 @@ public class TrackDAOTest {
         String forPlaylistToUse = "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0";
 
         // setup mocks
-        DataSource dataSource = mock(DataSource.class);
         Connection connection = mock(Connection.class);
         // VIDEO
         PreparedStatement preparedStatementVideo = mock(PreparedStatement.class);
@@ -78,9 +91,6 @@ public class TrackDAOTest {
             when(resultSetSong.getString("id")).thenReturn("LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u");
             when(resultSetSong.getString("alumb_name")).thenReturn("Texas Flood");
 
-            TrackDAO trackDAO = new TrackDAO();
-            trackDAO.setDataSource(dataSource);
-
             // Act
             ArrayList<Track> tracks = trackDAO.getTracks(tokenToUse, forPlaylistToUse);
     
@@ -99,5 +109,68 @@ public class TrackDAOTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }   
+    }
+
+    @Test
+    public void getTracksFromPlaylistTest() {
+        try {
+            String sqlWhere = "WHERE TrackMappers.playlist_id = ? AND Users.token = ?";
+
+            String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
+                                + "FROM Videos "
+                                + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
+                                + sqlJoins
+                                + sqlWhere;
+            String sqlSong  = sqlFields + ", Albums.name AS album_name "
+                                + "FROM Songs "
+                                + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
+                                + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
+                                + sqlJoins
+                                + sqlWhere;
+
+            String tokenToExpect = "1425-2565-5487";
+
+            String test_id = "1";
+
+            // setup mocks
+            Connection connection = mock(Connection.class);
+
+            PreparedStatement preparedStatementVideo = mock(PreparedStatement.class);
+            ResultSet resultSetVideo = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementSong = mock(PreparedStatement.class);
+            ResultSet resultSetSong = mock(ResultSet.class);
+            
+            // instruct mocks
+            when(dataSource.getConnection()).thenReturn(connection);
+            
+            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
+            when(resultSetVideo.next()).thenReturn(true).thenReturn(false);
+
+            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
+            when(resultSetSong.next()).thenReturn(true).thenReturn(false);
+
+            // Act
+            ArrayList<Track> tracks = this.trackDAO.getTracksFromPlaylist(tokenToExpect, test_id);
+
+            // Assert
+            verify(connection).prepareStatement(sqlVideo);
+            verify(preparedStatementVideo).setString(1, test_id);
+            verify(preparedStatementVideo).setString(2, tokenToExpect);
+            verify(preparedStatementVideo).executeQuery();
+
+            verify(connection).prepareStatement(sqlSong);
+            verify(preparedStatementSong).setString(1, test_id);
+            verify(preparedStatementSong).setString(2, tokenToExpect);
+            verify(preparedStatementSong).executeQuery();
+
+            assertNotNull(tracks);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
 }

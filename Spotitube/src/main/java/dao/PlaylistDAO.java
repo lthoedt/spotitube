@@ -37,10 +37,7 @@ public class PlaylistDAO implements IPlaylistDAO {
                 playlist.setName(resultSet.getString("name"));
                 playlist.setOwner(resultSet.getString("users_id").equals(resultSet.getString("user_id")));
 
-                System.out.println(resultSet.getString("users_id"));
-                System.out.println(resultSet.getString("user_id"));
-
-                // Misschien is dit niet mooi maar duration moet uit tracks gehaald worden
+                // TODO Deze dependency moet weg
                 TrackDAO trackDAO = new TrackDAO();
                 trackDAO.setDataSource(this.dataSource);
                 ArrayList<Track> tracks = trackDAO.getTracksFromPlaylist( token, playlist.getId() );
