@@ -16,6 +16,9 @@ public class PlaylistDAO implements IPlaylistDAO {
     @Resource(name = "jdbc/spotitube")
     DataSource dataSource;
 
+    private String sqlUserJoin = "INNER JOIN PlaylistMappers ON Playlists.id=PlaylistMappers.playlist_id "
+                                + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id ";
+
     @Override
     public ArrayList<Playlist> getPlaylists(String token) {
         String sql = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id "
@@ -59,15 +62,16 @@ public class PlaylistDAO implements IPlaylistDAO {
     @Override
     public ArrayList<Playlist> deletePlaylist(String token, String playlist_id) {
 
-        boolean owns = this.ownsPlaylist(token, playlist_id);
-
-        if (!owns) return null;
-
-        String sql = "DELETE FROM Playlists WHERE id=?";
+        String sql = "DELETE Playlists "
+                    + "FROM Playlists "
+                    + sqlUserJoin
+                    + "WHERE Playlists.id = ? "
+                    + "AND Users.token = ?";
 
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, playlist_id);
+            statement.setString(2, token);
             int result = statement.executeUpdate();
 
             if (result != 1 ) return null;
@@ -115,18 +119,19 @@ public class PlaylistDAO implements IPlaylistDAO {
     @Override
     public ArrayList<Playlist> editPlaylist(String token, String playlist_id, String playlist_name) {
 
-        boolean owns = this.ownsPlaylist(token, playlist_id);
-
-        if (!owns) return null;
-
         // TODO Validate name
 
-        String sql = "UPDATE Playlists SET name = ? WHERE id = ?";
+        String sql = "UPDATE Playlists "
+                    + sqlUserJoin
+                    + "SET name = ? "
+                    + "WHERE Playlists.id = ? "
+                    + "AND Users.token = ?";
 
         try ( Connection connection = this.dataSource.getConnection() ) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, playlist_name);
             statement.setString(2, playlist_id);
+            statement.setString(3, token);
             int result = statement.executeUpdate();
 
             // TODO
@@ -143,28 +148,6 @@ public class PlaylistDAO implements IPlaylistDAO {
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    @Override
-    public boolean ownsPlaylist(String token, String playlist_id) {
-        
-        String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
-
-        try ( Connection connection = this.dataSource.getConnection() ) {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, token);
-            statement.setString(2, playlist_id);
-            ResultSet result = statement.executeQuery();
-
-            while ( result.next() ) {
-                return result.getBoolean("owns");
-            }
-        } catch ( SQLException e ) {
-            // TODO
-            e.printStackTrace();
-        }
-
-        return false;
     }
     
 }

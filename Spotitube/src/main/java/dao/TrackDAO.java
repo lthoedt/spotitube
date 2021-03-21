@@ -105,7 +105,7 @@ public class TrackDAO implements ITrackDAO {
 
     @Override
     public ArrayList<Track> getTracksFromPlaylist(String token, String playlist_id) {
-        String sqlWhere = "WHERE TrackMappers.playlist_id = ? AND Users.token = ?";
+        String sqlWhere = "WHERE TrackMappers.playlist_id = ?";
 
         String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
@@ -122,12 +122,10 @@ public class TrackDAO implements ITrackDAO {
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statementVideo = connection.prepareStatement(sqlVideo);
             statementVideo.setString(1, playlist_id);
-            statementVideo.setString(2, token);
             ResultSet resultSetVideo = statementVideo.executeQuery();
 
             PreparedStatement statementSong = connection.prepareStatement(sqlSong);
             statementSong.setString(1, playlist_id);
-            statementSong.setString(2, token);
 
             ResultSet resultSetSong = statementSong.executeQuery();
 
@@ -142,13 +140,11 @@ public class TrackDAO implements ITrackDAO {
     @Override
     public ArrayList<Track> addTrackToPlaylist(String token, String playlist_id, String track_id, boolean track_offlineAvailable) {
 
-        PlaylistDAO playlistDAO = new PlaylistDAO();
-        playlistDAO.setDataSource(this.dataSource);
-
-        boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);
+        boolean owns = this.ownsPlaylist(token, playlist_id);
         if ( !owns ) return null;
 
-        String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) VALUES ( ?, ?, ? )";
+        String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) "
+                    + "VALUES ( ?, ?, ? )";
 
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -164,26 +160,25 @@ public class TrackDAO implements ITrackDAO {
             e.printStackTrace();
         }
 
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public ArrayList<Track> deleteTrackFromPlaylist(String token, String playlist_id, String track_id) {
 
-        // TODO
-        PlaylistDAO playlistDAO = new PlaylistDAO();
-        playlistDAO.setDataSource(this.dataSource);
-
-        boolean owns = playlistDAO.ownsPlaylist(token, playlist_id);        
-        if ( !owns ) return null;
-
-        String sql = "DELETE FROM TrackMappers WHERE playlist_id = ? AND track_id = ? ";
+        String sql = "DELETE TrackMappers "
+                    + "FROM TrackMappers "
+                    + "INNER JOIN PlaylistMappers ON TrackMappers.playlist_id=PlaylistMappers.playlist_id "
+                    + "INNER JOIN Users On PlaylistMappers.user_id=Users.id "
+                    + "WHERE TrackMappers.playlist_id = ? "
+                    + "AND TrackMappers.track_id = ? "
+                    + "AND Users.token = ?";
 
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, playlist_id);
             statement.setString(2, track_id);
+            statement.setString(3, token);
 
             if ( statement.executeUpdate() != 1 ) return null;
 
@@ -194,5 +189,27 @@ public class TrackDAO implements ITrackDAO {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean ownsPlaylist(String token, String playlist_id) {
+        
+        String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
+
+        try ( Connection connection = this.dataSource.getConnection() ) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, token);
+            statement.setString(2, playlist_id);
+            ResultSet result = statement.executeQuery();
+
+            while ( result.next() ) {
+                return result.getBoolean("owns");
+            }
+        } catch ( SQLException e ) {
+            // TODO
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

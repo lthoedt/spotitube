@@ -10,5 +10,5 @@ public interface ITrackDAO {
 
     ArrayList<Track> addTrackToPlaylist( String token, String playlist_id, String track_id, boolean track_offlineAvailable);
     ArrayList<Track> deleteTrackFromPlaylist( String token, String playlist_id, String track_id);
-    
+    public boolean ownsPlaylist( String token, String playlist_id );
 }
