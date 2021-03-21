@@ -138,7 +138,12 @@ public class PlaylistDAOTest {
     @Test
     public void deletePlaylistTest() {
         try {
-            String sql = "DELETE FROM Playlists WHERE id=?";
+            String sql = "DELETE Playlists "
+                        + "FROM Playlists "
+                        + "INNER JOIN PlaylistMappers ON Playlists.id=PlaylistMappers.playlist_id "
+                        + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
+                        + "WHERE Playlists.id = ? "
+                        + "AND Users.token = ?";
 
             String tokenToExpect = "1425-2565-5487";
             int expectedSize = 0;
@@ -167,6 +172,7 @@ public class PlaylistDAOTest {
             // Assert
             verify(connection).prepareStatement(sql);
             verify(preparedStatement).setString(1, test_id);
+            verify(preparedStatement).setString(2, tokenToExpect);
             verify(preparedStatement).executeUpdate();
 
             // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.

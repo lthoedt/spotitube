@@ -1,7 +1,10 @@
 package tests.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,10 +32,13 @@ public class TrackDAOTest {
 
     private TrackDAO trackDAO;
     private DataSource dataSource;
+    private Connection connection;
 
     @BeforeEach
     public void setup() {
         this.dataSource = mock(DataSource.class);
+        this.connection = mock(Connection.class);
+
         this.trackDAO = new TrackDAO();
         this.trackDAO.setDataSource(this.dataSource);
     }
@@ -56,7 +62,6 @@ public class TrackDAOTest {
         String forPlaylistToUse = "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0";
 
         // setup mocks
-        Connection connection = mock(Connection.class);
         // VIDEO
         PreparedStatement preparedStatementVideo = mock(PreparedStatement.class);
         ResultSet resultSetVideo = mock(ResultSet.class);
@@ -167,6 +172,238 @@ public class TrackDAOTest {
             verify(preparedStatementSong).executeQuery();
 
             assertNotNull(tracks);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void addTrackToPlaylistTestRegular() {
+        try {
+            String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) VALUES ( ?, ?, ? )";
+
+            String tokenToExpect = "1425-2565-5487";
+            String test_playlist_id = "1";
+            String test_track_id = "1";
+            boolean test_offline_available = true;
+
+            // setup mocks
+            Connection connection = mock(Connection.class);
+
+            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            ResultSet resultSet = mock(ResultSet.class);
+            
+            // instruct mocks
+            when(dataSource.getConnection()).thenReturn(connection);
+            
+            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
+            when(preparedStatement.executeUpdate()).thenReturn(1);
+
+            // Act
+            ArrayList<Track> tracks = this.trackDAO.addTrackToPlaylist(tokenToExpect, test_playlist_id, test_track_id, test_offline_available);
+
+            // Assert
+            verify(connection).prepareStatement(sql);
+            verify(preparedStatement).setString(1, test_track_id);
+            verify(preparedStatement).setString(2, test_playlist_id);
+            verify(preparedStatement).setBoolean(3, test_offline_available);
+            verify(preparedStatement).executeUpdate();
+
+            assertNotNull(tracks);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void addTrackToPlaylistTestNotOwner() {
+        try {
+            String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) VALUES ( ?, ?, ? )";
+
+            String tokenToExpect = "1425-2565-5487";
+            String test_playlist_id = "1";
+            String test_track_id = "1";
+            boolean test_offline_available = true;
+
+            // setup mocks
+            Connection connection = mock(Connection.class);
+
+            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            ResultSet resultSet = mock(ResultSet.class);
+            
+            // instruct mocks
+            when(dataSource.getConnection()).thenReturn(connection);
+            
+            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
+            when(preparedStatement.executeUpdate()).thenReturn(0);
+
+            // Act
+            ArrayList<Track> tracks = this.trackDAO.addTrackToPlaylist(tokenToExpect, test_playlist_id, test_track_id, test_offline_available);
+
+            // Assert
+            verify(connection).prepareStatement(sql);
+            verify(preparedStatement).setString(1, test_track_id);
+            verify(preparedStatement).setString(2, test_playlist_id);
+            verify(preparedStatement).setBoolean(3, test_offline_available);
+            verify(preparedStatement).executeUpdate();
+
+            assertNull(tracks);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void deleteTrackFromPlaylistTestRegular() {
+        try {
+            String sql = "DELETE TrackMappers "
+                        + "FROM TrackMappers "
+                        + "INNER JOIN PlaylistMappers ON TrackMappers.playlist_id=PlaylistMappers.playlist_id "
+                        + "INNER JOIN Users On PlaylistMappers.user_id=Users.id "
+                        + "WHERE TrackMappers.playlist_id = ? "
+                        + "AND TrackMappers.track_id = ? "
+                        + "AND Users.token = ?";
+
+
+            String tokenToExpect = "1425-2565-5487";
+            String test_playlist_id = "1";
+            String test_track_id = "1";
+
+            // setup mocks
+            Connection connection = mock(Connection.class);
+            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            
+            // instruct mocks
+            when(dataSource.getConnection()).thenReturn(connection);
+            
+            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
+            when(preparedStatement.executeUpdate()).thenReturn(1);
+
+            // Act
+            ArrayList<Track> tracks = this.trackDAO.deleteTrackFromPlaylist(tokenToExpect, test_playlist_id, test_track_id);
+
+            // Assert
+            verify(connection).prepareStatement(sql);
+            verify(preparedStatement).setString(1, test_playlist_id);
+            verify(preparedStatement).setString(2, test_track_id);
+            verify(preparedStatement).setString(3, tokenToExpect);
+            verify(preparedStatement).executeUpdate();
+
+            assertNotNull(tracks);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void deleteTrackFromPlaylistTestNotOwner() {
+        try {
+            String sql = "DELETE TrackMappers "
+                        + "FROM TrackMappers "
+                        + "INNER JOIN PlaylistMappers ON TrackMappers.playlist_id=PlaylistMappers.playlist_id "
+                        + "INNER JOIN Users On PlaylistMappers.user_id=Users.id "
+                        + "WHERE TrackMappers.playlist_id = ? "
+                        + "AND TrackMappers.track_id = ? "
+                        + "AND Users.token = ?";
+
+
+            String tokenToExpect = "1425-2565-5487";
+            String test_playlist_id = "1";
+            String test_track_id = "1";
+
+            // setup mocks
+            Connection connection = mock(Connection.class);
+            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            
+            // instruct mocks
+            when(dataSource.getConnection()).thenReturn(connection);
+            
+            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
+            when(preparedStatement.executeUpdate()).thenReturn(0);
+
+            // Act
+            ArrayList<Track> tracks = this.trackDAO.deleteTrackFromPlaylist(tokenToExpect, test_playlist_id, test_track_id);
+
+            // Assert
+            verify(connection).prepareStatement(sql);
+            verify(preparedStatement).setString(1, test_playlist_id);
+            verify(preparedStatement).setString(2, test_track_id);
+            verify(preparedStatement).setString(3, tokenToExpect);
+            verify(preparedStatement).executeUpdate();
+
+            assertNull(tracks);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void OwnsPlaylistTestRegular() {
+        try {
+            String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
+            String tokenToExpect = "1425-2565-5487";
+            String test_playlist_id = "1";
+
+            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            ResultSet resultSet = mock(ResultSet.class);
+
+            when(dataSource.getConnection()).thenReturn(this.connection);
+                
+            when(this.connection.prepareStatement(sql)).thenReturn(preparedStatement);
+            when(preparedStatement.executeQuery()).thenReturn(resultSet);
+            when(resultSet.next()).thenReturn(true).thenReturn(false);
+            when(resultSet.getBoolean("owns")).thenReturn(true);
+
+            verify(this.connection).prepareStatement(sql);
+            verify(preparedStatement).setString(1, tokenToExpect);
+            verify(preparedStatement).setString(2, test_playlist_id);
+            verify(preparedStatement).executeUpdate();
+
+            boolean owns = trackDAO.ownsPlaylist(tokenToExpect, test_playlist_id);
+
+            assertTrue(owns);
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void OwnsPlaylistTestNotOwner(String token, String playlist_id) {
+        try {
+            String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
+
+            Connection connection = mock(Connection.class);
+
+            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            ResultSet resultSet = mock(ResultSet.class);
+
+            when(dataSource.getConnection()).thenReturn(connection);
+                
+            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
+            when(preparedStatement.executeQuery()).thenReturn(resultSet);
+            when(resultSet.next()).thenReturn(true).thenReturn(false);
+            when(resultSet.getBoolean("owns")).thenReturn(false);
+
+            verify(connection).prepareStatement(sql);
+            verify(preparedStatement).setString(1, token);
+            verify(preparedStatement).setString(2, playlist_id);
+            verify(preparedStatement).executeUpdate();
+
+            boolean owns = trackDAO.ownsPlaylist(token, playlist_id);
+
+            assertFalse(owns);
 
         } catch ( Exception e ) {
             e.printStackTrace();
