@@ -26,9 +26,8 @@ public class Login {
         // create user in db
         User user = this.userDAO.loginUser(loginDTORequest.user, loginDTORequest.password);
 
-        if (user == null) {
+        if (user == null) 
             throw new UserNotFoundException();
-        }
         
         // make dto
         LoginDTO loginDTO = new LoginDTO();
