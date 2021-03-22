@@ -6,6 +6,7 @@ import dao.PlaylistDAO;
 import domain.Playlist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -21,13 +22,29 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 public class PlaylistDAOTest {
+
+    private String sqlUserJoin = "INNER JOIN PlaylistMappers ON Playlists.id=PlaylistMappers.playlist_id "
+                                + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id ";
+    
+    private  String sqlGetPlaylists = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id, SUM(Tracks.duration) AS duration "
+                                    + "FROM Playlists "
+                                    + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
+                                    + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
+                                    + "LEFT JOIN TrackMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
+                                    + "LEFT JOIN Tracks ON TrackMappers.track_id=Tracks.id "
+                                    + "GROUP BY Playlists.id, Playlists.name, users_id, PlaylistMappers.user_id";
+
+
     @Test
     public void getPlaylistsTest() {
         try {
-            String expectedSQL = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id "
-                            + "FROM Playlists "
-                            + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
-                            + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id";
+            String expectedSQL = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id, SUM(Tracks.duration) AS duration "
+                                + "FROM Playlists "
+                                + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
+                                + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
+                                + "LEFT JOIN TrackMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
+                                + "LEFT JOIN Tracks ON TrackMappers.track_id=Tracks.id "
+                                + "GROUP BY Playlists.id, Playlists.name, users_id, PlaylistMappers.user_id";
             String tokenToExpect = "1425-2565-5487";
 
             String test_id = "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0";
@@ -77,35 +94,37 @@ public class PlaylistDAOTest {
     public void addPlaylistTest() {
         try {
             String sqlPL = "INSERT INTO Playlists ( id, name ) VALUES ( ?, ? )";
-            String sqlPLM = "INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( ?, ?, 1 )";
-    
-            String tokenToExpect = "1425-2565-5487";
+            String sqlPLM = "INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) "
+                            + "SELECT ?, id, 1 "
+                            + "FROM Users "
+                            + "WHERE token=?";
+            String tokenToExpect = "htuE-0f6l-ybEx";
 
             String test_id = "1";
             String test_name = "test";
-            String test_users_id = "1";
-            String test_user_id = "1";
 
             // setup mocks
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
 
             PreparedStatement preparedStatementPL = mock(PreparedStatement.class);
-            ResultSet resultSetPL = mock(ResultSet.class);
 
             PreparedStatement preparedStatementPLM = mock(PreparedStatement.class);
-            ResultSet resultSetPLM = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementGetPlaylists = mock(PreparedStatement.class);
+            ResultSet resultSetGetPlaylists = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
 
             when(connection.prepareStatement(sqlPL)).thenReturn(preparedStatementPL);
-            when(preparedStatementPL.executeQuery()).thenReturn(resultSetPL);
-            when(resultSetPL.next()).thenReturn(true).thenReturn(false);
+            when(preparedStatementPL.executeUpdate()).thenReturn(1);
 
             when(connection.prepareStatement(sqlPLM)).thenReturn(preparedStatementPLM);
-            when(preparedStatementPLM.executeQuery()).thenReturn(resultSetPLM);
-            when(resultSetPLM.next()).thenReturn(true).thenReturn(false);
+            when(preparedStatementPLM.executeUpdate()).thenReturn(1);
+
+            when(connection.prepareStatement(sqlGetPlaylists)).thenReturn(preparedStatementGetPlaylists);
+            when(preparedStatementGetPlaylists.executeQuery()).thenReturn(resultSetGetPlaylists);
 
             PlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
@@ -115,18 +134,19 @@ public class PlaylistDAOTest {
 
             // Assert
             verify(connection).prepareStatement(sqlPL);
-            verify(preparedStatementPL).setString(1, test_id);
-            verify(preparedStatementPL).setString(2, test_users_id);
+            // verify(preparedStatementPL).setString(1, test_id);
+            verify(preparedStatementPL).setString(2, test_name);
             verify(preparedStatementPL).executeUpdate();
 
             verify(connection).prepareStatement(sqlPLM);
-            verify(preparedStatementPLM).setString(1, test_id);
-            verify(preparedStatementPLM).setString(2, test_users_id);
+            // verify(preparedStatementPLM).setString(1, test_id);
+            verify(preparedStatementPLM).setString(2, tokenToExpect);
             verify(preparedStatementPLM).executeUpdate();
 
-            // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
-            // miss werkt dit niet omdat er miss meerdere playlists zijn.
-            assertEquals(test_id, playlists.get(0).getId());
+            verify(connection).prepareStatement(sqlGetPlaylists);
+            verify(preparedStatementGetPlaylists).setString(1, tokenToExpect);
+
+            assertNotNull(playlists);
 
         } catch ( Exception e ) {
             System.out.println("");
@@ -140,8 +160,7 @@ public class PlaylistDAOTest {
         try {
             String sql = "DELETE Playlists "
                         + "FROM Playlists "
-                        + "INNER JOIN PlaylistMappers ON Playlists.id=PlaylistMappers.playlist_id "
-                        + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
+                        + sqlUserJoin
                         + "WHERE Playlists.id = ? "
                         + "AND Users.token = ?";
 
@@ -154,14 +173,19 @@ public class PlaylistDAOTest {
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementGetPlaylists = mock(PreparedStatement.class);
+            ResultSet resultSetGetPlaylists = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
 
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
+            when(preparedStatement.executeUpdate()).thenReturn(1);
+            
+            when(connection.prepareStatement(sqlGetPlaylists)).thenReturn(preparedStatementGetPlaylists);
+            when(preparedStatementGetPlaylists.executeQuery()).thenReturn(resultSetGetPlaylists);
+
 
             PlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
@@ -174,6 +198,9 @@ public class PlaylistDAOTest {
             verify(preparedStatement).setString(1, test_id);
             verify(preparedStatement).setString(2, tokenToExpect);
             verify(preparedStatement).executeUpdate();
+
+            verify(connection).prepareStatement(sqlGetPlaylists);
+            verify(preparedStatementGetPlaylists).setString(1, tokenToExpect);
 
             // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
             // miss werkt dit niet omdat er miss meerdere playlists zijn.
@@ -189,7 +216,11 @@ public class PlaylistDAOTest {
     @Test
     public void deletePlaylistTestNotOwner() {
         try {
-            String sql = "DELETE FROM Playlists WHERE id=?";
+            String sql = "DELETE Playlists "
+                        + "FROM Playlists "
+                        + sqlUserJoin
+                        + "WHERE Playlists.id = ? "
+                        + "AND Users.token = ?";
 
             String tokenToExpect = "1";
 
@@ -199,14 +230,12 @@ public class PlaylistDAOTest {
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
 
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
+            when(preparedStatement.executeUpdate()).thenReturn(0);
 
             PlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
@@ -233,7 +262,11 @@ public class PlaylistDAOTest {
     @Test
     public void editPlaylistTest() {
         try {
-            String sql = "UPDATE Playlists SET name = ? WHERE id = ?";
+            String sql = "UPDATE Playlists "
+                        + sqlUserJoin
+                        + "SET name = ? "
+                        + "WHERE Playlists.id = ? "
+                        + "AND Users.token = ?";
 
             String tokenToExpect = "1425-2565-5487";
 
@@ -244,14 +277,18 @@ public class PlaylistDAOTest {
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementGetPlaylists = mock(PreparedStatement.class);
+            ResultSet resultSetGetPlaylists = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
 
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
+            when(preparedStatement.executeUpdate()).thenReturn(1);
+
+            when(connection.prepareStatement(sqlGetPlaylists)).thenReturn(preparedStatementGetPlaylists);
+            when(preparedStatementGetPlaylists.executeQuery()).thenReturn(resultSetGetPlaylists);
 
             PlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
@@ -265,9 +302,12 @@ public class PlaylistDAOTest {
             verify(preparedStatement).setString(2, test_id);
             verify(preparedStatement).executeUpdate();
 
+            verify(connection).prepareStatement(sqlGetPlaylists);
+            verify(preparedStatementGetPlaylists).setString(1, tokenToExpect);
+
             // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
             // miss werkt dit niet omdat er miss meerdere playlists zijn.
-            assertEquals(test_name, playlists.get(0).getName());
+            assertNotNull(playlists);
 
         } catch ( Exception e ) {
             System.out.println("");
@@ -279,7 +319,11 @@ public class PlaylistDAOTest {
     @Test
     public void editPlaylistTestNotOwner() {
         try {
-            String sql = "UPDATE Playlists SET name = ? WHERE id = ?";
+            String sql = "UPDATE Playlists "
+                        + sqlUserJoin
+                        + "SET name = ? "
+                        + "WHERE Playlists.id = ? "
+                        + "AND Users.token = ?";
 
             String tokenToExpect = "1425-2565-5487";
 
@@ -290,14 +334,12 @@ public class PlaylistDAOTest {
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
 
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
+            when(preparedStatement.executeUpdate()).thenReturn(0);
 
             PlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
@@ -309,6 +351,7 @@ public class PlaylistDAOTest {
             verify(connection).prepareStatement(sql);
             verify(preparedStatement).setString(1, test_name);
             verify(preparedStatement).setString(2, test_id);
+            verify(preparedStatement).setString(3, tokenToExpect);
             verify(preparedStatement).executeUpdate();
 
             // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.

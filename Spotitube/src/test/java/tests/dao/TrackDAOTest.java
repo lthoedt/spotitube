@@ -193,7 +193,6 @@ public class TrackDAOTest {
             Connection connection = mock(Connection.class);
 
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
@@ -233,7 +232,6 @@ public class TrackDAOTest {
             Connection connection = mock(Connection.class);
 
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);

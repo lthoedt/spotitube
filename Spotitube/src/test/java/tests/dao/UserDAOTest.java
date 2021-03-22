@@ -24,31 +24,21 @@ public class UserDAOTest {
     public void loginUserTest() {
         try {
             // Arrange
-            String expectedSQL = "SELECT username, token FROM Users WHERE username = ? AND password = ?";
+            String expectedSQL = "UPDATE Users SET token = ? WHERE username = ? AND password = ?";
             String usernameToTest = "henk";
             String passwordToTest = "henk";
             
             String tokenToExpect = "1425-2565-5487";
 
-            // TODO wat doet dit?
-            User userToExpect = new User();
-            userToExpect.setUsername(usernameToTest);
-            userToExpect.setToken(tokenToExpect);
-
-
             // setup mocks
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
 
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
             when(connection.prepareStatement(expectedSQL)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
-            when(resultSet.getString("username")).thenReturn(usernameToTest);
-            when(resultSet.getString("token")).thenReturn(tokenToExpect);
+            when(preparedStatement.executeUpdate()).thenReturn(1);
 
             // setup classes
             UserDAO userDAO = new UserDAO();
@@ -59,14 +49,14 @@ public class UserDAOTest {
 
             // Assert
             verify(connection).prepareStatement(expectedSQL);
-            verify(preparedStatement).setString(1, usernameToTest);
-            verify(preparedStatement).setString(2, passwordToTest);
-            verify(preparedStatement).executeQuery();
+            verify(preparedStatement).setString(2, usernameToTest);
+            verify(preparedStatement).setString(3, passwordToTest);
+            verify(preparedStatement).executeUpdate();
 
             assertEquals(usernameToTest, user.getUsername());
-            assertEquals(tokenToExpect, user.getToken());
 
         } catch ( Exception e ) {
+            e.printStackTrace();
             fail();
         }
     }
@@ -75,7 +65,7 @@ public class UserDAOTest {
     public void loginUserNotFoundTest() {
         try {
             // Arrange
-            String expectedSQL = "SELECT username, token FROM Users WHERE username = ? AND password = ?";
+            String expectedSQL = "UPDATE Users SET token = ? WHERE username = ? AND password = ?";
             String usernameToTest = "notfound";
             String passwordToTest = "henk";
 
@@ -88,8 +78,7 @@ public class UserDAOTest {
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
             when(connection.prepareStatement(expectedSQL)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(false);
+            when(preparedStatement.executeUpdate()).thenReturn(0);
 
             // setup classes
             UserDAO userDAO = new UserDAO();
@@ -100,9 +89,9 @@ public class UserDAOTest {
 
             // Assert
             verify(connection).prepareStatement(expectedSQL);
-            verify(preparedStatement).setString(1, usernameToTest);
-            verify(preparedStatement).setString(2, passwordToTest);
-            verify(preparedStatement).executeQuery();
+            verify(preparedStatement).setString(2, usernameToTest);
+            verify(preparedStatement).setString(3, passwordToTest);
+            verify(preparedStatement).executeUpdate();
 
             assertNull(user);
 

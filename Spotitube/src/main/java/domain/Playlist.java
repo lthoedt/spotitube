@@ -10,6 +10,7 @@ public class Playlist {
     private String name;
     private Boolean owner;
     private ArrayList<Track> tracks;
+    public int duration;
 
     public String getId() {
         return this.id;

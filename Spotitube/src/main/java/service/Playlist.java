@@ -130,7 +130,7 @@ public class Playlist {
         ArrayList<PlaylistDTO> playlistDTOs = new ArrayList<>();
 
         for ( domain.Playlist playlist : playlists ) {
-            playlistsDTO.length += playlist.getDuration();
+            playlistsDTO.length += playlist.duration;
 
             // Remove this if tracks should not be empty
             playlist.setTracks(new ArrayList<Track>());

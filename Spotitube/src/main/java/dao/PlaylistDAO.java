@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import domain.Playlist;
-import domain.Track;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,43 +18,50 @@ public class PlaylistDAO implements IPlaylistDAO {
     private String sqlUserJoin = "INNER JOIN PlaylistMappers ON Playlists.id=PlaylistMappers.playlist_id "
                                 + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id ";
 
-    @Override
-    public ArrayList<Playlist> getPlaylists(String token) {
-        String sql = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id "
-                        + "FROM Playlists "
-                        + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
-                        + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id";
+    private  String sqlGetPlaylists = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id, SUM(Tracks.duration) AS duration "
+                                    + "FROM Playlists "
+                                    + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
+                                    + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
+                                    + "LEFT JOIN TrackMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
+                                    + "LEFT JOIN Tracks ON TrackMappers.track_id=Tracks.id "
+                                    + "GROUP BY Playlists.id, Playlists.name, users_id, PlaylistMappers.user_id";
 
-        try ( Connection connection = this.dataSource.getConnection() ) {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, token);
-            ResultSet resultSet = statement.executeQuery();
+    private ArrayList<Playlist> parsePlaylistResult( ResultSet resultSet ) throws SQLException {
+        ArrayList<Playlist> playlists = new ArrayList<>();
 
-            ArrayList<Playlist> playlists = new ArrayList<>();
+        while ( resultSet.next() ) {
+            Playlist playlist = new Playlist();
 
-            while ( resultSet.next() ) {
-                Playlist playlist = new Playlist();
-
-                playlist.setId(resultSet.getString("id"));
-                playlist.setName(resultSet.getString("name"));
+            playlist.setId(resultSet.getString("id"));
+            playlist.setName(resultSet.getString("name"));
+            // Wanneer users_id null is dan is de token niet goed dus is het niet de owner
+            try {
                 playlist.setOwner(resultSet.getString("users_id").equals(resultSet.getString("user_id")));
-
-                // TODO Deze dependency moet weg
-                TrackDAO trackDAO = new TrackDAO();
-                trackDAO.setDataSource(this.dataSource);
-                ArrayList<Track> tracks = trackDAO.getTracksFromPlaylist( token, playlist.getId() );
-                
-                playlist.setTracks(tracks);
-
-                playlists.add(playlist);
+            } catch ( NullPointerException e ) {
+                playlist.setOwner(false);
             }
 
-            return playlists;
+            playlist.duration = resultSet.getInt("duration");
+
+            playlists.add(playlist);
+        }
+
+        return playlists;
+
+    }
+
+    @Override
+    public ArrayList<Playlist> getPlaylists(String token) {
+        try ( Connection connection = this.dataSource.getConnection() ) {
+            
+            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
+            statementGetPlaylists.setString(1, token);
+
+            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
 
         } catch ( SQLException e ) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -76,7 +82,10 @@ public class PlaylistDAO implements IPlaylistDAO {
 
             if (result != 1 ) return null;
 
-            return this.getPlaylists(token);
+            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
+            statementGetPlaylists.setString(1, token);
+
+            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
 
         } catch ( SQLException e ) {
             e.printStackTrace();
@@ -88,12 +97,15 @@ public class PlaylistDAO implements IPlaylistDAO {
     @Override
     public ArrayList<Playlist> addPlaylist(String token, String name) {
         String sqlPL = "INSERT INTO Playlists ( id, name ) VALUES ( ?, ? )";
-        String sqlPLM = "INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( ?, ?, 1 )";
-
-        String playlist_id = DB.genId();
-        int user_id = DB.getUser(this.dataSource, token).getId();
-
+        String sqlPLM = "INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) "
+                        + "SELECT ?, id, 1 "
+                        + "FROM Users "
+                        + "WHERE token=?";
+        
         try (Connection connection = this.dataSource.getConnection()) {
+
+            String playlist_id = DB.genId();
+
             PreparedStatement statementPL = connection.prepareStatement(sqlPL);
             statementPL.setString(1, playlist_id);
             statementPL.setString(2, name);
@@ -101,13 +113,15 @@ public class PlaylistDAO implements IPlaylistDAO {
 
             PreparedStatement statementPLM = connection.prepareStatement(sqlPLM);
             statementPLM.setString(1, playlist_id);
-            statementPLM.setInt(2, user_id);
+            statementPLM.setString(2, token);
             int resultPLM = statementPLM.executeUpdate();
 
-            // TODO Error handling
             if ( resultPL != 1 || resultPLM != 1) return null;
 
-            return this.getPlaylists(token);
+            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
+            statementGetPlaylists.setString(1, token);
+
+            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
 
         } catch ( SQLException e ) {
             e.printStackTrace();
@@ -137,7 +151,10 @@ public class PlaylistDAO implements IPlaylistDAO {
             // TODO
             if ( result != 1 ) return null;
             
-            return this.getPlaylists(token);
+            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
+            statementGetPlaylists.setString(1, token);
+
+            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
         } catch ( SQLException e ) {
             // TODO
             e.printStackTrace();

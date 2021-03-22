@@ -2,6 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 
+import javax.sql.DataSource;
+
 import domain.Track;
 
 public interface ITrackDAO {
@@ -10,5 +12,7 @@ public interface ITrackDAO {
 
     ArrayList<Track> addTrackToPlaylist( String token, String playlist_id, String track_id, boolean track_offlineAvailable);
     ArrayList<Track> deleteTrackFromPlaylist( String token, String playlist_id, String track_id);
+
     public boolean ownsPlaylist( String token, String playlist_id );
+    public abstract void setDataSource(DataSource dataSource);
 }
