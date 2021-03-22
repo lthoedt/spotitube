@@ -1,12 +1,6 @@
 package service.utils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Random;
-
-import domain.User;
 
 public class DB {
     public static String genId() {

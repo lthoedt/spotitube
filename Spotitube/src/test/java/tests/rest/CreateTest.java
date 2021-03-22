@@ -1,7 +1,6 @@
 package tests.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import dao.IUserDAO;
 import domain.User;
-import exceptions.UserNotFoundException;
 import service.Create;
 import service.dto.request.LoginReqDTO;
 import service.dto.response.LoginDTO;
