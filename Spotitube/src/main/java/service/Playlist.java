@@ -19,6 +19,7 @@ import dao.IPlaylistDAO;
 import dao.ITrackDAO;
 import domain.Track;
 import exceptions.NotOwnerException;
+import filters.TokenQueryValidator;
 import service.dto.request.PlaylistReqDTO;
 import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
@@ -33,6 +34,7 @@ public class Playlist {
     private ITrackDAO TrackDAO;
 
     @GET
+    @TokenQueryValidator
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPlaylist(@QueryParam("token") String token) {
 
@@ -42,6 +44,7 @@ public class Playlist {
     }
 
     @POST
+    @TokenQueryValidator
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addPlaylist( @QueryParam("token") String token, PlaylistReqDTO playlistReqDTO ) {
@@ -52,6 +55,7 @@ public class Playlist {
     }
 
     @DELETE
+    @TokenQueryValidator
     @Path("/{id}")
     public Response deletePlaylist( @QueryParam("token") String token, @PathParam("id") String playlist_id ) throws NotOwnerException {
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.deletePlaylist(token, playlist_id );
@@ -63,6 +67,7 @@ public class Playlist {
     }
 
     @PUT
+    @TokenQueryValidator
     @Path("/{id}")
     public Response editPlaylist( @QueryParam("token") String token, PlaylistDTO playlistReqDTO) throws NotOwnerException {
 
@@ -75,6 +80,7 @@ public class Playlist {
     }
 
     @GET
+    @TokenQueryValidator
     @Path("{id}/tracks")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTracks(@QueryParam("token") String token, @PathParam("id") String playlist_id) {
@@ -85,6 +91,7 @@ public class Playlist {
     }
 
     @POST
+    @TokenQueryValidator
     @Path("/{id}/tracks")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -99,6 +106,7 @@ public class Playlist {
     }
 
     @DELETE
+    @TokenQueryValidator
     @Path("/{id}/tracks/{track_id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTrack(@QueryParam("token") String token, @PathParam("id") String playlist_id, @PathParam("track_id") String track_id) throws NotOwnerException {

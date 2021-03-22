@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import dao.ITrackDAO;
 import domain.Track;
+import filters.TokenQueryValidator;
 import service.dto.response.TrackDTO;
 import service.dto.response.TracksDTO;
 
@@ -21,10 +22,7 @@ public class Tracks {
     private ITrackDAO trackDAO;
 
     @GET
-    /**
-     * Receives all tracks that are available
-     * @return
-     */
+    @TokenQueryValidator
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTracks(@QueryParam("token") String token, @QueryParam("forPlaylist") String forPlaylist ) {
 
