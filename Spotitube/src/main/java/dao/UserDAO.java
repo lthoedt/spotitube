@@ -42,22 +42,22 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public User loginUser(String username, String password) {
-        String sql = "SELECT username, token FROM Users WHERE username = ? AND password = ?";
+        String sql = "UPDATE Users SET token = ? WHERE username = ? AND password = ?";
+
+        String token = generateToken();
         
         try (Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(1, token);
+            statement.setString(2, username);
+            statement.setString(3, password);
 
-            ResultSet resultSet = statement.executeQuery();
-
-            while ( resultSet.next() ) {
-                User user = new User();
-                user.setUsername(resultSet.getString("username"));
-                user.setToken(resultSet.getString("token"));
-                return user;
-            }
-
+            if ( statement.executeUpdate() != 1 ) return null;
+            
+            User user = new User();
+            user.setUsername(username);
+            user.setToken(token);
+            return user;
         } catch ( SQLException e ) {
             e.printStackTrace();
         }
