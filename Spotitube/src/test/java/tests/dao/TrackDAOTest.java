@@ -30,6 +30,22 @@ public class TrackDAOTest {
                             + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
                             + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
 
+    private String sqlTracksWhere = "WHERE TrackMappers.playlist_id = ?";
+    private String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
+                            + "FROM Videos "
+                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
+                            + sqlJoins
+                            + sqlTracksWhere;
+    private String sqlSong  = sqlFields + ", Albums.name AS album_name "
+                            + "FROM Songs "
+                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
+                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
+                            + sqlJoins
+                            + sqlTracksWhere;
+
+    private String sqlOwns = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
+
+
     private TrackDAO trackDAO;
     private DataSource dataSource;
     private Connection connection;
@@ -45,7 +61,7 @@ public class TrackDAOTest {
 
     @Test
     public void getTracksTestRegular() {
-        String sqlWhere = "WHERE TrackMappers.playlist_id NOT IN (SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
+        String sqlWhere = "WHERE TrackMappers.track_id NOT IN ( SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
 
         String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
@@ -119,20 +135,6 @@ public class TrackDAOTest {
     @Test
     public void getTracksFromPlaylistTest() {
         try {
-            String sqlWhere = "WHERE TrackMappers.playlist_id = ? AND Users.token = ?";
-
-            String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
-                                + "FROM Videos "
-                                + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
-                                + sqlJoins
-                                + sqlWhere;
-            String sqlSong  = sqlFields + ", Albums.name AS album_name "
-                                + "FROM Songs "
-                                + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
-                                + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
-                                + sqlJoins
-                                + sqlWhere;
-
             String tokenToExpect = "1425-2565-5487";
 
             String test_id = "1";
@@ -163,12 +165,10 @@ public class TrackDAOTest {
             // Assert
             verify(connection).prepareStatement(sqlVideo);
             verify(preparedStatementVideo).setString(1, test_id);
-            verify(preparedStatementVideo).setString(2, tokenToExpect);
             verify(preparedStatementVideo).executeQuery();
 
             verify(connection).prepareStatement(sqlSong);
             verify(preparedStatementSong).setString(1, test_id);
-            verify(preparedStatementSong).setString(2, tokenToExpect);
             verify(preparedStatementSong).executeQuery();
 
             assertNotNull(tracks);
@@ -193,12 +193,35 @@ public class TrackDAOTest {
             Connection connection = mock(Connection.class);
 
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
+
+            PreparedStatement preparedStatementOwns = mock(PreparedStatement.class);
+            ResultSet resultSetOwns = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementVideo = mock(PreparedStatement.class);
+            ResultSet resultSetVideo = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementSong = mock(PreparedStatement.class);
+            ResultSet resultSetSong = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
             
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1);
+
+            when(dataSource.getConnection()).thenReturn(connection);
+            when(connection.prepareStatement(sqlOwns)).thenReturn(preparedStatementOwns);
+            when(preparedStatementOwns.executeQuery()).thenReturn(resultSetOwns);
+            when(resultSetOwns.next()).thenReturn(true).thenReturn(false);
+            when(resultSetOwns.getBoolean("owns")).thenReturn(true);
+
+            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
+            when(resultSetVideo.next()).thenReturn(false);
+
+            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
+            when(resultSetSong.next()).thenReturn(false);
 
             // Act
             ArrayList<Track> tracks = this.trackDAO.addTrackToPlaylist(tokenToExpect, test_playlist_id, test_track_id, test_offline_available);
@@ -209,6 +232,11 @@ public class TrackDAOTest {
             verify(preparedStatement).setString(2, test_playlist_id);
             verify(preparedStatement).setBoolean(3, test_offline_available);
             verify(preparedStatement).executeUpdate();
+
+            verify(connection).prepareStatement(sqlOwns);
+            verify(preparedStatementOwns).setString(1, tokenToExpect);
+            verify(preparedStatementOwns).setString(2, test_playlist_id);
+            verify(preparedStatementOwns).executeQuery();
 
             assertNotNull(tracks);
 
@@ -221,8 +249,6 @@ public class TrackDAOTest {
     @Test
     public void addTrackToPlaylistTestNotOwner() {
         try {
-            String sql = "INSERT INTO TrackMappers ( track_id, playlist_id, offline_available ) VALUES ( ?, ?, ? )";
-
             String tokenToExpect = "1425-2565-5487";
             String test_playlist_id = "1";
             String test_track_id = "1";
@@ -231,23 +257,25 @@ public class TrackDAOTest {
             // setup mocks
             Connection connection = mock(Connection.class);
 
-            PreparedStatement preparedStatement = mock(PreparedStatement.class);
+            PreparedStatement preparedStatementOwns = mock(PreparedStatement.class);
+            ResultSet resultSetOwns = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
-            
-            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeUpdate()).thenReturn(0);
+
+            when(connection.prepareStatement(sqlOwns)).thenReturn(preparedStatementOwns);
+            when(preparedStatementOwns.executeQuery()).thenReturn(resultSetOwns);
+            when(resultSetOwns.next()).thenReturn(true).thenReturn(false);
+            when(resultSetOwns.getBoolean("owns")).thenReturn(false);
 
             // Act
             ArrayList<Track> tracks = this.trackDAO.addTrackToPlaylist(tokenToExpect, test_playlist_id, test_track_id, test_offline_available);
 
             // Assert
-            verify(connection).prepareStatement(sql);
-            verify(preparedStatement).setString(1, test_track_id);
-            verify(preparedStatement).setString(2, test_playlist_id);
-            verify(preparedStatement).setBoolean(3, test_offline_available);
-            verify(preparedStatement).executeUpdate();
+            verify(connection).prepareStatement(sqlOwns);
+            verify(preparedStatementOwns).setString(1, tokenToExpect);
+            verify(preparedStatementOwns).setString(2, test_playlist_id);
+            verify(preparedStatementOwns).executeQuery();
 
             assertNull(tracks);
 
@@ -276,12 +304,26 @@ public class TrackDAOTest {
             // setup mocks
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
+
+            PreparedStatement preparedStatementVideo = mock(PreparedStatement.class);
+            ResultSet resultSetVideo = mock(ResultSet.class);
+
+            PreparedStatement preparedStatementSong = mock(PreparedStatement.class);
+            ResultSet resultSetSong = mock(ResultSet.class);
             
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
             
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1);
+
+            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
+            when(resultSetVideo.next()).thenReturn(false);
+
+            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
+            when(resultSetSong.next()).thenReturn(false);
 
             // Act
             ArrayList<Track> tracks = this.trackDAO.deleteTrackFromPlaylist(tokenToExpect, test_playlist_id, test_track_id);
@@ -345,67 +387,67 @@ public class TrackDAOTest {
         }
     }
 
-    @Test
-    public void OwnsPlaylistTestRegular() {
-        try {
-            String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
-            String tokenToExpect = "1425-2565-5487";
-            String test_playlist_id = "1";
+    // @Test
+    // public void OwnsPlaylistTestRegular() {
+    //     try {
+    //         String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
+    //         String tokenToExpect = "1425-2565-5487";
+    //         String test_playlist_id = "1";
 
-            PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
+    //         PreparedStatement preparedStatement = mock(PreparedStatement.class);
+    //         ResultSet resultSet = mock(ResultSet.class);
 
-            when(dataSource.getConnection()).thenReturn(this.connection);
+    //         when(dataSource.getConnection()).thenReturn(this.connection);
                 
-            when(this.connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
-            when(resultSet.getBoolean("owns")).thenReturn(true);
+    //         when(this.connection.prepareStatement(sql)).thenReturn(preparedStatement);
+    //         when(preparedStatement.executeQuery()).thenReturn(resultSet);
+    //         when(resultSet.next()).thenReturn(true).thenReturn(false);
+    //         when(resultSet.getBoolean("owns")).thenReturn(true);
 
-            verify(this.connection).prepareStatement(sql);
-            verify(preparedStatement).setString(1, tokenToExpect);
-            verify(preparedStatement).setString(2, test_playlist_id);
-            verify(preparedStatement).executeUpdate();
+    //         verify(this.connection).prepareStatement(sql);
+    //         verify(preparedStatement).setString(1, tokenToExpect);
+    //         verify(preparedStatement).setString(2, test_playlist_id);
+    //         verify(preparedStatement).executeUpdate();
 
-            boolean owns = trackDAO.ownsPlaylist(tokenToExpect, test_playlist_id);
+    //         boolean owns = trackDAO.ownsPlaylist(tokenToExpect, test_playlist_id);
 
-            assertTrue(owns);
+    //         assertTrue(owns);
 
-        } catch ( Exception e ) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+    //     } catch ( Exception e ) {
+    //         e.printStackTrace();
+    //         fail();
+    //     }
+    // }
 
-    @Test
-    public void OwnsPlaylistTestNotOwner(String token, String playlist_id) {
-        try {
-            String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
+    // @Test
+    // public void OwnsPlaylistTestNotOwner(String token, String playlist_id) {
+    //     try {
+    //         String sql = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
 
-            Connection connection = mock(Connection.class);
+    //         Connection connection = mock(Connection.class);
 
-            PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
+    //         PreparedStatement preparedStatement = mock(PreparedStatement.class);
+    //         ResultSet resultSet = mock(ResultSet.class);
 
-            when(dataSource.getConnection()).thenReturn(connection);
+    //         when(dataSource.getConnection()).thenReturn(connection);
                 
-            when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
-            when(preparedStatement.executeQuery()).thenReturn(resultSet);
-            when(resultSet.next()).thenReturn(true).thenReturn(false);
-            when(resultSet.getBoolean("owns")).thenReturn(false);
+    //         when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
+    //         when(preparedStatement.executeQuery()).thenReturn(resultSet);
+    //         when(resultSet.next()).thenReturn(true).thenReturn(false);
+    //         when(resultSet.getBoolean("owns")).thenReturn(false);
 
-            verify(connection).prepareStatement(sql);
-            verify(preparedStatement).setString(1, token);
-            verify(preparedStatement).setString(2, playlist_id);
-            verify(preparedStatement).executeUpdate();
+    //         verify(connection).prepareStatement(sql);
+    //         verify(preparedStatement).setString(1, token);
+    //         verify(preparedStatement).setString(2, playlist_id);
+    //         verify(preparedStatement).executeUpdate();
 
-            boolean owns = trackDAO.ownsPlaylist(token, playlist_id);
+    //         boolean owns = trackDAO.ownsPlaylist(token, playlist_id);
 
-            assertFalse(owns);
+    //         assertFalse(owns);
 
-        } catch ( Exception e ) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+    //     } catch ( Exception e ) {
+    //         e.printStackTrace();
+    //         fail();
+    //     }
+    // }
 }

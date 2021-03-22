@@ -153,7 +153,7 @@ public class TrackDAO implements ITrackDAO {
             statement.setString(2, playlist_id);
             statement.setBoolean(3, track_offlineAvailable);
 
-            if ( statement.executeUpdate() != 1 ) return null;
+            statement.executeUpdate();
 
             return this.getTracksFromPlaylist( token, playlist_id );
 

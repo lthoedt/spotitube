@@ -29,9 +29,8 @@ public class Create {
         
         // TODO
         // error handling
-        if (user == null) {
-            return Response.status(404).build();
-        }
+        if (user == null) 
+            return Response.status(500).build();
         
         // make dto
         LoginDTO loginDTO = new LoginDTO();

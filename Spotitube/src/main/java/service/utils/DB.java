@@ -22,21 +22,4 @@ public class DB {
 
         return code;
     }
-
-    public static User getUser(Connection connection, String token) throws SQLException {
-        String sql = "SELECT id, username FROM Users WHERE token = ?";
-
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, token);
-        ResultSet resultSet = statement.executeQuery();
-
-        while ( resultSet.next() ) {
-            User user = new User();
-            user.setId(resultSet.getInt("id"));
-            user.setUsername(resultSet.getString("username"));
-            return user;
-        }
-
-        return null;
-    }
 }
