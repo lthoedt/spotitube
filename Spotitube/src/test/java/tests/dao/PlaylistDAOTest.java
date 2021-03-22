@@ -100,7 +100,6 @@ public class PlaylistDAOTest {
                             + "WHERE token=?";
             String tokenToExpect = "htuE-0f6l-ybEx";
 
-            String test_id = "1";
             String test_name = "test";
 
             // setup mocks

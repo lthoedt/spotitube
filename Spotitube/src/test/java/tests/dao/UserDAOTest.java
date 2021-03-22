@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
@@ -28,8 +27,6 @@ public class UserDAOTest {
             String usernameToTest = "henk";
             String passwordToTest = "henk";
             
-            String tokenToExpect = "1425-2565-5487";
-
             // setup mocks
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
@@ -73,7 +70,6 @@ public class UserDAOTest {
             DataSource dataSource = mock(DataSource.class);
             Connection connection = mock(Connection.class);
             PreparedStatement preparedStatement = mock(PreparedStatement.class);
-            ResultSet resultSet = mock(ResultSet.class);
 
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
