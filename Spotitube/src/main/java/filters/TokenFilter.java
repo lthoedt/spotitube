@@ -1,6 +1,7 @@
 package filters;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.container.ContainerRequestContext;
@@ -17,9 +18,9 @@ public class TokenFilter implements ContainerRequestFilter{
 
         MultivaluedMap<String, String> queryParameters = requestContext.getUriInfo().getQueryParameters();
 
-        queryParameters.keySet().stream().filter( param -> param == "token" ).collect(Collectors.toList());
+        List<String> parameters =  queryParameters.keySet().stream().filter(param -> param.equals("token") ).collect(Collectors.toList());
 
-        if ( queryParameters.size()==0 ) {
+        if ( parameters.size()==0 ) {
             requestContext.abortWith(Response
             .status(400)
             .entity("Token is missing")
