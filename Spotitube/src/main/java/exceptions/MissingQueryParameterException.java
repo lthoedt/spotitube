@@ -5,6 +5,11 @@ import javax.ws.rs.ext.ExceptionMapper;
 
 public class MissingQueryParameterException extends Exception implements ExceptionMapper<MissingQueryParameterException> {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 584996056075860635L;
+
     public MissingQueryParameterException(String message) {
         super(message);
     }

@@ -6,6 +6,11 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class UserNotFoundException extends Exception implements ExceptionMapper<UserNotFoundException> {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2187144747529383965L;
+
     public UserNotFoundException() {
         super("Username/password is wrong");
     }
