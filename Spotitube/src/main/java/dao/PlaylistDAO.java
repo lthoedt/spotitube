@@ -18,7 +18,8 @@ public class PlaylistDAO implements IPlaylistDAO {
     private String sqlUserJoin = "INNER JOIN PlaylistMappers ON Playlists.id=PlaylistMappers.playlist_id "
                                 + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id ";
 
-    private  String sqlGetPlaylists = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id, SUM(Tracks.duration) AS duration "
+    private ArrayList<Playlist> getPL(Connection connection, String token) throws SQLException {
+        String sqlGetPlaylists = "SELECT Playlists.id, Playlists.name, (SELECT id FROM Users WHERE token = ?) AS users_id, PlaylistMappers.user_id, SUM(Tracks.duration) AS duration "
                                     + "FROM Playlists "
                                     + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=Playlists.id "
                                     + "INNER JOIN Users ON PlaylistMappers.user_id=Users.id "
@@ -26,7 +27,11 @@ public class PlaylistDAO implements IPlaylistDAO {
                                     + "LEFT JOIN Tracks ON TrackMappers.track_id=Tracks.id "
                                     + "GROUP BY Playlists.id, Playlists.name, users_id, PlaylistMappers.user_id";
 
-    private ArrayList<Playlist> parsePlaylistResult( ResultSet resultSet ) throws SQLException {
+        PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
+        statementGetPlaylists.setString(1, token);
+
+        ResultSet resultSet = statementGetPlaylists.executeQuery();
+
         ArrayList<Playlist> playlists = new ArrayList<>();
 
         while ( resultSet.next() ) {
@@ -47,17 +52,13 @@ public class PlaylistDAO implements IPlaylistDAO {
         }
 
         return playlists;
-
     }
 
     @Override
     public ArrayList<Playlist> getPlaylists(String token) {
         try ( Connection connection = this.dataSource.getConnection() ) {
             
-            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
-            statementGetPlaylists.setString(1, token);
-
-            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
+            return this.getPL(connection, token);
 
         } catch ( SQLException e ) {
             e.printStackTrace();
@@ -82,10 +83,7 @@ public class PlaylistDAO implements IPlaylistDAO {
 
             if (result != 1 ) return null;
 
-            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
-            statementGetPlaylists.setString(1, token);
-
-            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
+            return this.getPL(connection, token);
 
         } catch ( SQLException e ) {
             e.printStackTrace();
@@ -118,10 +116,7 @@ public class PlaylistDAO implements IPlaylistDAO {
 
             if ( resultPL != 1 || resultPLM != 1) return null;
 
-            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
-            statementGetPlaylists.setString(1, token);
-
-            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
+            return this.getPL(connection, token);
 
         } catch ( SQLException e ) {
             e.printStackTrace();
@@ -151,10 +146,8 @@ public class PlaylistDAO implements IPlaylistDAO {
             // TODO
             if ( result != 1 ) return null;
             
-            PreparedStatement statementGetPlaylists = connection.prepareStatement(sqlGetPlaylists);
-            statementGetPlaylists.setString(1, token);
+            return this.getPL(connection, token);
 
-            return this.parsePlaylistResult( statementGetPlaylists.executeQuery() );
         } catch ( SQLException e ) {
             // TODO
             e.printStackTrace();
