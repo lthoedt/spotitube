@@ -27,8 +27,6 @@ public class Create {
         // create user in db
         User user = this.userDAO.createUser(loginDTORequest.user, loginDTORequest.password);
         
-        // TODO
-        // error handling
         if (user == null) 
             return Response.status(500).build();
         

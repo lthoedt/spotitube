@@ -104,7 +104,6 @@ public class PlaylistTest {
         try {
             response = this.playlist.deletePlaylist(testToken, playlist_id_to_test);
         } catch (NotOwnerException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
@@ -154,7 +153,6 @@ public class PlaylistTest {
         try {
             response = this.playlist.editPlaylist(testToken, playlistDTOToTest);
         } catch (NotOwnerException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
@@ -215,7 +213,6 @@ public class PlaylistTest {
         try {
             response = this.playlist.addTrack(testToken, playlist_id_to_test, trackReqDTO);
         } catch (NotOwnerException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
@@ -257,7 +254,6 @@ public class PlaylistTest {
         try {
             response = this.playlist.deleteTrack(testToken, playlist_id_to_test, track_id_to_test);
         } catch (NotOwnerException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

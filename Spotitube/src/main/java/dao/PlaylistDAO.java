@@ -143,13 +143,11 @@ public class PlaylistDAO implements IPlaylistDAO {
             statement.setString(3, token);
             int result = statement.executeUpdate();
 
-            // TODO
             if ( result != 1 ) return null;
             
             return this.getPL(connection, token);
 
         } catch ( SQLException e ) {
-            // TODO
             e.printStackTrace();
         }
 

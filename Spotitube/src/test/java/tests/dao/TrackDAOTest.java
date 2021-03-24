@@ -125,7 +125,6 @@ public class TrackDAOTest {
             assertEquals(2, tracks.size());
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
