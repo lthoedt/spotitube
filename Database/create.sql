@@ -63,7 +63,7 @@ CREATE TABLE Albums (
 CREATE TABLE Videos (
     id                  int             primary key AUTO_INCREMENT ,
     track_id            varchar(34)     not null ,
-    publication_date    DATETIME        DEFAULT CURRENT_TIMESTAMP  ,
+    publication_date    DATE            DEFAULT (CURRENT_DATE)     ,
     description         text            null                       ,
     playcount           int             DEFAULT 0
 );
@@ -122,7 +122,7 @@ INSERT INTO PlaylistMappers ( playlist_id, user_id, owner ) VALUES ( "RtUtzbPwzN
 
 -- Track 1
 INSERT INTO Tracks ( id, performer, title, url, duration ) VALUES ( "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", "Stevie Ray Vaughan And Double Trouble", "Texas Flood (from Live at the El Mocambo", "https://music.youtube.com/watch?v=KC5H9P4F5Uk&feature=share", 571 );
-INSERT INTO Videos ( track_id, playcount ) VALUES ( "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", 7585665 );
+INSERT INTO Videos ( track_id, playcount, publication_date ) VALUES ( "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", 7585665, '1982-6-23' );
 
 INSERT INTO TrackMappers ( id, track_id, playlist_id, offline_available ) VALUES ( 1, "LaaDzWjBjiVi8krXYTLW8b8iuW6wW4HX5u", "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0", true );
 --
