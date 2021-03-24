@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import dao.IPlaylistDAO;
 import dao.ITrackDAO;
 import domain.Track;
+import exceptions.InvalidTokenException;
 import exceptions.NotOwnerException;
 import filters.TokenQueryValidator;
 import service.dto.request.PlaylistReqDTO;
@@ -47,9 +48,12 @@ public class Playlist {
     @TokenQueryValidator
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addPlaylist( @QueryParam("token") String token, PlaylistReqDTO playlistReqDTO ) {
-        
+    public Response addPlaylist( @QueryParam("token") String token, PlaylistReqDTO playlistReqDTO ) throws InvalidTokenException {
+
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.addPlaylist(token, playlistReqDTO.name);
+        
+        if (playlists == null)
+            throw new InvalidTokenException();
         
         return this.buildPlaylistsDTO(playlists);
     }

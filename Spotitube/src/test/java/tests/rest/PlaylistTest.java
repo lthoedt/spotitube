@@ -2,6 +2,7 @@ package tests.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import dao.IPlaylistDAO;
 import dao.ITrackDAO;
 import domain.Track;
+import exceptions.InvalidTokenException;
 import exceptions.NotOwnerException;
 import service.Playlist;
 import service.dto.request.PlaylistReqDTO;
@@ -57,31 +59,53 @@ public class PlaylistTest {
 
     @Test
     public void addPlaylistTestRegular() {
-        int expectedStatus = 200;
+        try {
+            int expectedStatus = 200;
 
-        // create playlists
-        ArrayList<domain.Playlist> playlists = new ArrayList<>();
-        // add sample playlist
-        domain.Playlist playlist = Utils.getSamplePlaylist();
-        playlists.add(playlist);
+            // create playlists
+            ArrayList<domain.Playlist> playlists = new ArrayList<>();
+            // add sample playlist
+            domain.Playlist playlist = Utils.getSamplePlaylist();
+            playlists.add(playlist);
+
+            // get sample playlistDTO
+            PlaylistReqDTO playlistReqDTOToTest = Utils.getSamplePlaylistReqDTO();
+
+            // convert to domain and add to playlists
+            playlists.add(Utils.convertPlaylistDTOToPlaylist(playlistReqDTOToTest));
+
+            // Act
+            IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
+            when(playlistDAO.addPlaylist(testToken, playlistReqDTOToTest.name)).thenReturn(playlists);
+            this.playlist.setPlaylistDAO(playlistDAO);
+            
+            Response response = this.playlist.addPlaylist(testToken, playlistReqDTOToTest);
+            PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
+
+            // Assert
+            assertEquals(expectedStatus, response.getStatus());
+            assertEquals(playlistReqDTOToTest.name, playlistsDTO.playlists.get(1).name);
+        } catch (InvalidTokenException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void addPlaylistTestInvalidToken() {
+        int expectedStatus = 403;
 
         // get sample playlistDTO
         PlaylistReqDTO playlistReqDTOToTest = Utils.getSamplePlaylistReqDTO();
 
-        // convert to domain and add to playlists
-        playlists.add(Utils.convertPlaylistDTOToPlaylist(playlistReqDTOToTest));
-
         // Act
         IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
-        when(playlistDAO.addPlaylist(testToken, playlistReqDTOToTest.name)).thenReturn(playlists);
+        when(playlistDAO.addPlaylist(testToken, playlistReqDTOToTest.name)).thenReturn(null);
         this.playlist.setPlaylistDAO(playlistDAO);
-        
-        Response response = this.playlist.addPlaylist(testToken, playlistReqDTOToTest);
-        PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
 
-        // Assert
-        assertEquals(expectedStatus, response.getStatus());
-        assertEquals(playlistReqDTOToTest.name, playlistsDTO.playlists.get(1).name);
+        assertThrows(InvalidTokenException.class, () -> {
+            Response response = this.playlist.addPlaylist(testToken, playlistReqDTOToTest);
+            assertEquals(expectedStatus, response.getStatus());
+        });            
     }
 
     @Test
