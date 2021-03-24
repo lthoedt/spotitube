@@ -32,14 +32,12 @@ public class TrackDAOTest {
     private String sqlVideo = sqlFields + ", DATE_FORMAT(Videos.publication_date, '%e-%c-%Y') AS publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
                             + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlTracksWhere;
+                            + sqlJoins;
     private String sqlSong  = sqlFields + ", Albums.name AS album_name "
                             + "FROM Songs "
                             + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
                             + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlTracksWhere;
+                            + sqlJoins;
 
     private String sqlOwns = "SELECT PlaylistMappers.owner as owns FROM Users INNER JOIN PlaylistMappers ON Users.id=PlaylistMappers.user_id WHERE Users.token = ? AND PlaylistMappers.playlist_id = ? ";
 
@@ -60,18 +58,6 @@ public class TrackDAOTest {
     @Test
     public void getTracksTestRegular() {
         String sqlWhere = "WHERE TrackMappers.track_id NOT IN ( SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
-
-        String sqlVideo = sqlFields + ", DATE_FORMAT(Videos.publication_date, '%e-%c-%Y') AS publication_date, Videos.description, Videos.playcount "
-                            + "FROM Videos "
-                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlWhere;
-        String sqlSong  = sqlFields + ", Albums.name AS album_name "
-                            + "FROM Songs "
-                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
-                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlWhere;
         String tokenToUse = "1425-2565-5487";
         String forPlaylistToUse = "RtUtzbPwzN1rds0qEGtSvsmcvtIT3Rpxg0";
 
@@ -87,7 +73,7 @@ public class TrackDAOTest {
         try {
             // VIDEO
             when(dataSource.getConnection()).thenReturn(connection);
-            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(connection.prepareStatement(sqlVideo+sqlWhere)).thenReturn(preparedStatementVideo);
             when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
             when(resultSetVideo.next()).thenReturn(true).thenReturn(false);
             when(resultSetVideo.getString("performer")).thenReturn("srv");
@@ -100,7 +86,7 @@ public class TrackDAOTest {
 
             // SONG
             when(dataSource.getConnection()).thenReturn(connection);
-            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(connection.prepareStatement(sqlSong+sqlWhere)).thenReturn(preparedStatementSong);
             when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
             when(resultSetSong.next()).thenReturn(true).thenReturn(false);
             when(resultSetSong.getString("performer")).thenReturn("srv");
@@ -114,11 +100,11 @@ public class TrackDAOTest {
             ArrayList<Track> tracks = trackDAO.getTracks(tokenToUse, forPlaylistToUse);
     
             // Assert
-            verify(connection).prepareStatement(sqlVideo);
+            verify(connection).prepareStatement(sqlVideo+sqlWhere);
             verify(preparedStatementVideo).setString(1, forPlaylistToUse);
             verify(preparedStatementVideo).executeQuery();
 
-            verify(connection).prepareStatement(sqlSong);
+            verify(connection).prepareStatement(sqlSong+sqlWhere);
             verify(preparedStatementSong).setString(1, forPlaylistToUse);
             verify(preparedStatementSong).executeQuery();
 
@@ -148,11 +134,11 @@ public class TrackDAOTest {
             // instruct mocks
             when(dataSource.getConnection()).thenReturn(connection);
             
-            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(connection.prepareStatement(sqlVideo+sqlTracksWhere)).thenReturn(preparedStatementVideo);
             when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
             when(resultSetVideo.next()).thenReturn(true).thenReturn(false);
 
-            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(connection.prepareStatement(sqlSong+sqlTracksWhere)).thenReturn(preparedStatementSong);
             when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
             when(resultSetSong.next()).thenReturn(true).thenReturn(false);
 
@@ -160,11 +146,11 @@ public class TrackDAOTest {
             ArrayList<Track> tracks = this.trackDAO.getTracksFromPlaylist(tokenToExpect, test_id);
 
             // Assert
-            verify(connection).prepareStatement(sqlVideo);
+            verify(connection).prepareStatement(sqlVideo+sqlTracksWhere);
             verify(preparedStatementVideo).setString(1, test_id);
             verify(preparedStatementVideo).executeQuery();
 
-            verify(connection).prepareStatement(sqlSong);
+            verify(connection).prepareStatement(sqlSong+sqlTracksWhere);
             verify(preparedStatementSong).setString(1, test_id);
             verify(preparedStatementSong).executeQuery();
 
@@ -212,11 +198,11 @@ public class TrackDAOTest {
             when(resultSetOwns.next()).thenReturn(true).thenReturn(false);
             when(resultSetOwns.getBoolean("owns")).thenReturn(true);
 
-            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(connection.prepareStatement(sqlVideo+sqlTracksWhere)).thenReturn(preparedStatementVideo);
             when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
             when(resultSetVideo.next()).thenReturn(false);
 
-            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(connection.prepareStatement(sqlSong+sqlTracksWhere)).thenReturn(preparedStatementSong);
             when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
             when(resultSetSong.next()).thenReturn(false);
 
@@ -314,11 +300,11 @@ public class TrackDAOTest {
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(1);
 
-            when(connection.prepareStatement(sqlVideo)).thenReturn(preparedStatementVideo);
+            when(connection.prepareStatement(sqlVideo+sqlTracksWhere)).thenReturn(preparedStatementVideo);
             when(preparedStatementVideo.executeQuery()).thenReturn(resultSetVideo);
             when(resultSetVideo.next()).thenReturn(false);
 
-            when(connection.prepareStatement(sqlSong)).thenReturn(preparedStatementSong);
+            when(connection.prepareStatement(sqlSong+sqlTracksWhere)).thenReturn(preparedStatementSong);
             when(preparedStatementSong.executeQuery()).thenReturn(resultSetSong);
             when(resultSetSong.next()).thenReturn(false);
 
