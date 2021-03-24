@@ -29,7 +29,7 @@ public class TrackDAOTest {
                             + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
 
     private String sqlTracksWhere = "WHERE TrackMappers.playlist_id = ?";
-    private String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
+    private String sqlVideo = sqlFields + ", DATE_FORMAT(Videos.publication_date, '%e-%c-%Y') AS publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
                             + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
                             + sqlJoins
@@ -61,7 +61,7 @@ public class TrackDAOTest {
     public void getTracksTestRegular() {
         String sqlWhere = "WHERE TrackMappers.track_id NOT IN ( SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
 
-        String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
+        String sqlVideo = sqlFields + ", DATE_FORMAT(Videos.publication_date, '%e-%c-%Y') AS publication_date, Videos.description, Videos.playcount "
                             + "FROM Videos "
                             + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
                             + sqlJoins
