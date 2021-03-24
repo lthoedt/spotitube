@@ -20,30 +20,27 @@ public class TrackDAO implements ITrackDAO {
     private String sqlJoins = "LEFT JOIN TrackMappers ON TrackMappers.track_id=Tracks.id "
                             + "LEFT JOIN PlaylistMappers ON PlaylistMappers.playlist_id=TrackMappers.playlist_id "
                             + "LEFT JOIN Users ON Users.id=PlaylistMappers.user_id ";
-
+    
+    private String sqlVideo = sqlFields + ", DATE_FORMAT(Videos.publication_date, '%e-%c-%Y') AS publication_date, Videos.description, Videos.playcount "
+                            + "FROM Videos "
+                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
+                            + sqlJoins;
+    private String sqlSong  = sqlFields + ", Albums.name AS album_name "
+                            + "FROM Songs "
+                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
+                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
+                            + sqlJoins;
 
     @Override
     public ArrayList<Track> getTracks(String token, String forPlaylist ) {
         String sqlWhere = "WHERE TrackMappers.track_id NOT IN ( SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
 
-        String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
-                            + "FROM Videos "
-                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlWhere;
-        String sqlSong  = sqlFields + ", Albums.name AS album_name "
-                            + "FROM Songs "
-                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
-                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlWhere;
-
         try (Connection connection = this.dataSource.getConnection()) {
-            PreparedStatement statementVideo = connection.prepareStatement(sqlVideo);
+            PreparedStatement statementVideo = connection.prepareStatement(sqlVideo+sqlWhere);
             statementVideo.setString(1, forPlaylist);
             ResultSet resultSetVideo = statementVideo.executeQuery();
 
-            PreparedStatement statementSong = connection.prepareStatement(sqlSong);
+            PreparedStatement statementSong = connection.prepareStatement(sqlSong+sqlWhere);
             statementSong.setString(1, forPlaylist);
             ResultSet resultSetSong = statementSong.executeQuery();
 
@@ -108,24 +105,12 @@ public class TrackDAO implements ITrackDAO {
     public ArrayList<Track> getTracksFromPlaylist(String token, String playlist_id) {
         String sqlWhere = "WHERE TrackMappers.playlist_id = ?";
 
-        String sqlVideo = sqlFields + ", Videos.publication_date, Videos.description, Videos.playcount "
-                            + "FROM Videos "
-                            + "INNER JOIN Tracks ON Videos.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlWhere;
-        String sqlSong  = sqlFields + ", Albums.name AS album_name "
-                            + "FROM Songs "
-                            + "LEFT JOIN Albums ON Songs.album_id=Albums.id "
-                            + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
-                            + sqlJoins
-                            + sqlWhere;
-
         try (Connection connection = this.dataSource.getConnection()) {
-            PreparedStatement statementVideo = connection.prepareStatement(sqlVideo);
+            PreparedStatement statementVideo = connection.prepareStatement(sqlVideo+sqlWhere);
             statementVideo.setString(1, playlist_id);
             ResultSet resultSetVideo = statementVideo.executeQuery();
 
-            PreparedStatement statementSong = connection.prepareStatement(sqlSong);
+            PreparedStatement statementSong = connection.prepareStatement(sqlSong+sqlWhere);
             statementSong.setString(1, playlist_id);
 
             ResultSet resultSetSong = statementSong.executeQuery();
@@ -207,8 +192,6 @@ public class TrackDAO implements ITrackDAO {
                 return result.getBoolean("owns");
             }
         } catch ( SQLException e ) {
-            // TODO
-            e.printStackTrace();
         }
 
         return false;
