@@ -84,16 +84,12 @@ public class TrackDAO implements ITrackDAO {
         return tracks;
     }
 
-    private void addTrackData( Track track, ResultSet set ) {
-        try {
-            track.setPerformer(set.getString("performer"));
-            track.setTitle    (set.getString("title"));
-            track.setUrl(set.getString("url"));
-            track.setDuration(set.getInt("duration"));
-            track.setOfflineAvailable(set.getBoolean("offline_available"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    private void addTrackData( Track track, ResultSet set ) throws SQLException {
+        track.setPerformer(set.getString("performer"));
+        track.setTitle    (set.getString("title"));
+        track.setUrl(set.getString("url"));
+        track.setDuration(set.getInt("duration"));
+        track.setOfflineAvailable(set.getBoolean("offline_available"));
     }
 
     @Override
