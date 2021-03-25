@@ -28,6 +28,8 @@ import tests.Utils;
 public class PlaylistTest {
 
     private Playlist playlist;
+    private IPlaylistDAO playlistDAO;
+    private ITrackDAO trackDAO;
     private String testToken = "1425-2565-5487";
     private String testTokenWrong = "1";
     String playlist_id_to_test = "5NOVKXx5r_66y42IIK61th-PT9hU6C4hts";
@@ -35,6 +37,12 @@ public class PlaylistTest {
     @BeforeEach
     public void setup() {
         this.playlist = new Playlist();
+
+        this.playlistDAO = mock(IPlaylistDAO.class);
+        this.playlist.setPlaylistDAO(playlistDAO);
+        
+        this.trackDAO = mock(ITrackDAO.class);
+        this.playlist.setTrackDAO(trackDAO);
     }
 
     @Test
@@ -47,9 +55,7 @@ public class PlaylistTest {
         playlists.add(playlist);
 
         // Act
-        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.getPlaylists(testToken)).thenReturn(playlists);
-        this.playlist.setPlaylistDAO(playlistDAO);
         
         Response response = this.playlist.getPlaylist(testToken);
 
@@ -75,9 +81,7 @@ public class PlaylistTest {
             playlists.add(Utils.convertPlaylistDTOToPlaylist(playlistReqDTOToTest));
 
             // Act
-            IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
             when(playlistDAO.addPlaylist(testToken, playlistReqDTOToTest.name)).thenReturn(playlists);
-            this.playlist.setPlaylistDAO(playlistDAO);
             
             Response response = this.playlist.addPlaylist(testToken, playlistReqDTOToTest);
             PlaylistsDTO playlistsDTO = (PlaylistsDTO) response.getEntity(); 
@@ -98,9 +102,7 @@ public class PlaylistTest {
         PlaylistReqDTO playlistReqDTOToTest = Utils.getSamplePlaylistReqDTO();
 
         // Act
-        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.addPlaylist(testToken, playlistReqDTOToTest.name)).thenReturn(null);
-        this.playlist.setPlaylistDAO(playlistDAO);
 
         assertThrows(InvalidTokenException.class, () -> {
             Response response = this.playlist.addPlaylist(testToken, playlistReqDTOToTest);
@@ -120,9 +122,7 @@ public class PlaylistTest {
         playlists.add(playlist);
 
         // Act
-        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.deletePlaylist(testToken, playlist_id_to_test)).thenReturn(new ArrayList<domain.Playlist>());
-        this.playlist.setPlaylistDAO(playlistDAO);
         
         Response response = null;
         try {
@@ -142,9 +142,7 @@ public class PlaylistTest {
         int expectedStatus = 403;
 
         // Act
-        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.deletePlaylist(testTokenWrong, playlist_id_to_test)).thenReturn(null);
-        this.playlist.setPlaylistDAO(playlistDAO);
         
         // Assert
         assertThrows(NotOwnerException.class, () -> {
@@ -169,9 +167,7 @@ public class PlaylistTest {
         playlists.add(playlist);
 
         // Act
-        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.editPlaylist(testToken, playlist_id_to_test, expectedName)).thenReturn(playlists);
-        this.playlist.setPlaylistDAO(playlistDAO);
         
         Response response = null;
         try {
@@ -194,9 +190,7 @@ public class PlaylistTest {
         PlaylistDTO playlistDTOToTest = Utils.getSamplePlaylistDTO(expectedName);
 
         // Act
-        IPlaylistDAO playlistDAO = mock(IPlaylistDAO.class);
         when(playlistDAO.editPlaylist(testTokenWrong, playlist_id_to_test, expectedName)).thenReturn(null);
-        this.playlist.setPlaylistDAO(playlistDAO);
         
         // Assert
         assertThrows(NotOwnerException.class, () -> {
@@ -211,9 +205,7 @@ public class PlaylistTest {
         int expectedStatus = 200;
 
         // Act
-        ITrackDAO trackDAO = mock(ITrackDAO.class);
         when(trackDAO.getTracksFromPlaylist(testToken, playlist_id_to_test)).thenReturn(Utils.getSamplePlaylist().getTracks());
-        this.playlist.setTrackDAO(trackDAO);
         
         Response response = this.playlist.getTracks(testToken, playlist_id_to_test);
         
@@ -229,9 +221,7 @@ public class PlaylistTest {
         TrackReqDTO trackReqDTO = Utils.getSampleTrackReqDTO();
 
         // Act
-        ITrackDAO trackDAO = mock(ITrackDAO.class);
         when(trackDAO.addTrackToPlaylist(testToken, playlist_id_to_test, trackReqDTO.id, trackReqDTO.offlineAvailable)).thenReturn(new ArrayList<Track>());
-        this.playlist.setTrackDAO(trackDAO);
         
         Response response = null;
         try {
@@ -252,9 +242,7 @@ public class PlaylistTest {
         TrackReqDTO trackReqDTO = Utils.getSampleTrackReqDTO();
 
         // Act
-        ITrackDAO trackDAO = mock(ITrackDAO.class);
         when(trackDAO.addTrackToPlaylist("1", playlist_id_to_test, trackReqDTO.id, trackReqDTO.offlineAvailable)).thenReturn(null);
-        this.playlist.setTrackDAO(trackDAO);
         
         // Assert
         assertThrows(NotOwnerException.class, () -> {
@@ -270,9 +258,7 @@ public class PlaylistTest {
         String track_id_to_test = "1";
 
         // Act
-        ITrackDAO trackDAO = mock(ITrackDAO.class);
         when(trackDAO.deleteTrackFromPlaylist(testToken, playlist_id_to_test, track_id_to_test)).thenReturn(new ArrayList<Track>());
-        this.playlist.setTrackDAO(trackDAO);
 
         Response response = null;
         try {
@@ -293,9 +279,7 @@ public class PlaylistTest {
         String wrong_token = "1";
 
         // Act
-        ITrackDAO trackDAO = mock(ITrackDAO.class);
         when(trackDAO.deleteTrackFromPlaylist(wrong_token, playlist_id_to_test, track_id_to_test)).thenReturn(null);
-        this.playlist.setTrackDAO(trackDAO);
         
         // Assert
         assertThrows(NotOwnerException.class, () -> {
