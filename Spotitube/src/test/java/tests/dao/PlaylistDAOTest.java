@@ -80,7 +80,6 @@ public class PlaylistDAOTest {
             verify(preparedStatement).setString(1, tokenToExpect);
             verify(preparedStatement).executeQuery();
 
-            // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
             assertEquals(test_name, playlists.get(0).getName());
             assertTrue(playlists.get(0).getOwner());
 
@@ -134,12 +133,10 @@ public class PlaylistDAOTest {
 
             // Assert
             verify(connection).prepareStatement(sqlPL);
-            // verify(preparedStatementPL).setString(1, test_id);
             verify(preparedStatementPL).setString(2, test_name);
             verify(preparedStatementPL).executeUpdate();
 
             verify(connection).prepareStatement(sqlPLM);
-            // verify(preparedStatementPLM).setString(1, test_id);
             verify(preparedStatementPLM).setString(2, tokenToExpect);
             verify(preparedStatementPLM).executeUpdate();
 
@@ -202,8 +199,6 @@ public class PlaylistDAOTest {
             verify(connection).prepareStatement(sqlGetPlaylists);
             verify(preparedStatementGetPlaylists).setString(1, tokenToExpect);
 
-            // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
-            // miss werkt dit niet omdat er miss meerdere playlists zijn.
             assertEquals(expectedSize, playlists.size());
 
         } catch ( Exception e ) {
@@ -248,8 +243,6 @@ public class PlaylistDAOTest {
             verify(preparedStatement).setString(1, test_id);
             verify(preparedStatement).executeUpdate();
 
-            // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
-            // miss werkt dit niet omdat er miss meerdere playlists zijn.
             assertNull(playlists);
 
         } catch ( Exception e ) {
@@ -305,8 +298,6 @@ public class PlaylistDAOTest {
             verify(connection).prepareStatement(sqlGetPlaylists);
             verify(preparedStatementGetPlaylists).setString(1, tokenToExpect);
 
-            // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
-            // miss werkt dit niet omdat er miss meerdere playlists zijn.
             assertNotNull(playlists);
 
         } catch ( Exception e ) {
@@ -354,7 +345,6 @@ public class PlaylistDAOTest {
             verify(preparedStatement).setString(3, tokenToExpect);
             verify(preparedStatement).executeUpdate();
 
-            // dependency in PlaylistDAO moet weg gehaald worden voordat deze test kan werken.
             assertNull(playlists);
 
         } catch ( Exception e ) {
