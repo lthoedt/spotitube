@@ -22,6 +22,7 @@ public class LoginTest {
 
     private LoginReqDTO loginReqDTO;
     private Login Login;
+    private IUserDAO userDAOMock;
 
     @BeforeEach
     public void setup() {
@@ -30,6 +31,10 @@ public class LoginTest {
         this.loginReqDTO = new LoginReqDTO();
         this.loginReqDTO.user = "henk";
         this.loginReqDTO.password = "henk";
+
+        this.userDAOMock = mock(IUserDAO.class);
+        this.Login.setUserDAO(userDAOMock);
+
     }
 
     @Test
@@ -39,9 +44,7 @@ public class LoginTest {
         User user = new User();
         user.setUsername("henk");
 
-        IUserDAO loginDAOMock = mock(IUserDAO.class);
-        when(loginDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenReturn(user);
-        this.Login.setUserDAO(loginDAOMock);
+        when(userDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenReturn(user);
         
         Response response = null;
         try {
@@ -63,9 +66,7 @@ public class LoginTest {
         // Arrange
         int statuscodeExpected = 401;
 
-        IUserDAO loginDAOMock = mock(IUserDAO.class);
-        when(loginDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenReturn(null);
-        this.Login.setUserDAO(loginDAOMock);
+        when(userDAOMock.loginUser(this.loginReqDTO.user, this.loginReqDTO.password)).thenReturn(null);
         
         assertThrows(UserNotFoundException.class, () -> {
             Response response = this.Login.login(this.loginReqDTO);
