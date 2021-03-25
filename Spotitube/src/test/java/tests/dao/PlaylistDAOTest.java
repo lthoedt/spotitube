@@ -2,6 +2,7 @@ package tests.dao;
 
 import org.junit.jupiter.api.Test;
 
+import dao.IPlaylistDAO;
 import dao.PlaylistDAO;
 import domain.Playlist;
 
@@ -68,7 +69,7 @@ public class PlaylistDAOTest {
             when(resultSet.getString("users_id")).thenReturn(test_users_id);
             when(resultSet.getString("user_id")).thenReturn(test_user_id);
 
-            PlaylistDAO playlistDAO = new PlaylistDAO();
+            IPlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
 
             // Act
@@ -125,7 +126,7 @@ public class PlaylistDAOTest {
             when(connection.prepareStatement(sqlGetPlaylists)).thenReturn(preparedStatementGetPlaylists);
             when(preparedStatementGetPlaylists.executeQuery()).thenReturn(resultSetGetPlaylists);
 
-            PlaylistDAO playlistDAO = new PlaylistDAO();
+            IPlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
 
             // Act
@@ -186,7 +187,7 @@ public class PlaylistDAOTest {
             when(preparedStatementGetPlaylists.executeQuery()).thenReturn(resultSetGetPlaylists);
 
 
-            PlaylistDAO playlistDAO = new PlaylistDAO();
+            IPlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
 
             // Act
@@ -236,7 +237,7 @@ public class PlaylistDAOTest {
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(0);
 
-            PlaylistDAO playlistDAO = new PlaylistDAO();
+            IPlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
 
             // Act
@@ -289,7 +290,7 @@ public class PlaylistDAOTest {
             when(connection.prepareStatement(sqlGetPlaylists)).thenReturn(preparedStatementGetPlaylists);
             when(preparedStatementGetPlaylists.executeQuery()).thenReturn(resultSetGetPlaylists);
 
-            PlaylistDAO playlistDAO = new PlaylistDAO();
+            IPlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
 
             // Act
@@ -340,7 +341,7 @@ public class PlaylistDAOTest {
             when(connection.prepareStatement(sql)).thenReturn(preparedStatement);
             when(preparedStatement.executeUpdate()).thenReturn(0);
 
-            PlaylistDAO playlistDAO = new PlaylistDAO();
+            IPlaylistDAO playlistDAO = new PlaylistDAO();
             playlistDAO.setDataSource(dataSource);
 
             // Act
