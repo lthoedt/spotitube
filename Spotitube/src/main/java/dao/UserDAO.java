@@ -34,7 +34,7 @@ public class UserDAO implements IUserDAO {
             return user;
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         
         return null;
