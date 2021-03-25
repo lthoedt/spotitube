@@ -22,7 +22,6 @@ public class Create {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create( LoginReqDTO loginDTORequest ) {
-        // System.out.println(this.userDAO.kaas());
 
         // create user in db
         User user = this.userDAO.createUser(loginDTORequest.user, loginDTORequest.password);
