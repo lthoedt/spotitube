@@ -2,9 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 
-import service.dto.response.PlaylistDTO;
-import service.dto.response.TrackDTO;
-
 public class Playlist {
     private String id;
     private String name;
@@ -52,20 +49,5 @@ public class Playlist {
         }
         
         return duration;
-    }
-
-    public PlaylistDTO getDTO() {
-        PlaylistDTO playlistDTO = new PlaylistDTO();
-        playlistDTO.id = this.getId();
-        playlistDTO.name = this.getName();
-        playlistDTO.owner = this.getOwner();
-
-        ArrayList<TrackDTO> trackDTOs = new ArrayList<>();
-        for ( Track track : this.getTracks() ) {
-            trackDTOs.add(track.getDTO());
-        }
-        playlistDTO.tracks = trackDTOs;
-
-        return playlistDTO;
     }
 }

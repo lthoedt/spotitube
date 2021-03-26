@@ -1,7 +1,5 @@
 package domain;
 
-import service.dto.response.TrackDTO;
-
 public abstract class Track {
     private String id;
     private String performer;
@@ -56,24 +54,6 @@ public abstract class Track {
 
     public void setOfflineAvailable(Boolean offline_available) {
         this.offline_available = offline_available;
-    }
-
-    public TrackDTO getDTO() {
-        TrackDTO trackDTO = new TrackDTO();
-        trackDTO.id = this.getId();
-        trackDTO.title = this.getTitle();
-        trackDTO.performer = this.getPerformer();
-        trackDTO.playcount = this.getPlaycount();
-        trackDTO.publicationDate = this.getPublicationDate();
-        trackDTO.description = this.getDescription();
-        trackDTO.offlineAvailable = this.getOfflineAvailable();
-        
-        try {
-            trackDTO.album = this.getAlbum().getName();
-        } catch ( NullPointerException e) {
-            trackDTO.album = null;
-        }
-        return trackDTO;
     }
 
     public String getPublicationDate(){return null;};

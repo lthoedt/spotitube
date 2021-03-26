@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import dao.ITrackDAO;
 import domain.Track;
 import filters.TokenQueryValidator;
+import service.dto.DTOMapper;
 import service.dto.response.TrackDTO;
 import service.dto.response.TracksDTO;
 
@@ -33,7 +34,7 @@ public class Tracks {
         ArrayList<TrackDTO> trackDTOs = new ArrayList<>();
 
         for ( Track t : tracks ) {
-            trackDTOs.add(t.getDTO());
+            trackDTOs.add(DTOMapper.buildTrackDTO(t));
         }
 
         tracksDTO.tracks = trackDTOs;

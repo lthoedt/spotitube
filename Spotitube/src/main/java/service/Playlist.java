@@ -21,12 +21,11 @@ import domain.Track;
 import exceptions.InvalidTokenException;
 import exceptions.NotOwnerException;
 import filters.TokenQueryValidator;
+
+import service.dto.DTOMapper;
 import service.dto.request.PlaylistReqDTO;
 import service.dto.request.TrackReqDTO;
 import service.dto.response.PlaylistDTO;
-import service.dto.response.PlaylistsDTO;
-import service.dto.response.TrackDTO;
-import service.dto.response.TracksDTO;
 
 @Path("playlists")
 public class Playlist {
@@ -41,7 +40,7 @@ public class Playlist {
 
         ArrayList<domain.Playlist> playlists = this.PlaylistDAO.getPlaylists(token);
 
-        return this.buildPlaylistsDTO(playlists);
+        return Response.status(200).entity( DTOMapper.buildPlaylistsDTO(playlists) ).build();
     }
 
     @POST
@@ -55,7 +54,7 @@ public class Playlist {
         if (playlists == null)
             throw new InvalidTokenException();
         
-        return this.buildPlaylistsDTO(playlists);
+        return Response.status(200).entity( DTOMapper.buildPlaylistsDTO(playlists) ).build();
     }
 
     @DELETE
@@ -67,7 +66,7 @@ public class Playlist {
         if (playlists == null) 
             throw new NotOwnerException();
 
-        return this.buildPlaylistsDTO(playlists);
+        return Response.status(200).entity( DTOMapper.buildPlaylistsDTO(playlists) ).build();
     }
 
     @PUT
@@ -80,7 +79,7 @@ public class Playlist {
         if (playlists == null) 
             throw new NotOwnerException();
 
-        return this.buildPlaylistsDTO(playlists);
+        return Response.status(200).entity( DTOMapper.buildPlaylistsDTO(playlists) ).build();
     }
 
     @GET
@@ -91,7 +90,7 @@ public class Playlist {
 
         ArrayList<Track> tracks = this.TrackDAO.getTracksFromPlaylist(token, playlist_id);
 
-        return Response.status(200).entity(this.buildTracksDTO(tracks)).build();
+        return Response.status(200).entity(DTOMapper.buildTracksDTO(tracks)).build();
     }
 
     @POST
@@ -106,7 +105,7 @@ public class Playlist {
         if (tracks == null) 
             throw new NotOwnerException();
 
-        return Response.status(201).entity(this.buildTracksDTO(tracks)).build();
+        return Response.status(201).entity(DTOMapper.buildTracksDTO(tracks)).build();
     }
 
     @DELETE
@@ -120,40 +119,7 @@ public class Playlist {
         if (tracks == null) 
             throw new NotOwnerException();
 
-        return Response.status(200).entity(this.buildTracksDTO(tracks)).build();
-    }
-
-    private TracksDTO buildTracksDTO( ArrayList<Track> tracks ) {
-        TracksDTO tracksDTO = new TracksDTO();
-
-        ArrayList<TrackDTO> trackDTOs = new ArrayList<>();
-
-        for ( Track t : tracks ) {
-            trackDTOs.add(t.getDTO());
-        }
-
-        tracksDTO.tracks = trackDTOs;
-        
-        return tracksDTO;
-    }
-
-    private Response buildPlaylistsDTO( ArrayList<domain.Playlist> playlists ) {
-        PlaylistsDTO playlistsDTO = new PlaylistsDTO();
-        ArrayList<PlaylistDTO> playlistDTOs = new ArrayList<>();
-
-        for ( domain.Playlist playlist : playlists ) {
-            playlistsDTO.length += playlist.duration;
-
-            // Remove this if tracks should not be empty
-            playlist.setTracks(new ArrayList<Track>());
-
-            playlistDTOs.add(playlist.getDTO());
-
-        }
-
-        playlistsDTO.playlists = playlistDTOs;
-        
-        return Response.status(200).entity(playlistsDTO).build();
+        return Response.status(200).entity(DTOMapper.buildTracksDTO(tracks)).build();
     }
 
     @Inject
