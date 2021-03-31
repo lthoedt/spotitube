@@ -15,32 +15,19 @@ public class App {
         // Connecting
         try (Connection con = DriverManager.getConnection("jdbc:neo4j:bolt://localhost/?database=spotitube", "neo4j", "password")) {
 
-            Users user = new Users();
-            user.setUsername("henk");;
-            user.setPassword("henk");
-            user.setToken("1234-1234-1234");
-
-            Playlists playlist = new Playlists();
-            playlist.setName("SRV");
-
-            // user.setPlaylist(playlist);
-
             // Querying
-            String queryInsert = "CREATE " + user.build()
-                        + Users.buildRelationPlaylist() + playlist.build()
-                        + "RETURN users, playlists";
+            String queryInsert = "CREATE (user:Users {username:\"henk\", password: \"henk\", token: \"1234-1234-1234\"} ) "
+                        + "-[:owns]-> (playlist:Playlists {name: \"SRV\"}) "
+                        + "RETURN user, playlist";
             PreparedStatement stmt = con.prepareStatement(queryInsert);
-            stmt.executeUpdate();
+//            stmt.executeUpdate();
 
-            Playlists playlist2 = new Playlists();
-            playlist2.setName("kaas");
-
-            String queryAddPlaylist = "MATCH (user:Users) x"
+            String queryAddPlaylist = "MATCH (user:Users) "
                                     + "WHERE user.username='henk' "
-                                    + "CREATE (user)" + Users.buildRelationPlaylist() + playlist2.build()
+                                    + "CREATE (user)-[:owns]->(playlist:Playlists {name: \"kaas\"}) "
                                     + "RETURN user";
             PreparedStatement stmt2 = con.prepareStatement(queryAddPlaylist);
-            stmt2.executeUpdate();
+            // stmt2.executeUpdate();
 
             for ( int i = 0; i < 10; i++ ) {
                 String sql = "MATCH (pl:Playlists) "
@@ -51,7 +38,7 @@ public class App {
                 s.executeUpdate();
             }
 
-            String queryRetrieve = "MATCH (user:Users)" + Users.buildRelationPlaylist() + "(playlists:Playlists) "
+            String queryRetrieve = "MATCH (user:Users)-[:owns]->(playlists:Playlists) "
                                     + "WHERE user.username='henk' "
                                     + "RETURN user.username, playlists.name";
             PreparedStatement stmtRetrieve = con.prepareStatement(queryRetrieve);
