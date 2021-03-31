@@ -14,5 +14,5 @@ public interface ITrackDAO {
     ArrayList<Track> deleteTrackFromPlaylist( String token, String playlist_id, String track_id);
 
     public boolean ownsPlaylist( String token, String playlist_id );
-    public abstract void setDataSource(DataSource dataSource);
+    public void setDataSource(DataSource dataSource);
 }

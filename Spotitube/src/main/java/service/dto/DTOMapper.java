@@ -48,6 +48,7 @@ public class DTOMapper {
         trackDTO.id = track.getId();
         trackDTO.title = track.getTitle();
         trackDTO.performer = track.getPerformer();
+        trackDTO.duration = track.getDuration();
         trackDTO.playcount = track.getPlaycount();
         trackDTO.publicationDate = track.getPublicationDate();
         trackDTO.description = track.getDescription();
