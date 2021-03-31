@@ -1,0 +1,865 @@
+2021-03-30 08:29:29.308+0000 WARN [o.n.k.i.JvmChecker] You are using an unsupported version of the Java runtime. Please use Oracle(R) Java(TM) Runtime Environment 8, OpenJDK(TM) 8 or IBM J9.
+2021-03-30 08:29:29.324+0000 WARN [o.n.i.p.PageCache] The dbms.memory.pagecache.size setting has not been configured. It is recommended that this setting is always explicitly configured, to ensure the system has a balanced configuration. Until then, a computed heuristic value of 6268512256 bytes will be used instead. Run `neo4j-admin memrec` for memory configuration suggestions.
+2021-03-30 08:29:29.516+0000 INFO [o.n.k.i.f.CommunityEditionModule] No locking implementation specified, defaulting to 'forseti'
+2021-03-30 08:29:29.629+0000 INFO [o.n.k.AvailabilityGuard] Requirement makes database unavailable: Database available
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] --- INITIALIZED diagnostics START ---
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] Neo4j Kernel properties:
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] unsupported.dbms.directories.neo4j_home=/home/lthoedt/Documents/github/demos/target/jnosql
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] unsupported.dbms.edition=community
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] unsupported.dbms.ephemeral=false
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] Diagnostics providers:
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] org.neo4j.kernel.configuration.Config
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] org.neo4j.kernel.info.DiagnosticsManager
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] SYSTEM_MEMORY
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] JAVA_MEMORY
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] OPERATING_SYSTEM
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] JAVA_VIRTUAL_MACHINE
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] CLASSPATH
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] LIBRARY_PATH
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] SYSTEM_PROPERTIES
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] TIMEZONE_DATABASE
+2021-03-30 08:29:29.637+0000 INFO [o.n.k.i.DiagnosticsManager] LINUX_SCHEDULERS
+2021-03-30 08:29:29.638+0000 INFO [o.n.k.i.DiagnosticsManager] NETWORK
+2021-03-30 08:29:29.638+0000 INFO [o.n.k.i.DiagnosticsManager] System memory information:
+2021-03-30 08:29:29.639+0000 INFO [o.n.k.i.DiagnosticsManager] Total Physical memory: 15.57 GB
+2021-03-30 08:29:29.639+0000 INFO [o.n.k.i.DiagnosticsManager] Free Physical memory: 6.26 GB
+2021-03-30 08:29:29.639+0000 INFO [o.n.k.i.DiagnosticsManager] Committed virtual memory: 7.60 GB
+2021-03-30 08:29:29.639+0000 INFO [o.n.k.i.DiagnosticsManager] Total swap space: 2.00 GB
+2021-03-30 08:29:29.639+0000 INFO [o.n.k.i.DiagnosticsManager] Free swap space: 2.00 GB
+2021-03-30 08:29:29.639+0000 INFO [o.n.k.i.DiagnosticsManager] JVM memory information:
+2021-03-30 08:29:29.640+0000 INFO [o.n.k.i.DiagnosticsManager] Free  memory: 49.43 MB
+2021-03-30 08:29:29.640+0000 INFO [o.n.k.i.DiagnosticsManager] Total memory: 84.00 MB
+2021-03-30 08:29:29.640+0000 INFO [o.n.k.i.DiagnosticsManager] Max   memory: 3.89 GB
+2021-03-30 08:29:29.642+0000 INFO [o.n.k.i.DiagnosticsManager] Garbage Collector: G1 Young Generation: [G1 Eden Space, G1 Survivor Space, G1 Old Gen]
+2021-03-30 08:29:29.642+0000 INFO [o.n.k.i.DiagnosticsManager] Garbage Collector: G1 Old Generation: [G1 Eden Space, G1 Survivor Space, G1 Old Gen]
+2021-03-30 08:29:29.642+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: CodeHeap 'non-nmethods' (Non-heap memory): committed=2.44 MB, used=1.14 MB, max=5.56 MB, threshold=0.00 B
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: Metaspace (Non-heap memory): committed=22.92 MB, used=22.05 MB, max=-1.00 B, threshold=0.00 B
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: CodeHeap 'profiled nmethods' (Non-heap memory): committed=5.69 MB, used=5.68 MB, max=117.22 MB, threshold=0.00 B
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: Compressed Class Space (Non-heap memory): committed=3.25 MB, used=2.94 MB, max=1.00 GB, threshold=0.00 B
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: G1 Eden Space (Heap memory): committed=62.00 MB, used=12.00 MB, max=-1.00 B, threshold=?
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: G1 Old Gen (Heap memory): committed=15.00 MB, used=14.57 MB, max=3.89 GB, threshold=0.00 B
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: G1 Survivor Space (Heap memory): committed=7.00 MB, used=7.00 MB, max=-1.00 B, threshold=?
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: CodeHeap 'non-profiled nmethods' (Non-heap memory): committed=2.44 MB, used=1.23 MB, max=117.22 MB, threshold=0.00 B
+2021-03-30 08:29:29.643+0000 INFO [o.n.k.i.DiagnosticsManager] Operating system information:
+2021-03-30 08:29:29.644+0000 INFO [o.n.k.i.DiagnosticsManager] Operating System: Linux; version: 5.8.0-48-generic; arch: amd64; cpus: 6
+2021-03-30 08:29:29.644+0000 INFO [o.n.k.i.DiagnosticsManager] Max number of file descriptors: 1048576
+2021-03-30 08:29:29.644+0000 INFO [o.n.k.i.DiagnosticsManager] Number of open file descriptors: 193
+2021-03-30 08:29:29.647+0000 INFO [o.n.k.i.DiagnosticsManager] Process id: 19142@Anton
+2021-03-30 08:29:29.647+0000 INFO [o.n.k.i.DiagnosticsManager] Byte order: LITTLE_ENDIAN
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] Local timezone: Europe/Amsterdam
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] JVM information:
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] VM Name: OpenJDK 64-Bit Server VM
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] VM Vendor: Oracle Corporation
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] VM Version: 12.0.2+10
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] JIT compiler: HotSpot 64-Bit Tiered Compilers
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] VM Arguments: [-Dfile.encoding=UTF-8]
+2021-03-30 08:29:29.655+0000 INFO [o.n.k.i.DiagnosticsManager] Java classpath:
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-procedure-api/3.4.11/neo4j-procedure-api-3.4.11.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-lucene-upgrade/3.4.11/neo4j-lucene-upgrade-3.4.11.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-unsafe/3.4.11/neo4j-unsafe-3.4.11.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-lucene-index/3.4.11/neo4j-lucene-index-3.4.11.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/scala-lang/scala-library/2.11.12/scala-library-2.11.12.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-management/3.4.11/neo4j-management-3.4.11.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/json/jakarta.json-api/1.1.6/jakarta.json-api-1.1.6.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-groovysh/2.5.7/groovy-groovysh-2.5.7-indy.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-codecs/5.5.5/lucene-codecs-5.5.5.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-core/5.5.5/lucene-core-5.5.5.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-primitive-collections/3.4.11/neo4j-primitive-collections-3.4.11.jar
+2021-03-30 08:29:29.658+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-resource/3.4.11/neo4j-resource-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/gremlin-shaded/3.4.3/gremlin-shaded-3.4.3.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-enterprise-kernel/3.4.11/neo4j-enterprise-kernel-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-runtime-util/3.4.11/neo4j-cypher-runtime-util-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/jboss/weld/se/weld-se-shaded/3.1.6.Final/weld-se-shaded-3.1.6.Final.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/dropwizard/metrics/metrics-core/4.0.2/metrics-core-4.0.2.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/transaction/jakarta.transaction-api/1.3.1/jakarta.transaction-api-1.3.1.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy/2.5.7/groovy-2.5.7-indy.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-metrics/3.4.11/neo4j-metrics-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-io/3.4.11/neo4j-io-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/json/bind/jakarta.json.bind-api/1.0.2/jakarta.json.bind-api-1.0.2.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm-tree/6.2/asm-tree-6.2.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/commons/commons-text/1.3/commons-text-1.3.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-dbms/3.4.11/neo4j-dbms-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-query-logging/3.4.11/neo4j-query-logging-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-lang/1.4.0/shiro-lang-1.4.0.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.3/3.3.9/neo4j-cypher-frontend-3.3-3.3.9.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/json/javax.json-api/1.1/javax.json-api-1.1.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/info/picocli/picocli/3.9.5/picocli-3.9.5.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/googlecode/concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.4.2/concurrentlinkedhashmap-lru-1.4.2.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-planner-3.4/3.4.11/neo4j-cypher-planner-3.4-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-index/3.4.11/neo4j-index-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/github/ben-manes/caffeine/caffeine/2.3.1/caffeine-2.3.1.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-frontend-2.3/2.3.12/neo4j-cypher-frontend-2.3-2.3.12.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-expression-3.4/3.4.11/neo4j-cypher-expression-3.4-3.4.11.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-crypto-cipher/1.4.0/shiro-crypto-cipher-1.4.0.jar
+2021-03-30 08:29:29.659+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-ir-3.3/3.3.9/neo4j-cypher-ir-3.3-3.3.9.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/slf4j/slf4j-nop/1.7.25/slf4j-nop-1.7.25.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-jsr223/2.5.7/groovy-jsr223-2.5.7-indy.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/dropwizard/metrics/metrics-graphite/4.0.2/metrics-graphite-4.0.2.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-auth-plugin-api/3.4.11/neo4j-auth-plugin-api-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.1/3.1.9/neo4j-cypher-frontend-3.1-3.1.9.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-tinkerpop-api-impl/0.9-3.4.0/neo4j-tinkerpop-api-impl-0.9-3.4.0.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-causal-clustering/3.4.11/neo4j-causal-clustering-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/parboiled/parboiled-scala_2.11/1.1.7/parboiled-scala_2.11-1.1.7.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-bolt/3.4.11/neo4j-bolt-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/communication/communication-query/1.0.0-b3/communication-query-1.0.0-b3.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/gremlin-core/3.4.3/gremlin-core-3.4.3.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-cache/1.4.0/shiro-cache-1.4.0.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient_common/0.1.0/simpleclient_common-0.1.0.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/jcabi/jcabi-manifests/1.1/jcabi-manifests-1.1.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-compiler-2.3/2.3.12/neo4j-cypher-compiler-2.3-2.3.12.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/1.2.3/jakarta.interceptor-api-1.2.3.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/net/objecthunter/exp4j/0.4.8/exp4j-0.4.8.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-util-3.4/3.4.11/neo4j-cypher-util-3.4-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/neo4j-gremlin/3.4.3/neo4j-gremlin-3.4.3.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/hazelcast/hazelcast-all/3.7.8/hazelcast-all-3.7.8.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/netty/netty/3.9.9.Final/netty-3.9.9.Final.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-backup/3.4.11/neo4j-backup-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/json/bind/javax.json.bind-api/1.0/javax.json.bind-api-1.0.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher/3.4.11/neo4j-cypher-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-import-tool/3.4.11/neo4j-import-tool-3.4.11.jar
+2021-03-30 08:29:29.660+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-security/3.4.11/neo4j-security-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/openCypher-frontend-1/3.4.11/openCypher-frontend-1-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-swing/2.5.7/groovy-swing-2.5.7.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/commons/commons-compress/1.16.1/commons-compress-1.16.1.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-crypto-core/1.4.0/shiro-crypto-core-1.4.0.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-cli-picocli/2.5.7/groovy-cli-picocli-2.5.7.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-logical-plans-3.3/3.3.9/neo4j-cypher-logical-plans-3.3-3.3.9.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-event/1.4.0/shiro-event-1.4.0.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-common/3.4.11/neo4j-common-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/scala-lang/scala-reflect/2.11.12/scala-reflect-2.11.12.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient/0.1.0/simpleclient-0.1.0.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-backward-codecs/5.5.0/lucene-backward-codecs-5.5.0.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/netty/netty-all/4.1.24.Final/netty-all-4.1.24.Final.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-templates/2.5.7/groovy-templates-2.5.7.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/ejb/jakarta.ejb-api/3.2.3/jakarta.ejb-api-3.2.3.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-ha/3.4.11/neo4j-ha-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/communication/communication-core/1.0.0-b3/communication-core-1.0.0-b3.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm-util/6.2/asm-util-6.2.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-com/3.4.11/neo4j-com-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/carrotsearch/hppc/0.7.1/hppc-0.7.1.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/antlr/antlr4-runtime/4.9.1/antlr4-runtime-4.9.1.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/glassfish/javax.json/1.1/javax.json-1.1.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-enterprise/3.4.11/neo4j-enterprise-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-crypto-hash/1.4.0/shiro-crypto-hash-1.4.0.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/mapping/mapping-core/1.0.0-b3/mapping-core-1.0.0-b3.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm/6.2/asm-6.2.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cluster/3.4.11/neo4j-cluster-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-xml/2.5.7/groovy-xml-2.5.7.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-values/3.4.11/neo4j-values-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-consistency-check/3.4.11/neo4j-consistency-check-3.4.11.jar
+2021-03-30 08:29:29.661+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-tinkerpop-api/0.1/neo4j-tinkerpop-api-0.1.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/2.0.1/jakarta.enterprise.cdi-api-2.0.1.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-spatial-index/3.4.11/neo4j-spatial-index-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-graphdb-api/3.4.11/neo4j-graphdb-api-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm-analysis/6.2/asm-analysis-6.2.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/yasson/1.0/yasson-1.0.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/jprocesses/jProcesses/1.6.4/jProcesses-1.6.4.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-codegen/3.4.11/neo4j-codegen-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-graph-algo/3.4.11/neo4j-graph-algo-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.3/3.3.9/neo4j-cypher-compiler-3.3-3.3.9.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-csv/3.4.11/neo4j-csv-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.1/3.1.9/neo4j-cypher-compiler-3.1-3.1.9.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/nosql/communication/communication-query/1.0.0-b3/communication-query-1.0.0-b3.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-ssl/3.4.11/neo4j-ssl-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-planner-spi-3.4/3.4.11/neo4j-cypher-planner-spi-3.4-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/microprofile/config/microprofile-config-api/1.4/microprofile-config-api-1.4.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/parboiled/parboiled-core/1.1.7/parboiled-core-1.1.7.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient_dropwizard/0.1.0/simpleclient_dropwizard-0.1.0.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-ir-3.4/3.4.11/neo4j-cypher-ir-3.4-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/profesorfalken/WMI4Java/1.6.1/WMI4Java-1.6.1.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jline/jline/2.14.6/jline-2.14.6.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/nosql/mapping/mapping-core/1.0.0-b3/mapping-core-1.0.0-b3.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-command-line/3.4.11/neo4j-command-line-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-security-enterprise/3.4.11/neo4j-security-enterprise-3.4.11.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/Documents/github/demos/artemis-demo-java-se/graph-neo4j/target/classes
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-console/2.5.7/groovy-console-2.5.7.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-config-ogdl/1.4.0/shiro-config-ogdl-1.4.0.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/javatuples/javatuples/1.2/javatuples-1.2.jar
+2021-03-30 08:29:29.662+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-logging/3.4.11/neo4j-logging-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-collections/3.4.11/neo4j-collections-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j/3.4.11/neo4j-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-analyzers-common/5.5.5/lucene-analyzers-common-5.5.5.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-json/2.5.7/groovy-json-2.5.7-indy.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-jmx/3.4.11/neo4j-jmx-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient_httpserver/0.1.0/simpleclient_httpserver-0.1.0.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/profesorfalken/jPowerShell/1.9/jPowerShell-1.9.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/yaml/snakeyaml/1.15/snakeyaml-1.15.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-kernel/3.4.11/neo4j-kernel-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-configuration/3.4.11/neo4j-configuration-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-graph-matching/3.1.9/neo4j-graph-matching-3.1.9.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/squareup/javapoet/1.8.0/javapoet-1.8.0.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/gremlin-groovy/3.4.3/gremlin-groovy-3.4.3.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-queryparser/5.5.5/lucene-queryparser-5.5.5.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/mapping/mapping-graph/1.0.0-b3/mapping-graph-1.0.0-b3.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-logical-plans-3.4/3.4.11/neo4j-cypher-logical-plans-3.4-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-kernel-api/3.4.11/neo4j-kernel-api-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/el/jakarta.el-api/3.0.2/jakarta.el-api-3.0.2.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/jcabi/jcabi-log/0.14/jcabi-log-0.14.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-interpreted-runtime/3.4.11/neo4j-cypher-interpreted-runtime-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-config-core/1.4.0/shiro-config-core-1.4.0.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/nosql/communication/communication-core/1.0.0-b3/communication-core-1.0.0-b3.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-udc/3.4.11/neo4j-udc-3.4.11.jar
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] Library path:
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/java/packages/lib
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib64
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib64
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib
+2021-03-30 08:29:29.663+0000 INFO [o.n.k.i.DiagnosticsManager] System.properties:
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] awt.toolkit = sun.awt.X11.XToolkit
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.jnu.encoding = UTF-8
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] user.name = lthoedt
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] path.separator = :
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.arch.data.model = 64
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] file.encoding = UTF-8
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] user.timezone = Europe/Amsterdam
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.java.launcher = SUN_STANDARD
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] user.country = US
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.boot.library.path = /usr/java/jdk-12.0.2/lib
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.java.command = org.jnosql.artemis.demo.se.TravelApp
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] jdk.debug = release
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.cpu.endian = little
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] user.home = /home/lthoedt
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] user.dir = /home/lthoedt/Documents/github/demos
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] user.language = en
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] file.separator = /
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] sun.io.unicode.encoding = UnicodeLittle
+2021-03-30 08:29:29.664+0000 INFO [o.n.k.i.DiagnosticsManager] (IANA) TimeZone Database Version:
+2021-03-30 08:29:29.683+0000 INFO [o.n.k.i.DiagnosticsManager]   TimeZone version: 2018i (available for 600 zone identifiers)
+2021-03-30 08:29:29.683+0000 INFO [o.n.k.i.DiagnosticsManager] Linux scheduler information:
+2021-03-30 08:29:29.685+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.685+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.685+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.685+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.686+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:29:29.687+0000 INFO [o.n.k.i.DiagnosticsManager] Network information:
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager] Interface enp4s0:
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager]     address: fe80:0:0:0:d13c:f640:60a5:778e%enp4s0
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager]     address: 192.168.1.60
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager] Interface lo:
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager]     address: 0:0:0:0:0:0:0:1%lo
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager]     address: 127.0.0.1
+2021-03-30 08:29:29.688+0000 INFO [o.n.k.i.DiagnosticsManager] --- INITIALIZED diagnostics END ---
+2021-03-30 08:29:29.752+0000 INFO [o.n.m.MetricsExtension] Initiating metrics...
+2021-03-30 08:29:29.823+0000 INFO [o.n.k.i.s.f.RecordFormatSelector] Selected format 'RecordFormat:StandardV3_4[v0.A.9]' for the new store
+2021-03-30 08:29:29.998+0000 INFO [o.n.k.i.i.l.NativeLabelScanStore] No label index found, this might just be first use. Preparing to rebuild.
+2021-03-30 08:29:30.021+0000 INFO [o.n.k.NeoStoreDataSource] Rotated to transaction log [/home/lthoedt/Documents/github/demos/target/jnosql/neostore.transaction.db.0] version=0, last transaction in previous log=1
+2021-03-30 08:29:30.022+0000 INFO [o.n.k.NeoStoreDataSource] No commits found after last check point (which is at <no log position given>)
+2021-03-30 08:29:30.026+0000 WARN [o.n.k.i.s.MetaDataStore] Missing counts store, rebuilding it.
+2021-03-30 08:29:30.100+0000 WARN [o.n.k.i.s.MetaDataStore] Counts store rebuild completed.
+2021-03-30 08:29:30.106+0000 INFO [o.n.k.i.i.l.NativeLabelScanStore] Rebuilding label index, this may take a while
+2021-03-30 08:29:30.111+0000 INFO [o.n.k.i.i.l.NativeLabelScanStore] Label index rebuilt (roughly 0 nodes)
+2021-03-30 08:29:30.119+0000 INFO [o.n.k.i.DatabaseHealth] Database health set to OK
+2021-03-30 08:29:30.278+0000 INFO [o.n.m.MetricsExtension] Sending metrics to CSV file at /home/lthoedt/Documents/github/demos/target/jnosql/metrics
+2021-03-30 08:29:30.320+0000 INFO [o.n.b.i.BackupServer] BackupServer communication server started and bound to /127.0.0.1:6362
+2021-03-30 08:29:30.324+0000 INFO [o.n.k.AvailabilityGuard] Fulfilling of requirement makes database available: Database available
+2021-03-30 08:29:30.324+0000 INFO [o.n.k.i.f.GraphDatabaseFacadeFactory] Database is now ready
+2021-03-30 08:29:30.325+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2021-03-30 08:29:30.325+0000 INFO [o.n.k.i.DiagnosticsManager] Graph Database: community single StoreId{creationTime=1617092969951, randomId=4204662379945629216, storeVersion=16094931155187206, upgradeTime=1617092969951, upgradeId=1}
+2021-03-30 08:29:30.325+0000 INFO [o.n.k.i.DiagnosticsManager] Kernel version: 3.4.11,caef93a0f23fead51dd7995db1a018ef0321b923
+2021-03-30 08:29:30.326+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager] Store versions:
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager] Store versions:
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   NodeStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyIndexStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipTypeStore v0.A.9
+2021-03-30 08:29:30.327+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   LabelTokenStore v0.A.9
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   SchemaStore v0.A.9
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipGroupStore v0.A.9
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   NeoStore v0.A.9
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager] Id usage:
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager] Id usage:
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore: used=1 high=0
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   NodeStore: used=0 high=-1
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=1 high=0
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyIndexStore: used=0 high=-1
+2021-03-30 08:29:30.328+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=1 high=0
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore: used=1 high=0
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyStore: used=0 high=-1
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipStore: used=0 high=-1
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=1 high=0
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipTypeStore: used=0 high=-1
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=1 high=0
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   LabelTokenStore: used=0 high=-1
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   SchemaStore: used=1 high=0
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipGroupStore: used=1 high=0
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager]   NeoStore: used=15 high=14
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_RECORDS START ---
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager] Neostore records:
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager] TIME (Creation time): 1617092969951
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager] RANDOM_NUMBER (Random number for store id): 4204662379945629216
+2021-03-30 08:29:30.329+0000 INFO [o.n.k.i.DiagnosticsManager] LOG_VERSION (Current log version): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_ID (Last committed transaction): 1
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] STORE_VERSION (Store format version): 16094931155187206
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] FIRST_GRAPH_PROPERTY (First property record containing graph properties): -1
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_CONSTRAINT_TRANSACTION (Last committed transaction containing constraint changes): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_ID (Transaction id most recent upgrade was performed at): 1
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TIME (Time of last upgrade): 1617092969951
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_CHECKSUM (Checksum of last committed transaction): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_CHECKSUM (Checksum of transaction id the most recent upgrade was performed at): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_CLOSED_TRANSACTION_LOG_VERSION (Log version where the last transaction commit entry has been written into): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_CLOSED_TRANSACTION_LOG_BYTE_OFFSET (Byte offset in the log file where the last transaction commit entry has been written into): 16
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_COMMIT_TIMESTAMP (Commit time timestamp for last committed transaction): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_COMMIT_TIMESTAMP (Commit timestamp of transaction the most recent upgrade was performed at): 0
+2021-03-30 08:29:30.330+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_RECORDS END ---
+2021-03-30 08:29:30.331+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for TRANSACTION_RANGE START ---
+2021-03-30 08:29:30.331+0000 INFO [o.n.k.i.DiagnosticsManager] Transaction log:
+2021-03-30 08:29:30.331+0000 INFO [o.n.k.i.DiagnosticsManager] No transactions found in any log
+2021-03-30 08:29:30.331+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for TRANSACTION_RANGE END ---
+2021-03-30 08:29:30.332+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2021-03-30 08:29:30.332+0000 INFO [o.n.k.i.DiagnosticsManager] Disk space on partition (Total / Free / Free %): 81503285248 / 56832897024 / 69
+2021-03-30 08:29:30.332+0000 INFO [o.n.k.i.DiagnosticsManager] Storage files: (filename : modification date - size)
+2021-03-30 08:29:30.333+0000 INFO [o.n.k.i.DiagnosticsManager]   index:
+2021-03-30 08:29:30.333+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.333+0000 INFO [o.n.k.i.DiagnosticsManager]   logs:
+2021-03-30 08:29:30.333+0000 INFO [o.n.k.i.DiagnosticsManager]     debug.log: 2021-03-30T10:29:30+0200 - 47.68 kB
+2021-03-30 08:29:30.333+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:29+0200 - 47.68 kB
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   metrics:
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.counts.db.a: 2021-03-30T10:29:30+0200 - 96.00 B
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labelscanstore.db: 2021-03-30T10:29:30+0200 - 40.00 kB
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.names: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.334+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.names.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.labels: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.labels.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.arrays: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.arrays.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.335+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.keys: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.keys.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.strings: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.strings.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipgroupstore.db: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipgroupstore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipstore.db: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipstore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.336+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.339+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.339+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.names: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.339+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.names.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.339+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.schemastore.db: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.schemastore.db.id: 2021-03-30T10:29:29+0200 - 9.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.transaction.db.0: 2021-03-30T10:29:30+0200 - 16.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]   profiles:
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.counts.db.a.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.labelscanstore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.labeltokenstore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.labeltokenstore.db.names.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.nodestore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.nodestore.db.labels.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.340+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.arrays.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.index.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.index.keys.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.strings.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshipgroupstore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshipstore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshiptypestore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshiptypestore.db.names.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.schemastore.db.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:30+0200 - 357.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]   store_lock: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager] Storage summary: 
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]   Total size of store: 160.27 kB
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager]   Total size of mapped files: 112.00 kB
+2021-03-30 08:29:30.341+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2021-03-30 08:29:30.531+0000 INFO [o.n.k.i.f.GraphDatabaseFacadeFactory] Shutdown started
+2021-03-30 08:29:30.531+0000 INFO [o.n.k.i.f.GraphDatabaseFacadeFactory] Database is now unavailable
+2021-03-30 08:29:30.539+0000 INFO [o.n.b.i.BackupServer] BackupServer communication server shutting down and unbinding from  /127.0.0.1:6362
+2021-03-30 08:29:30.551+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by database shutdown @ txId: 34 checkpoint started...
+2021-03-30 08:29:30.555+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 34 to [/home/lthoedt/Documents/github/demos/target/jnosql/neostore.counts.db.b], from [/home/lthoedt/Documents/github/demos/target/jnosql/neostore.counts.db.a].
+2021-03-30 08:29:30.562+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by database shutdown @ txId: 34 checkpoint completed in 10ms
+2021-03-30 08:29:30.563+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2021-03-30 08:29:30.572+0000 INFO [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics START ---
+2021-03-30 08:29:30.572+0000 INFO [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics END ---
+2021-03-30 08:30:19.347+0000 WARN [o.n.k.i.JvmChecker] You are using an unsupported version of the Java runtime. Please use Oracle(R) Java(TM) Runtime Environment 8, OpenJDK(TM) 8 or IBM J9.
+2021-03-30 08:30:19.359+0000 WARN [o.n.i.p.PageCache] The dbms.memory.pagecache.size setting has not been configured. It is recommended that this setting is always explicitly configured, to ensure the system has a balanced configuration. Until then, a computed heuristic value of 6268512256 bytes will be used instead. Run `neo4j-admin memrec` for memory configuration suggestions.
+2021-03-30 08:30:19.582+0000 INFO [o.n.k.i.f.CommunityEditionModule] No locking implementation specified, defaulting to 'forseti'
+2021-03-30 08:30:19.678+0000 INFO [o.n.k.AvailabilityGuard] Requirement makes database unavailable: Database available
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] --- INITIALIZED diagnostics START ---
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] Neo4j Kernel properties:
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] unsupported.dbms.directories.neo4j_home=/home/lthoedt/Documents/github/demos/target/jnosql
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] unsupported.dbms.edition=community
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] unsupported.dbms.ephemeral=false
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] Diagnostics providers:
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] org.neo4j.kernel.configuration.Config
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] org.neo4j.kernel.info.DiagnosticsManager
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] SYSTEM_MEMORY
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] JAVA_MEMORY
+2021-03-30 08:30:19.686+0000 INFO [o.n.k.i.DiagnosticsManager] OPERATING_SYSTEM
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] JAVA_VIRTUAL_MACHINE
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] CLASSPATH
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] LIBRARY_PATH
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] SYSTEM_PROPERTIES
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] TIMEZONE_DATABASE
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] LINUX_SCHEDULERS
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] NETWORK
+2021-03-30 08:30:19.687+0000 INFO [o.n.k.i.DiagnosticsManager] System memory information:
+2021-03-30 08:30:19.688+0000 INFO [o.n.k.i.DiagnosticsManager] Total Physical memory: 15.57 GB
+2021-03-30 08:30:19.688+0000 INFO [o.n.k.i.DiagnosticsManager] Free Physical memory: 6.15 GB
+2021-03-30 08:30:19.688+0000 INFO [o.n.k.i.DiagnosticsManager] Committed virtual memory: 7.60 GB
+2021-03-30 08:30:19.688+0000 INFO [o.n.k.i.DiagnosticsManager] Total swap space: 2.00 GB
+2021-03-30 08:30:19.688+0000 INFO [o.n.k.i.DiagnosticsManager] Free swap space: 2.00 GB
+2021-03-30 08:30:19.688+0000 INFO [o.n.k.i.DiagnosticsManager] JVM memory information:
+2021-03-30 08:30:19.689+0000 INFO [o.n.k.i.DiagnosticsManager] Free  memory: 48.86 MB
+2021-03-30 08:30:19.689+0000 INFO [o.n.k.i.DiagnosticsManager] Total memory: 84.00 MB
+2021-03-30 08:30:19.689+0000 INFO [o.n.k.i.DiagnosticsManager] Max   memory: 3.89 GB
+2021-03-30 08:30:19.691+0000 INFO [o.n.k.i.DiagnosticsManager] Garbage Collector: G1 Young Generation: [G1 Eden Space, G1 Survivor Space, G1 Old Gen]
+2021-03-30 08:30:19.691+0000 INFO [o.n.k.i.DiagnosticsManager] Garbage Collector: G1 Old Generation: [G1 Eden Space, G1 Survivor Space, G1 Old Gen]
+2021-03-30 08:30:19.691+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: CodeHeap 'non-nmethods' (Non-heap memory): committed=2.44 MB, used=1.14 MB, max=5.56 MB, threshold=0.00 B
+2021-03-30 08:30:19.691+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: Metaspace (Non-heap memory): committed=22.87 MB, used=22.05 MB, max=-1.00 B, threshold=0.00 B
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: CodeHeap 'profiled nmethods' (Non-heap memory): committed=5.88 MB, used=5.86 MB, max=117.22 MB, threshold=0.00 B
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: Compressed Class Space (Non-heap memory): committed=3.25 MB, used=2.93 MB, max=1.00 GB, threshold=0.00 B
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: G1 Eden Space (Heap memory): committed=62.00 MB, used=13.00 MB, max=-1.00 B, threshold=?
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: G1 Old Gen (Heap memory): committed=16.00 MB, used=15.64 MB, max=3.89 GB, threshold=0.00 B
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: G1 Survivor Space (Heap memory): committed=6.00 MB, used=6.00 MB, max=-1.00 B, threshold=?
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Memory Pool: CodeHeap 'non-profiled nmethods' (Non-heap memory): committed=2.44 MB, used=1.25 MB, max=117.22 MB, threshold=0.00 B
+2021-03-30 08:30:19.692+0000 INFO [o.n.k.i.DiagnosticsManager] Operating system information:
+2021-03-30 08:30:19.693+0000 INFO [o.n.k.i.DiagnosticsManager] Operating System: Linux; version: 5.8.0-48-generic; arch: amd64; cpus: 6
+2021-03-30 08:30:19.693+0000 INFO [o.n.k.i.DiagnosticsManager] Max number of file descriptors: 1048576
+2021-03-30 08:30:19.693+0000 INFO [o.n.k.i.DiagnosticsManager] Number of open file descriptors: 193
+2021-03-30 08:30:19.696+0000 INFO [o.n.k.i.DiagnosticsManager] Process id: 19457@Anton
+2021-03-30 08:30:19.696+0000 INFO [o.n.k.i.DiagnosticsManager] Byte order: LITTLE_ENDIAN
+2021-03-30 08:30:19.704+0000 INFO [o.n.k.i.DiagnosticsManager] Local timezone: Europe/Amsterdam
+2021-03-30 08:30:19.704+0000 INFO [o.n.k.i.DiagnosticsManager] JVM information:
+2021-03-30 08:30:19.704+0000 INFO [o.n.k.i.DiagnosticsManager] VM Name: OpenJDK 64-Bit Server VM
+2021-03-30 08:30:19.704+0000 INFO [o.n.k.i.DiagnosticsManager] VM Vendor: Oracle Corporation
+2021-03-30 08:30:19.704+0000 INFO [o.n.k.i.DiagnosticsManager] VM Version: 12.0.2+10
+2021-03-30 08:30:19.704+0000 INFO [o.n.k.i.DiagnosticsManager] JIT compiler: HotSpot 64-Bit Tiered Compilers
+2021-03-30 08:30:19.705+0000 INFO [o.n.k.i.DiagnosticsManager] VM Arguments: [-Dfile.encoding=UTF-8]
+2021-03-30 08:30:19.705+0000 INFO [o.n.k.i.DiagnosticsManager] Java classpath:
+2021-03-30 08:30:19.707+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-procedure-api/3.4.11/neo4j-procedure-api-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-lucene-upgrade/3.4.11/neo4j-lucene-upgrade-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-unsafe/3.4.11/neo4j-unsafe-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-lucene-index/3.4.11/neo4j-lucene-index-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/scala-lang/scala-library/2.11.12/scala-library-2.11.12.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-management/3.4.11/neo4j-management-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/json/jakarta.json-api/1.1.6/jakarta.json-api-1.1.6.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-groovysh/2.5.7/groovy-groovysh-2.5.7-indy.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-codecs/5.5.5/lucene-codecs-5.5.5.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-core/5.5.5/lucene-core-5.5.5.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-primitive-collections/3.4.11/neo4j-primitive-collections-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-resource/3.4.11/neo4j-resource-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/gremlin-shaded/3.4.3/gremlin-shaded-3.4.3.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-enterprise-kernel/3.4.11/neo4j-enterprise-kernel-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-runtime-util/3.4.11/neo4j-cypher-runtime-util-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/jboss/weld/se/weld-se-shaded/3.1.6.Final/weld-se-shaded-3.1.6.Final.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/dropwizard/metrics/metrics-core/4.0.2/metrics-core-4.0.2.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/transaction/jakarta.transaction-api/1.3.1/jakarta.transaction-api-1.3.1.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy/2.5.7/groovy-2.5.7-indy.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-metrics/3.4.11/neo4j-metrics-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-io/3.4.11/neo4j-io-3.4.11.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/json/bind/jakarta.json.bind-api/1.0.2/jakarta.json.bind-api-1.0.2.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm-tree/6.2/asm-tree-6.2.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/commons/commons-text/1.3/commons-text-1.3.jar
+2021-03-30 08:30:19.708+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-dbms/3.4.11/neo4j-dbms-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-query-logging/3.4.11/neo4j-query-logging-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-lang/1.4.0/shiro-lang-1.4.0.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.3/3.3.9/neo4j-cypher-frontend-3.3-3.3.9.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/json/javax.json-api/1.1/javax.json-api-1.1.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/info/picocli/picocli/3.9.5/picocli-3.9.5.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/googlecode/concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.4.2/concurrentlinkedhashmap-lru-1.4.2.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-planner-3.4/3.4.11/neo4j-cypher-planner-3.4-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-index/3.4.11/neo4j-index-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/github/ben-manes/caffeine/caffeine/2.3.1/caffeine-2.3.1.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-frontend-2.3/2.3.12/neo4j-cypher-frontend-2.3-2.3.12.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-expression-3.4/3.4.11/neo4j-cypher-expression-3.4-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-crypto-cipher/1.4.0/shiro-crypto-cipher-1.4.0.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-ir-3.3/3.3.9/neo4j-cypher-ir-3.3-3.3.9.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/slf4j/slf4j-nop/1.7.25/slf4j-nop-1.7.25.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-jsr223/2.5.7/groovy-jsr223-2.5.7-indy.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/dropwizard/metrics/metrics-graphite/4.0.2/metrics-graphite-4.0.2.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-auth-plugin-api/3.4.11/neo4j-auth-plugin-api-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.1/3.1.9/neo4j-cypher-frontend-3.1-3.1.9.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-tinkerpop-api-impl/0.9-3.4.0/neo4j-tinkerpop-api-impl-0.9-3.4.0.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-causal-clustering/3.4.11/neo4j-causal-clustering-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/parboiled/parboiled-scala_2.11/1.1.7/parboiled-scala_2.11-1.1.7.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-bolt/3.4.11/neo4j-bolt-3.4.11.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/communication/communication-query/1.0.0-b3/communication-query-1.0.0-b3.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/gremlin-core/3.4.3/gremlin-core-3.4.3.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-cache/1.4.0/shiro-cache-1.4.0.jar
+2021-03-30 08:30:19.709+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient_common/0.1.0/simpleclient_common-0.1.0.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/jcabi/jcabi-manifests/1.1/jcabi-manifests-1.1.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-compiler-2.3/2.3.12/neo4j-cypher-compiler-2.3-2.3.12.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/1.2.3/jakarta.interceptor-api-1.2.3.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/net/objecthunter/exp4j/0.4.8/exp4j-0.4.8.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-util-3.4/3.4.11/neo4j-cypher-util-3.4-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/neo4j-gremlin/3.4.3/neo4j-gremlin-3.4.3.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/hazelcast/hazelcast-all/3.7.8/hazelcast-all-3.7.8.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/netty/netty/3.9.9.Final/netty-3.9.9.Final.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-backup/3.4.11/neo4j-backup-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/json/bind/javax.json.bind-api/1.0/javax.json.bind-api-1.0.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher/3.4.11/neo4j-cypher-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-import-tool/3.4.11/neo4j-import-tool-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-security/3.4.11/neo4j-security-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/openCypher-frontend-1/3.4.11/openCypher-frontend-1-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-swing/2.5.7/groovy-swing-2.5.7.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/commons/commons-compress/1.16.1/commons-compress-1.16.1.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-crypto-core/1.4.0/shiro-crypto-core-1.4.0.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-cli-picocli/2.5.7/groovy-cli-picocli-2.5.7.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-logical-plans-3.3/3.3.9/neo4j-cypher-logical-plans-3.3-3.3.9.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-event/1.4.0/shiro-event-1.4.0.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-common/3.4.11/neo4j-common-3.4.11.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/scala-lang/scala-reflect/2.11.12/scala-reflect-2.11.12.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient/0.1.0/simpleclient-0.1.0.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-backward-codecs/5.5.0/lucene-backward-codecs-5.5.0.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/netty/netty-all/4.1.24.Final/netty-all-4.1.24.Final.jar
+2021-03-30 08:30:19.710+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-templates/2.5.7/groovy-templates-2.5.7.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/ejb/jakarta.ejb-api/3.2.3/jakarta.ejb-api-3.2.3.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-ha/3.4.11/neo4j-ha-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/communication/communication-core/1.0.0-b3/communication-core-1.0.0-b3.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm-util/6.2/asm-util-6.2.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-com/3.4.11/neo4j-com-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/carrotsearch/hppc/0.7.1/hppc-0.7.1.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/antlr/antlr4-runtime/4.9.1/antlr4-runtime-4.9.1.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/glassfish/javax.json/1.1/javax.json-1.1.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-enterprise/3.4.11/neo4j-enterprise-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-crypto-hash/1.4.0/shiro-crypto-hash-1.4.0.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/mapping/mapping-core/1.0.0-b3/mapping-core-1.0.0-b3.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm/6.2/asm-6.2.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cluster/3.4.11/neo4j-cluster-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-xml/2.5.7/groovy-xml-2.5.7.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-values/3.4.11/neo4j-values-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-consistency-check/3.4.11/neo4j-consistency-check-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-tinkerpop-api/0.1/neo4j-tinkerpop-api-0.1.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/2.0.1/jakarta.enterprise.cdi-api-2.0.1.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-spatial-index/3.4.11/neo4j-spatial-index-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-graphdb-api/3.4.11/neo4j-graphdb-api-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/ow2/asm/asm-analysis/6.2/asm-analysis-6.2.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/net/jpountz/lz4/lz4/1.3.0/lz4-1.3.0.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/yasson/1.0/yasson-1.0.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/jprocesses/jProcesses/1.6.4/jProcesses-1.6.4.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-codegen/3.4.11/neo4j-codegen-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-graph-algo/3.4.11/neo4j-graph-algo-3.4.11.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.3/3.3.9/neo4j-cypher-compiler-3.3-3.3.9.jar
+2021-03-30 08:30:19.711+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-csv/3.4.11/neo4j-csv-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.1/3.1.9/neo4j-cypher-compiler-3.1-3.1.9.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/nosql/communication/communication-query/1.0.0-b3/communication-query-1.0.0-b3.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-ssl/3.4.11/neo4j-ssl-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-planner-spi-3.4/3.4.11/neo4j-cypher-planner-spi-3.4-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/microprofile/config/microprofile-config-api/1.4/microprofile-config-api-1.4.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/parboiled/parboiled-core/1.1.7/parboiled-core-1.1.7.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient_dropwizard/0.1.0/simpleclient_dropwizard-0.1.0.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-ir-3.4/3.4.11/neo4j-cypher-ir-3.4-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/profesorfalken/WMI4Java/1.6.1/WMI4Java-1.6.1.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jline/jline/2.14.6/jline-2.14.6.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/nosql/mapping/mapping-core/1.0.0-b3/mapping-core-1.0.0-b3.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-command-line/3.4.11/neo4j-command-line-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-security-enterprise/3.4.11/neo4j-security-enterprise-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/Documents/github/demos/artemis-demo-java-se/graph-neo4j/target/classes
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-console/2.5.7/groovy-console-2.5.7.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-config-ogdl/1.4.0/shiro-config-ogdl-1.4.0.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/javatuples/javatuples/1.2/javatuples-1.2.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-logging/3.4.11/neo4j-logging-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-collections/3.4.11/neo4j-collections-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j/3.4.11/neo4j-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-analyzers-common/5.5.5/lucene-analyzers-common-5.5.5.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/codehaus/groovy/groovy-json/2.5.7/groovy-json-2.5.7-indy.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-jmx/3.4.11/neo4j-jmx-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/io/prometheus/simpleclient_httpserver/0.1.0/simpleclient_httpserver-0.1.0.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/profesorfalken/jPowerShell/1.9/jPowerShell-1.9.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/yaml/snakeyaml/1.15/snakeyaml-1.15.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-kernel/3.4.11/neo4j-kernel-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-configuration/3.4.11/neo4j-configuration-3.4.11.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-graph-matching/3.1.9/neo4j-graph-matching-3.1.9.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/squareup/javapoet/1.8.0/javapoet-1.8.0.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/tinkerpop/gremlin-groovy/3.4.3/gremlin-groovy-3.4.3.jar
+2021-03-30 08:30:19.712+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/lucene/lucene-queryparser/5.5.5/lucene-queryparser-5.5.5.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/eclipse/jnosql/mapping/mapping-graph/1.0.0-b3/mapping-graph-1.0.0-b3.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-logical-plans-3.4/3.4.11/neo4j-cypher-logical-plans-3.4-3.4.11.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-kernel-api/3.4.11/neo4j-kernel-api-3.4.11.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/el/jakarta.el-api/3.0.2/jakarta.el-api-3.0.2.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/com/jcabi/jcabi-log/0.14/jcabi-log-0.14.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-cypher-interpreted-runtime/3.4.11/neo4j-cypher-interpreted-runtime-3.4.11.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/apache/shiro/shiro-config-core/1.4.0/shiro-config-core-1.4.0.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/jakarta/nosql/communication/communication-core/1.0.0-b3/communication-core-1.0.0-b3.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager]  [classpath] /home/lthoedt/.m2/repository/org/neo4j/neo4j-udc/3.4.11/neo4j-udc-3.4.11.jar
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] Library path:
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/java/packages/lib
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib64
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib64
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] /usr/lib
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] System.properties:
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] awt.toolkit = sun.awt.X11.XToolkit
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] sun.jnu.encoding = UTF-8
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] user.name = lthoedt
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] path.separator = :
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] sun.arch.data.model = 64
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] file.encoding = UTF-8
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] user.timezone = Europe/Amsterdam
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] sun.java.launcher = SUN_STANDARD
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] user.country = US
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] sun.boot.library.path = /usr/java/jdk-12.0.2/lib
+2021-03-30 08:30:19.713+0000 INFO [o.n.k.i.DiagnosticsManager] sun.java.command = org.jnosql.artemis.demo.se.BookApp
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] jdk.debug = release
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] sun.cpu.endian = little
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] user.home = /home/lthoedt
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] user.dir = /home/lthoedt/Documents/github/demos
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] user.language = en
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] file.separator = /
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] sun.io.unicode.encoding = UnicodeLittle
+2021-03-30 08:30:19.714+0000 INFO [o.n.k.i.DiagnosticsManager] (IANA) TimeZone Database Version:
+2021-03-30 08:30:19.732+0000 INFO [o.n.k.i.DiagnosticsManager]   TimeZone version: 2018i (available for 600 zone identifiers)
+2021-03-30 08:30:19.732+0000 INFO [o.n.k.i.DiagnosticsManager] Linux scheduler information:
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.735+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.736+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager] [mq-deadline] none
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager] Network information:
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager] Interface enp4s0:
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager]     address: fe80:0:0:0:d13c:f640:60a5:778e%enp4s0
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager]     address: 192.168.1.60
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager] Interface lo:
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager]     address: 0:0:0:0:0:0:0:1%lo
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager]     address: 127.0.0.1
+2021-03-30 08:30:19.737+0000 INFO [o.n.k.i.DiagnosticsManager] --- INITIALIZED diagnostics END ---
+2021-03-30 08:30:19.800+0000 INFO [o.n.m.MetricsExtension] Initiating metrics...
+2021-03-30 08:30:19.896+0000 INFO [o.n.k.i.s.f.RecordFormatSelector] Selected RecordFormat:StandardV3_4[v0.A.9] record format from store /home/lthoedt/Documents/github/demos/target/jnosql
+2021-03-30 08:30:19.921+0000 INFO [o.n.k.i.s.f.RecordFormatSelector] Selected RecordFormat:StandardV3_4[v0.A.9] record format from store /home/lthoedt/Documents/github/demos/target/jnosql
+2021-03-30 08:30:19.921+0000 INFO [o.n.k.i.s.f.RecordFormatSelector] Format not configured. Selected format from the store: RecordFormat:StandardV3_4[v0.A.9]
+2021-03-30 08:30:20.025+0000 INFO [o.n.k.NeoStoreDataSource] No commits found after last check point (which is at LogPosition{logVersion=0, byteOffset=13633})
+2021-03-30 08:30:20.040+0000 INFO [o.n.k.i.DatabaseHealth] Database health set to OK
+2021-03-30 08:30:20.195+0000 INFO [o.n.m.MetricsExtension] Sending metrics to CSV file at /home/lthoedt/Documents/github/demos/target/jnosql/metrics
+2021-03-30 08:30:20.237+0000 INFO [o.n.b.i.BackupServer] BackupServer communication server started and bound to /127.0.0.1:6362
+2021-03-30 08:30:20.241+0000 INFO [o.n.k.AvailabilityGuard] Fulfilling of requirement makes database available: Database available
+2021-03-30 08:30:20.242+0000 INFO [o.n.k.i.f.GraphDatabaseFacadeFactory] Database is now ready
+2021-03-30 08:30:20.243+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2021-03-30 08:30:20.243+0000 INFO [o.n.k.i.DiagnosticsManager] Graph Database: community single StoreId{creationTime=1617092969951, randomId=4204662379945629216, storeVersion=16094931155187206, upgradeTime=1617092969951, upgradeId=1}
+2021-03-30 08:30:20.243+0000 INFO [o.n.k.i.DiagnosticsManager] Kernel version: 3.4.11,caef93a0f23fead51dd7995db1a018ef0321b923
+2021-03-30 08:30:20.243+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2021-03-30 08:30:20.244+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2021-03-30 08:30:20.244+0000 INFO [o.n.k.i.DiagnosticsManager] Store versions:
+2021-03-30 08:30:20.244+0000 INFO [o.n.k.i.DiagnosticsManager] Store versions:
+2021-03-30 08:30:20.244+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore v0.A.9
+2021-03-30 08:30:20.244+0000 INFO [o.n.k.i.DiagnosticsManager]   NodeStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyIndexStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipTypeStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   LabelTokenStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   SchemaStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipGroupStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   NeoStore v0.A.9
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager] Id usage:
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager] Id usage:
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore: used=1 high=0
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   NodeStore: used=9 high=39
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=5 high=4
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyIndexStore: used=4 high=3
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=1 high=0
+2021-03-30 08:30:20.245+0000 INFO [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore: used=1 high=0
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   PropertyStore: used=22 high=39
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipStore: used=15 high=39
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=3 high=2
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipTypeStore: used=2 high=1
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=3 high=2
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   LabelTokenStore: used=2 high=1
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   SchemaStore: used=1 high=0
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   RelationshipGroupStore: used=1 high=0
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager]   NeoStore: used=15 high=14
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_RECORDS START ---
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] Neostore records:
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] TIME (Creation time): 1617092969951
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] RANDOM_NUMBER (Random number for store id): 4204662379945629216
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] LOG_VERSION (Current log version): 0
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_ID (Last committed transaction): 34
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] STORE_VERSION (Store format version): 16094931155187206
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] FIRST_GRAPH_PROPERTY (First property record containing graph properties): 0
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_CONSTRAINT_TRANSACTION (Last committed transaction containing constraint changes): 0
+2021-03-30 08:30:20.246+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_ID (Transaction id most recent upgrade was performed at): 1
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TIME (Time of last upgrade): 1617092969951
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_CHECKSUM (Checksum of last committed transaction): -160402350901
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_CHECKSUM (Checksum of transaction id the most recent upgrade was performed at): 0
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_CLOSED_TRANSACTION_LOG_VERSION (Log version where the last transaction commit entry has been written into): 0
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_CLOSED_TRANSACTION_LOG_BYTE_OFFSET (Byte offset in the log file where the last transaction commit entry has been written into): 13633
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_COMMIT_TIMESTAMP (Commit time timestamp for last committed transaction): 1617092970503
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_COMMIT_TIMESTAMP (Commit timestamp of transaction the most recent upgrade was performed at): 0
+2021-03-30 08:30:20.247+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_RECORDS END ---
+2021-03-30 08:30:20.248+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for TRANSACTION_RANGE START ---
+2021-03-30 08:30:20.248+0000 INFO [o.n.k.i.DiagnosticsManager] Transaction log:
+2021-03-30 08:30:20.248+0000 INFO [o.n.k.i.DiagnosticsManager] Oldest transaction 2 found in log with version 0
+2021-03-30 08:30:20.248+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for TRANSACTION_RANGE END ---
+2021-03-30 08:30:20.249+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2021-03-30 08:30:20.249+0000 INFO [o.n.k.i.DiagnosticsManager] Disk space on partition (Total / Free / Free %): 81503285248 / 56832581632 / 69
+2021-03-30 08:30:20.249+0000 INFO [o.n.k.i.DiagnosticsManager] Storage files: (filename : modification date - size)
+2021-03-30 08:30:20.250+0000 INFO [o.n.k.i.DiagnosticsManager]   index:
+2021-03-30 08:30:20.250+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:30:20.250+0000 INFO [o.n.k.i.DiagnosticsManager]   logs:
+2021-03-30 08:30:20.250+0000 INFO [o.n.k.i.DiagnosticsManager]     debug.log: 2021-03-30T10:30:20+0200 - 103.94 kB
+2021-03-30 08:30:20.250+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:29+0200 - 103.94 kB
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   metrics:
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.counts.db.a: 2021-03-30T10:29:30+0200 - 96.00 B
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.counts.db.b: 2021-03-30T10:29:30+0200 - 512.00 B
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labelscanstore.db: 2021-03-30T10:30:20+0200 - 48.00 kB
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.names: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.251+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.names.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.252+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.id: 2021-03-30T10:30:19+0200 - 257.00 B
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.labels: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.labels.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db: 2021-03-30T10:29:30+0200 - 7.97 kB
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.arrays: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.arrays.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.id: 2021-03-30T10:30:19+0200 - 153.00 B
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.keys: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.253+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.keys.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.strings: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.strings.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipgroupstore.db: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipgroupstore.db.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipstore.db: 2021-03-30T10:29:30+0200 - 7.97 kB
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshipstore.db.id: 2021-03-30T10:30:19+0200 - 209.00 B
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.names: 2021-03-30T10:29:30+0200 - 8.00 kB
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.names.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.schemastore.db: 2021-03-30T10:29:29+0200 - 8.00 kB
+2021-03-30 08:30:20.254+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.schemastore.db.id: 2021-03-30T10:30:19+0200 - 9.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]   neostore.transaction.db.0: 2021-03-30T10:29:30+0200 - 13.33 kB
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]   profiles:
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.counts.db.a.0.cacheprof: 2021-03-30T10:29:30+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.counts.db.b.0.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.labelscanstore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.labeltokenstore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.labeltokenstore.db.names.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.nodestore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.255+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.nodestore.db.labels.0.cacheprof: 1970-01-01T01:00:00+0100 - 0.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.nodestore.db.labels.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.arrays.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.index.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.index.keys.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.propertystore.db.strings.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshipgroupstore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshipstore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.256+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshiptypestore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.relationshiptypestore.db.names.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager]     neostore.schemastore.db.1.cacheprof: 2021-03-30T10:30:20+0200 - 21.00 B
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager]   - Total: 2021-03-30T10:30:20+0200 - 378.00 B
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager]   store_lock: 2021-03-30T10:29:29+0200 - 0.00 B
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager] Storage summary: 
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager]   Total size of store: 286.87 kB
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager]   Total size of mapped files: 167.93 kB
+2021-03-30 08:30:20.257+0000 INFO [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2021-03-30 08:30:21.119+0000 INFO [o.n.k.i.f.GraphDatabaseFacadeFactory] Shutdown started
+2021-03-30 08:30:21.119+0000 INFO [o.n.k.i.f.GraphDatabaseFacadeFactory] Database is now unavailable
+2021-03-30 08:30:21.126+0000 INFO [o.n.b.i.BackupServer] BackupServer communication server shutting down and unbinding from  /127.0.0.1:6362
+2021-03-30 08:30:21.135+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by database shutdown @ txId: 56 checkpoint started...
+2021-03-30 08:30:21.142+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 56 to [/home/lthoedt/Documents/github/demos/target/jnosql/neostore.counts.db.a], from [/home/lthoedt/Documents/github/demos/target/jnosql/neostore.counts.db.b].
+2021-03-30 08:30:21.145+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by database shutdown @ txId: 56 checkpoint completed in 10ms
+2021-03-30 08:30:21.145+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2021-03-30 08:30:21.155+0000 INFO [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics START ---
+2021-03-30 08:30:21.155+0000 INFO [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics END ---

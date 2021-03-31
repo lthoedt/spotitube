@@ -1,0 +1,273 @@
+
+*****************************************************
+Summary
+-------
+Generated at: 2021-03-30T12:12:04+02:00
+
+Notes: 0
+Binaries: 0
+Archives: 0
+Standards: 6
+
+Apache Licensed: 0
+Generated Documents: 0
+
+JavaDocs are generated, thus a license header is optional.
+Generated files do not require license headers.
+
+6 Unknown Licenses
+
+*****************************************************
+
+Files with unapproved licenses:
+
+  pom.xml
+  src/test/java/oose/dea/AppTest.java
+  src/main/java/oose/dea/GraphTemplateTraversalSupplier.java
+  src/main/java/oose/dea/Track.java
+  src/main/java/oose/dea/GraphProducer.java
+  src/main/java/oose/dea/App.java
+
+*****************************************************
+
+*****************************************************
+  Files with Apache License headers will be marked AL
+  Binary files (which do not require any license headers) will be marked B
+  Compressed archives will be marked A
+  Notices, licenses etc. will be marked N
+ !????? pom.xml
+ !????? src/test/java/oose/dea/AppTest.java
+ !????? src/main/java/oose/dea/GraphTemplateTraversalSupplier.java
+ !????? src/main/java/oose/dea/Track.java
+ !????? src/main/java/oose/dea/GraphProducer.java
+ !????? src/main/java/oose/dea/App.java
+ 
+*****************************************************
+
+ Printing headers for text files without a valid license header...
+ 
+=====================================================
+== File: pom.xml
+=====================================================
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>oose.dea</groupId>
+  <artifactId>labonderzoek</artifactId>
+  <version>1.0</version>
+
+  <name>labonderzoek</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <parent>
+    <groupId>org.eclipse.jnosql</groupId>
+    <artifactId>jnosql-parent</artifactId>
+    <version>1.0.0-b3</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>12</maven.compiler.source>
+    <maven.compiler.target>12</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jnosql.artemis</groupId>
+      <artifactId>artemis-graph</artifactId>
+      <version>1.0.0-b2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tinkerpop</groupId>
+      <artifactId>neo4j-gremlin</artifactId>
+      <version>3.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-tinkerpop-api-impl</artifactId>
+      <version>0.9-3.4.0</version>
+    </dependency>
+
+
+=====================================================
+== File: src/test/java/oose/dea/AppTest.java
+=====================================================
+package oose.dea;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest 
+{
+    /**
+     * Rigorous Test :-)
+     */
+    @Test
+    public void shouldAnswerWithTrue()
+    {
+        assertTrue( true );
+    }
+}
+
+=====================================================
+== File: src/main/java/oose/dea/GraphTemplateTraversalSupplier.java
+=====================================================
+package oose.dea;
+
+import java.util.function.Supplier;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import org.eclipse.jnosql.mapping.graph.GraphTemplate;
+import org.eclipse.jnosql.mapping.graph.GraphTraversalSourceOperation;
+
+@ApplicationScoped
+public class GraphTemplateTraversalSupplier implements Supplier<GraphTemplate> {
+
+    @Inject
+    @GraphTraversalSourceOperation
+    private GraphTemplate template;
+
+
+    @Override
+    public GraphTemplate get() {
+        return template;
+    }
+}
+
+=====================================================
+== File: src/main/java/oose/dea/Track.java
+=====================================================
+package oose.dea;
+
+import jakarta.nosql.mapping.Column;
+import jakarta.nosql.mapping.Entity;
+import jakarta.nosql.mapping.Id;
+
+@Entity
+public class Track {
+
+    public Track ( String title ) {
+        this.title = title;
+    }
+    
+    @Id
+    private Long id;
+
+    @Column
+    private String title;
+
+    public static TracKBuilder builder() {
+        return new TracKBuilder();
+    }
+
+    public static class TracKBuilder {
+
+        private String title;
+
+        public TracKBuilder withTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Track build() {
+            return new Track(title);
+        }
+    }
+
+}
+
+=====================================================
+== File: src/main/java/oose/dea/GraphProducer.java
+=====================================================
+package oose.dea;
+
+import java.io.File;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Disposes;
+import javax.enterprise.inject.Produces;
+
+import org.apache.tinkerpop.gremlin.neo4j.structure.Neo4jGraph;
+import org.apache.tinkerpop.gremlin.structure.Graph;
+import org.eclipse.jnosql.mapping.graph.GraphTraversalSourceSupplier;
+
+@ApplicationScoped
+public class GraphProducer {
+
+    private Graph graph;
+
+    @PostConstruct
+    public void init() {
+        String absolutePath = new File("").getAbsolutePath() + "/target/jnosql/";
+        this.graph = Neo4jGraph.open(absolutePath);
+    }
+
+    @Produces
+    @ApplicationScoped
+    public Graph getGraph() {
+        return graph;
+    }
+
+    @Produces
+    @ApplicationScoped
+    public GraphTraversalSourceSupplier getSupplier() {
+        return () -> graph.traversal();
+    }
+
+    public void close(@Disposes Graph graph) throws Exception {
+        graph.close();
+    }
+}
+
+=====================================================
+== File: src/main/java/oose/dea/App.java
+=====================================================
+package oose.dea;
+
+import java.util.List;
+import static java.util.stream.Collectors.toList;
+
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
+
+import org.eclipse.jnosql.artemis.graph.GraphTemplate;
+
+import static oose.dea.Track.builder;
+
+public class App 
+{
+    public static void main(String[] args) {
+
+        try (SeContainer container = SeContainerInitializer.newInstance().initialize()) {
+            GraphTemplate graph = container.select(GraphTemplate.class).get();
+            
+            Track track1 = graph.insert(builder().withTitle("test").build());
+            Track track2 = graph.insert(builder().withTitle("test2").build());
+
+            List<Track> tracks = graph.getTraversalVertex()
+            .<Track>getResult().collect(toList());
+
+            System.out.println(tracks);
+
+        }
+    
+    }
+}
