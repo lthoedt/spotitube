@@ -1,5 +1,8 @@
 package service.utils;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class DB {
@@ -15,5 +18,9 @@ public class DB {
         }
 
         return code;
+    }
+
+    public static Connection getNoSQLURL() throws SQLException {
+         return DriverManager.getConnection("jdbc:neo4j:bolt://localhost/?database=spotitube", "neo4j", "password");
     }
 }
