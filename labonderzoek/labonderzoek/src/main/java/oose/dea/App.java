@@ -21,14 +21,14 @@ public class App {
                                 + "-[:owns]-> (playlist:Playlists {name: \"SRV\"}) "
                                 + "RETURN user, playlist";
             PreparedStatement stmt = con.prepareStatement(queryInsert);
-//            stmt.executeUpdate();
+            stmt.executeUpdate();
 
             String queryAddPlaylist = "MATCH (user:Users) "
                                     + "WHERE user.username='henk' "
                                     + "CREATE (user)-[:owns]->(playlist:Playlists {name: \"kaas\"}) "
                                     + "RETURN user";
             PreparedStatement stmt2 = con.prepareStatement(queryAddPlaylist);
-//            stmt2.executeUpdate();
+            stmt2.executeUpdate();
 
             for ( int i = 0; i < 10; i++ ) {
                 String sql = "MATCH (pl:Playlists) "
