@@ -44,6 +44,18 @@
             <version>3.8.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- NoSQL -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-jdbc-driver</artifactId>
+            <version>4.0.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+          </dependency>
     </dependencies>
     <build>
         <finalName>Spotitube</finalName>

@@ -21,6 +21,11 @@ public class DB {
     }
 
     public static Connection getNoSQLURL() throws SQLException {
-         return DriverManager.getConnection("jdbc:neo4j:bolt://localhost/?database=spotitube", "neo4j", "password");
+        try {
+            Class.forName("org.neo4j.jdbc.bolt.BoltDriver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return DriverManager.getConnection("jdbc:neo4j:bolt://localhost/?database=spotitube", "neo4j", "password");
     }
 }

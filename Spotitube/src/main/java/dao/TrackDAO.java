@@ -3,6 +3,8 @@ package dao;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.json.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import domain.Album;
 import domain.Song;
 import domain.Track;
 import domain.Video;
+import service.utils.DB;
 
 public class TrackDAO implements ITrackDAO {
 
@@ -31,24 +34,76 @@ public class TrackDAO implements ITrackDAO {
                             + "INNER JOIN Tracks ON Songs.track_id=Tracks.id "
                             + sqlJoins;
 
-    @Override
-    public ArrayList<Track> getTracks(String token, String forPlaylist ) {
-        String sqlWhere = "WHERE TrackMappers.track_id NOT IN ( SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
+    // @Override
+    // public ArrayList<Track> getTracks(String token, String forPlaylist ) {
+    //     String sqlWhere = "WHERE TrackMappers.track_id NOT IN ( SELECT track_id FROM TrackMappers WHERE playlist_id = ? ) OR TrackMappers.playlist_id IS NULL";
 
-        try (Connection connection = this.dataSource.getConnection()) {
-            PreparedStatement statementVideo = connection.prepareStatement(sqlVideo+sqlWhere);
-            statementVideo.setString(1, forPlaylist);
-            ResultSet resultSetVideo = statementVideo.executeQuery();
+    //     try (Connection connection = this.dataSource.getConnection()) {
+    //         PreparedStatement statementVideo = connection.prepareStatement(sqlVideo+sqlWhere);
+    //         statementVideo.setString(1, forPlaylist);
+    //         ResultSet resultSetVideo = statementVideo.executeQuery();
 
-            PreparedStatement statementSong = connection.prepareStatement(sqlSong+sqlWhere);
-            statementSong.setString(1, forPlaylist);
-            ResultSet resultSetSong = statementSong.executeQuery();
+    //         PreparedStatement statementSong = connection.prepareStatement(sqlSong+sqlWhere);
+    //         statementSong.setString(1, forPlaylist);
+    //         ResultSet resultSetSong = statementSong.executeQuery();
 
-            return this.parseTrackData(resultSetVideo, resultSetSong);
+    //         return this.parseTrackData(resultSetVideo, resultSetSong);
             
+    //     } catch ( SQLException e ) {
+    //         e.printStackTrace();
+    //     }
+    //     return null;
+    // }
+
+    @Override
+    public ArrayList<Track> getTracks(String token, String forPlaylist) {
+        try (Connection con = DB.getNoSQLURL()) {
+            String queryRetrieve = "MATCH (ts:Tracks), (pl:Playlists) "
+                                    + "OPTIONAL MATCH (album:Albums)-[:contains]->(ts) "
+                                    + "WITH ts, pl, album "
+                                    + "WHERE NOT (ts)-[:in]->(pl { id: ? }) "
+                                    + "RETURN {album_name: album.name, track: ts} AS data";
+
+            PreparedStatement stmtRetrieve = con.prepareStatement(queryRetrieve);
+            stmtRetrieve.setString(1, forPlaylist);
+            ResultSet resultSet = stmtRetrieve.executeQuery();
+
+            ArrayList<Track> tracks = new ArrayList<>();
+
+            while (resultSet.next()) {
+                String dataString = resultSet.getString("data");
+                JSONObject dataJSON = new JSONObject(dataString);
+
+                JSONObject trackJSON = dataJSON.getJSONObject("track");
+
+                Track track = new Video( trackJSON.getString("id") );
+                track.setDuration(trackJSON.getInt("duration"));
+                track.setPerformer(trackJSON.getString("performer"));
+                track.setTitle(trackJSON.getString("title"));
+                track.setUrl(trackJSON.getString("url"));
+
+                if ( trackJSON.has("album_name") )
+                    track.setAlbum( new Album(dataJSON.getString("album_name")) );
+
+                if ( trackJSON.has("playcount") ) 
+                    track.setPlaycount(trackJSON.getInt("playcount"));
+
+                if ( trackJSON.has("publication_date") ) 
+                    track.setPublicationDate(trackJSON.getString("publication_date"));
+                
+                if ( trackJSON.has("description") ) 
+                    track.setDescription( trackJSON.getString("description") );
+
+                tracks.add(track);
+            }
+
+            return tracks;
+
         } catch ( SQLException e ) {
+            // TODO: errorhandling
             e.printStackTrace();
         }
+        
         return null;
     }
 
