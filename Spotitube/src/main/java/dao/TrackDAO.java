@@ -76,23 +76,28 @@ public class TrackDAO implements ITrackDAO {
 
                 JSONObject trackJSON = dataJSON.getJSONObject("track");
 
-                Track track = new Video( trackJSON.getString("id") );
-                track.setDuration(trackJSON.getInt("duration"));
-                track.setPerformer(trackJSON.getString("performer"));
-                track.setTitle(trackJSON.getString("title"));
-                track.setUrl(trackJSON.getString("url"));
+                Track track = null;
 
-                if ( trackJSON.has("album_name") )
-                    track.setAlbum( new Album(dataJSON.getString("album_name")) );
+                if ( trackJSON.getString("type").equals("song") ) {
+                    track = new Song( trackJSON.getString("id") );
+                    parseTrackDataJSON(track, trackJSON);
 
-                if ( trackJSON.has("playcount") ) 
-                    track.setPlaycount(trackJSON.getInt("playcount"));
+                    if ( dataJSON.has("album_name") )
+                        track.setAlbum( new Album(dataJSON.getString("album_name")) );
 
-                if ( trackJSON.has("publication_date") ) 
-                    track.setPublicationDate(trackJSON.getString("publication_date"));
-                
-                if ( trackJSON.has("description") ) 
-                    track.setDescription( trackJSON.getString("description") );
+                } else {
+                    track = new Video( trackJSON.getString("id") );
+                    parseTrackDataJSON(track, trackJSON);
+
+                    if ( trackJSON.has("playcount") ) 
+                        track.setPlaycount(trackJSON.getInt("playcount"));
+
+                    if ( trackJSON.has("publication_date") ) 
+                        track.setPublicationDate(trackJSON.getString("publication_date"));
+                    
+                    if ( trackJSON.has("description") ) 
+                        track.setDescription( trackJSON.getString("description") );
+                }
 
                 tracks.add(track);
             }
@@ -105,6 +110,13 @@ public class TrackDAO implements ITrackDAO {
         }
         
         return null;
+    }
+
+    private void parseTrackDataJSON( Track track, JSONObject trackJSON ) {
+        track.setDuration(trackJSON.getInt("duration"));
+        track.setPerformer(trackJSON.getString("performer"));
+        track.setTitle(trackJSON.getString("title"));
+        track.setUrl(trackJSON.getString("url"));
     }
 
     private ArrayList<Track> parseTrackData(ResultSet resultSetVideo, ResultSet resultSetSong) {
